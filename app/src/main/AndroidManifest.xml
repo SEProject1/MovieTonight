@@ -34,10 +34,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FragmentActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity
             android:name=".FavoriteListActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -62,7 +58,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".UserAccount"
+            android:name=".Class.UserAccount"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />

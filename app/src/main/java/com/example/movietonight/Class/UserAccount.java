@@ -1,4 +1,4 @@
-package com.example.movietonight;
+package com.example.movietonight.Class;
 
 // 유저 계정 정보 모델 클래스
 public class UserAccount {
@@ -7,6 +7,7 @@ public class UserAccount {
     private String userId;  //이메일 아이디
     private String userNickname;    //닉네임
     private String passwd;  //비밀번호
+    private String imageurl;
 
     public UserAccount(){ }
 
@@ -25,4 +26,9 @@ public class UserAccount {
     public String getPasswd() {return passwd;}
 
     public void setPasswd(String passwd) {this.passwd = passwd;}
- }
+
+    public String getImageurl() {return imageurl;}
+
+    public void setImageurl(String imageurl) {this.imageurl = imageurl;}
+}
+

@@ -1,28 +1,90 @@
 package com.example.movietonight;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.view.MenuItem;
 
-public class MainActivity extends Fragment implements View.OnClickListener{
+import com.example.movietonight.Fragment.FragFeed;
+import com.example.movietonight.Fragment.FragMain;
+import com.example.movietonight.Fragment.FragMypage;
+import com.example.movietonight.Fragment.FragNoti;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+public class MainActivity extends AppCompatActivity {
 
-    public View OnCreateView(@NonNull LayoutInflater inflater, @NonNull ViewGroup container, @Nullable Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.activity_main, container, false);
-        return v;
-    }
+    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
+    private FragmentManager fm;
+    private FragmentTransaction ft;
+    private FragMain fragMain;
+    private FragFeed fragFeed;
+    private FragNoti fragNotification;
+    private FragMypage fragMypage;
+
 
     @Override
-    public void onClick(View v) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        bottomNavigationView = findViewById(R.id.bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        setFrag(0);
+                        break;
+                    case R.id.action_feed:
+                        setFrag(1);
+                        break;
+                    case R.id.action_notification:
+                        setFrag(2);
+                        break;
+                    case R.id.action_mypage:
+                        setFrag(3);
+                        break;
+                }
+                return true;
+            }
+        });
+        fragMain = new FragMain();
+        fragFeed = new FragFeed();
+        fragNotification = new FragNoti();
+        fragMypage = new FragMypage();
+        setFrag(0); //첫 프래그먼트 화면을 무엇으로 지정해줄 것인지 선택
 
     }
+
+
+    // 프래그먼터 교체가 일어나는 실행문
+    private void setFrag(int n) {
+        fm = getSupportFragmentManager();
+        ft = fm.beginTransaction();
+        switch (n) {
+            case 0 :
+                ft.replace(R.id.main_frame, fragMain);
+                ft.commit();
+                break;
+            case 1 :
+                ft.replace(R.id.main_frame, fragFeed);
+                ft.commit();
+                break;
+            case 2 :
+                ft.replace(R.id.main_frame, fragNotification);
+                ft.commit();
+                break;
+            case 3 :
+                ft.replace(R.id.main_frame, fragMypage);
+                ft.commit();
+                break;
+
+        }
+
+    }
+
 }
