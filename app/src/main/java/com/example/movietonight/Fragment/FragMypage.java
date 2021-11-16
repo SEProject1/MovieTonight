@@ -18,7 +18,7 @@ import com.example.movietonight.R;
 import com.example.movietonight.RankingActivity;
 import com.example.movietonight.SavedActivity;
 
-public class FragMypage extends Fragment {
+public class FragMypage extends Fragment implements View.OnClickListener{
     private Button review, saved, cal, rank, logout;
     private View view;
 
@@ -31,6 +31,11 @@ public class FragMypage extends Fragment {
         cal = view.findViewById(R.id.btn_calendar);
         rank = view.findViewById(R.id.btn_ranking);
         logout = view.findViewById(R.id.btn_logout);
+        review.setOnClickListener(this);
+        saved.setOnClickListener(this);
+        cal.setOnClickListener(this);
+        rank.setOnClickListener(this);
+        logout.setOnClickListener(this);
         return view;
     }
     public void onClick(View v){

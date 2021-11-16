@@ -25,7 +25,6 @@ public class CalendarActivity extends AppCompatActivity{
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 diaryTextView.setVisibility(View.VISIBLE);
                 diaryTextView.setText(String.format("%d / %d / %d", year, month + 1, dayOfMonth));
-               \
             }
         });
     }
