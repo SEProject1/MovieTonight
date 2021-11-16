@@ -122,10 +122,10 @@ public class SignupActivity extends AppCompatActivity {
                                 arrayList.add(account.getUserId());
                             }
                             if(arrayList.contains(email)){
-                                Toast.makeText(SignupActivity.this, "사용불가", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "중복된 이메일입니다.", Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(SignupActivity.this, "사용가능", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "사용가능한 이메일입니다", Toast.LENGTH_SHORT).show();
                                 check=true;
                             }
                         }
