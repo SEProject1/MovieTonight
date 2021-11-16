@@ -76,7 +76,7 @@
                 >
 
                 <Button
-                    android:id="@+id/et_first_name"
+                    android:id="@+id/btn_uploadPicture"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="프로필 사진 변경"
@@ -85,6 +85,7 @@
                     android:textColor="#000000"
                     android:textColorHint="#333"
                     android:background="@drawable/background"
+                    android:onClick="onClick"
                     android:textSize="15sp"
                     />
             </com.google.android.material.textfield.TextInputLayout>
