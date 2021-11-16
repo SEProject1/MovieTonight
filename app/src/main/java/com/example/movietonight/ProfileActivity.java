@@ -29,12 +29,12 @@ public class ProfileActivity extends AppCompatActivity {
             etNickname.setError("닉네임은 비워둘 수 없습니다.");
             return false;
         }
+        return true;
     }
 
 
     public void performEditProfile (View v) {
         if (validateInput()) {
-
 
             String Nickname = etNickname.getText().toString();
 
@@ -43,5 +43,4 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-}
 }
