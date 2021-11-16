@@ -1,5 +1,6 @@
 package com.example.movietonight;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -69,4 +70,9 @@ public class MyPageActivity extends AppCompatActivity {
     }
 
 
+=======
+import androidx.fragment.app.Fragment;
+
+public class MypageActivity extends Fragment {
+>>>>>>> bc6a2ffd0e5d67cf9fc86b80017f7fdafd2a90d8
 }
