@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "229926634555",
+    "firebase_url": "https://movietonight-78dfc-default-rtdb.firebaseio.com",
+    "project_id": "movietonight-78dfc",
+    "storage_bucket": "movietonight-78dfc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229926634555:android:8c7c6f352842ecb0e0481e",
+        "android_client_info": {
+          "package_name": "com.example.movietonight"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "229926634555-mc2t8ggorauifn3sl4kskdho6h1s0h7k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkn36Kv_rhhj5VD765-HGo8y4_QGMn9S4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "229926634555-mc2t8ggorauifn3sl4kskdho6h1s0h7k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
