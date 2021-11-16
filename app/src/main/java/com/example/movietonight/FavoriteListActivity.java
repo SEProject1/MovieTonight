@@ -8,11 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 public class FavoriteListActivity extends AppCompatActivity {//찜한 리스트를 아이템으로 넣고 화면에 보여주는 클래스
     RecyclerView recyclerView;
     FavoriteListAdapter adapter;
     ImageButton btnBack;
-
+    ArrayList<FavoriteMovie> favoriteMovies=new ArrayList<FavoriteMovie>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,11 +25,9 @@ public class FavoriteListActivity extends AppCompatActivity {//찜한 리스트�
         recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL, false)) ;
         adapter = new FavoriteListAdapter();
-        for (int i = 0; i < 10; i++) {//이곳에 db에서 찜목록 가져와 영화이름 넣기.
-            String str = i + "번영화";
-            FavoriteMovie item=new FavoriteMovie(str);
-            adapter.setFavoriteMovieData(item);
-        }
+
+        favoriteMovies();//db에서 찜목록을 가져옴
+        setFavoriteMovies();//item추가
         recyclerView.setAdapter(adapter);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,5 +36,18 @@ public class FavoriteListActivity extends AppCompatActivity {//찜한 리스트�
                 //finish();
             }
         });
+    }
+    public void favoriteMovies() {//db에서 찜영화 가져오는 메서드
+        //db에서 찜 영화 가져옴
+        for (int i = 0; i < 10; i++) {
+            String str = i + "번영화";
+            FavoriteMovie item=new FavoriteMovie(str);
+            favoriteMovies.add(item);//아이템을 리스트에 넣기
+        }
+    }
+    public void setFavoriteMovies(){//아이템 추가 메서드
+        for (int i=0;i<favoriteMovies.size();i++){
+            adapter.setFavoriteMovieData(favoriteMovies.get(i));
+        }
     }
 }
