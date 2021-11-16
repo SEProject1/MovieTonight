@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.List;
+
 public class RankingActivity extends AppCompatActivity {
     PieChart chart1;
 
@@ -15,7 +17,7 @@ public class RankingActivity extends AppCompatActivity {
         chart1 = (PieChart) v.findViewById(R.id.tab1_chart_1);
 
     }
-    private void setPieChart(List<itemModel>itemList){
+    private void setPieChart(List<itemModel> itemList){
 
         chart1.clearChart();
         chart1.addPieSlice(new PieModel("TYPE 1",60, Color.parseColor("#CDA67F")));
