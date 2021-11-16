@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FavoriteListActivity"
+            android:name=".SavedActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
