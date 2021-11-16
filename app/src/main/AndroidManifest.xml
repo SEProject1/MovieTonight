@@ -48,11 +48,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".MypageActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            tools:ignore="Instantiatable" />
-        <activity
             android:name=".Class.UserAccount"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

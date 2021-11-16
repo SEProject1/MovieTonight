@@ -79,7 +79,7 @@
         android:text="내 리뷰 관리"
         android:textColor="@color/black"
         android:background="#00ff0000"
-        android:layout_marginTop="30dp" />
+        android:layout_marginTop="20dp" />
 
     <Button
 
@@ -92,7 +92,7 @@
         app:layout_constraintLeft_toLeftOf="@id/btn_review"
         android:text="찜한 영화 보기"
         android:textColor="#333333"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btn_calendar"
@@ -103,7 +103,7 @@
         android:text="캘린더"
         android:background="#00ff0000"
         android:textColor="#333333"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btn_ranking"
@@ -114,7 +114,7 @@
         android:text="나의 장르 랭킹"
         android:background="#00ff0000"
         android:textColor="#333333"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/btn_logout"
@@ -125,5 +125,5 @@
         android:text="로그아웃"
         android:background="#00ff0000"
         android:textColor="#333333"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="10dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

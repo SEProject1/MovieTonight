@@ -3,32 +3,42 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_fragment.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_intro.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_login.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_mypage.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_post.xml" value="0.1" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_ranking.xml" value="0.264" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_review.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/activity_signup.xml" value="0.1296875" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/favorite_list_recycler.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/feed_item.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/feed_recycler.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/frag_mypage.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/myreview_item.xml" value="0.2" />
-        <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/myreview_recycler.xml" value="0.1296875" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/search.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/write_reivew.xml" value="0.14537037037037037" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_feed_24.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_baseline_profile_24.xml" value="0.11666666666666667" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_search_dark.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/ic_search_light.xml" value="0.11296296296296296" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable/round.xml" value="0.11666666666666667" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout-w1240dp/frag_feed.xml" value="0.112109375" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout-w1240dp/frag_main.xml" value="0.112109375" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout-w1240dp/frag_mypage.xml" value="0.112109375" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout-w1240dp/frag_notification.xml" value="0.112109375" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout-w1240dp/user_item.xml" value="0.112109375" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_fragment.xml" value="0.22213779128672745" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_intro.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_movie_detail.xml" value="0.10925925925925926" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_mypage.xml" value="0.2671875" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/favorite_list_item.xml" value="0.22213779128672745" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/favorite_list_recycler.xml" value="0.22213779128672745" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/frag_feed.xml" value="0.13171225937183384" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/frag_main.xml" value="0.13171225937183384" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/frag_mypage.xml" value="0.13171225937183384" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/frag_notification.xml" value="0.13171225937183384" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/user_item.xml" value="0.13171225937183384" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/menu/bottom_menu.xml" value="0.25462962962962965" />
       </map>
     </option>
   </component>
