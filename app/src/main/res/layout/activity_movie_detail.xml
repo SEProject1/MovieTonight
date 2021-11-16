@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="690dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/project_toplogo" />
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="match_parent"
+            android:layout_height="101dp"
+            android:layout_weight="1"
+            android:backgroundTint="#ffffff"
+            android:scaleType="centerInside"
+            android:src="@drawable/close" />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="270dp"
+                android:layout_height="400dp"
+                android:src="@drawable/poster"
+                android:layout_marginBottom="30dp"
+                android:id="@+id/iv_poster"
+                android:scaleType="centerInside"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/heart"
+                    android:scaleType="centerInside"
+                    android:padding="0dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="9dp"
+                    android:backgroundTint="#ffffff"
+                    android:id="@+id/btn_favorite"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="영화 제목"
+                    android:id="@+id/tv_movieTitle"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:paddingRight="20dp"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#AEAEAE"
+                    android:text="리뷰 작성"
+                    android:drawableLeft="@drawable/write_reivew"
+                    android:id="@+id/btn_writeReview"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="줄거리"
+                    android:textSize="22dp"
+                    android:textStyle="bold"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="수 천년에 걸쳐 그 모습을 드러내지 않고 살아온 불멸의 히어로들이 어벤져스: 엔드게임 이후 인류의 가장 오래된 적 '데비안츠'에 맞서기 위해 다시 힘을 합치면서 벌어지는 이야기"
+                    android:id="@+id/tv_plot"
+                    />
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

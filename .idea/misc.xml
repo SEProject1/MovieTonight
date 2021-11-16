@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/search.xml" value="0.1" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/write_reivew.xml" value="0.14537037037037037" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_intro.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_main.xml" value="0.14444444444444443" />
+        <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_movie_detail.xml" value="0.10925925925925926" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_signup.xml" value="0.264" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />

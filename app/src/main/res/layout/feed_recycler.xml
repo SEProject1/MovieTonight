@@ -9,14 +9,30 @@
         android:layout_height="80dp"
         android:src="@drawable/project_toplogo"
         android:layout_gravity="center"/>
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search User"
         android:background="#CACACA"
-        android:drawableLeft="@drawable/search"
         android:layout_margin="30dp"
-        android:padding="20dp"/>
+        >
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/searchimage"
+            android:id="@+id/btn_userSearch"
+            android:layout_gravity="center"
+            android:scaleType="centerInside"
+            android:padding="0dp"
+            android:layout_margin="5dp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Search User"
+            android:id="@+id/et_userSearch"
+            android:padding="20dp"/>
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
