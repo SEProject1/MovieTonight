@@ -61,7 +61,7 @@
                 <ImageView
                     android:layout_width="290dp"
                     android:layout_height="165dp"
-                    android:src="@drawable/ic_baseline_person_outline_24"/>
+                    android:src="@drawable/mypage"/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/layout_first_name"
