@@ -1,6 +1,5 @@
 package com.example.movietonight;
 
-<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +20,7 @@ public class MyPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activty_mypage);
+        setContentView(R.layout.activity_mypage);
         saved=findViewById(R.id.btn_saved);
         profile=findViewById(R.id.btn_profile);
         review=findViewById(R.id.btn_review);
@@ -51,7 +50,7 @@ public class MyPageActivity extends AppCompatActivity {
         review.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent ReviewActivity=new Intent(getApplicationContext(),ReviewActivity.class);
+                Intent ReviewActivity=new Intent(getApplicationContext(),MyReviewActivity.class);
             }
         });
         ranking.setOnClickListener(new OnClickListener() {
@@ -68,11 +67,3 @@ public class MyPageActivity extends AppCompatActivity {
         });
 
     }
-
-
-=======
-import androidx.fragment.app.Fragment;
-
-public class MypageActivity extends Fragment {
->>>>>>> bc6a2ffd0e5d67cf9fc86b80017f7fdafd2a90d8
-}
