@@ -41,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressDialog progressDialog;
     ArrayList<String> arrayList = new ArrayList<>();
-    String userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +59,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //회원가입 처리 시작
-                userId = mEtId.getText().toString().trim();
+                String userId = mEtId.getText().toString().trim();
                 String userNickname = mEtNickname.getText().toString().trim();
                 String passwd = mEtPw.getText().toString().trim();
 
@@ -109,8 +108,10 @@ public class SignupActivity extends AppCompatActivity {
         });
 
         idcheck.setOnClickListener(new View.OnClickListener(){
+
             @Override
             public void onClick(View v) {
+                    String email = mEtId.getText().toString().trim();
                     arrayList.clear();
                     mDatabaseRef = FirebaseDatabase.getInstance().getReference("UserAccount");
                     mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -120,7 +121,7 @@ public class SignupActivity extends AppCompatActivity {
                                 UserAccount account = snapshot.getValue(UserAccount.class);
                                 arrayList.add(account.getUserId());
                             }
-                            if(arrayList.contains(userId)){
+                            if(arrayList.contains(email)){
                                 Toast.makeText(SignupActivity.this, "사용불가", Toast.LENGTH_SHORT).show();
                             }
                             else{
