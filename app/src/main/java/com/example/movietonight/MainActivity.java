@@ -45,18 +45,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
 
         //Asynctask - OKHttp
         MyAsyncTask mAsyncTask = new MyAsyncTask();
-        mAsyncTask.execute();
+        mAsyncTask.execute("https://api.themoviedb.org/3/movie/upcoming?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1");
 
         //LayoutManager
         recyclerView.setLayoutManager(new GridLayoutManager(MainActivity.this, 2));
 
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(myToolbar);
+
     }
 
 
@@ -72,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
             //show dialog
             progressDialog.show();
 
-            //목록 배열의 내용을 크리어 해 놓는다.
+            //목록 배열의 내용을 클리어 해 놓는다.
             movieList.clear();
 
         }
@@ -110,7 +112,8 @@ public class MainActivity extends AppCompatActivity {
                     movieList.add(p);
                 }
             }
-            //어답터 설정
+
+            //어댑터 설정
             adapter = new MyRecyclerViewAdapter(MainActivity.this, movieList);
             recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
@@ -118,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // 검색창
-   @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.my_menu, menu);
 
@@ -131,10 +134,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 Toast.makeText(MainActivity.this, s + "에 대한 영화를 검색합니다.", Toast.LENGTH_LONG).show();
-                String search_url = "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query="+ s +"&language=ko-KR&page=1";
+
+                String search_url = "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query=" + s + "&language=ko-KR&page=1";
                 String[] strings = {search_url};
-                MyAsyncTask mAsyncTask = new MyAsyncTask();
-                mAsyncTask.execute(strings[0]);
+                MyAsyncTask myAsyncTask = new MyAsyncTask();
+                myAsyncTask.execute(strings[0]);
                 return false;
             }
 
@@ -157,12 +161,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_search:
                 //Toast.makeText(this, "action_search", Toast.LENGTH_LONG).show();
                 return true;
+
             default:
                 Toast.makeText(this, "default", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }
 
 //    private BottomNavigationView bottomNavigationView; // 바텀 네비게이션 뷰
