@@ -30,6 +30,9 @@
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/myreview_item.xml" value="0.2" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/myreview_recycler.xml" value="0.1296875" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/layout/user_item.xml" value="0.1296875" />
+        <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_calendar.xml" value="0.32708333333333334" />
+        <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_profile.xml" value="0.3197463768115942" />
+        <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_ranking.xml" value="0.33177083333333335" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/search.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/write_reivew.xml" value="0.14537037037037037" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_intro.xml" value="0.14444444444444443" />
@@ -40,15 +43,10 @@
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
-        <entry key="..\:/Users/hyeok/AndroidStudioProjects/MovieTonight/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.5583333333333333" />
-        <entry key="..\:/Users/hyeok/AndroidStudioProjects/MovieTonight/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.5583333333333333" />
-        <entry key="..\:/Users/hyeok/AndroidStudioProjects/MovieTonight/app/src/main/res/layout/activity_detail.xml" value="0.21631205673758866" />
-        <entry key="..\:/Users/hyeok/AndroidStudioProjects/MovieTonight/app/src/main/res/layout/activity_main.xml" value="0.3097771023302938" />
-        <entry key="..\:/Users/hyeok/AndroidStudioProjects/MovieTonight/app/src/main/res/menu/my_menu.xml" value="0.5948717948717949" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
