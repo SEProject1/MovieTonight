@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.16" />
+        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_calendar.xml" value="0.2390625" />
+        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.152" />
+        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_ranking.xml" value="0.2390625" />
+        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/myreview_item.xml" value="0.2390625" />
         <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1259259259259259" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/drawable/background.xml" value="0.26979166666666665" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/drawable/ic_baseline_feed_24.xml" value="0.26979166666666665" />
