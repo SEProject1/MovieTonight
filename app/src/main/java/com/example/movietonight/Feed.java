@@ -4,15 +4,15 @@ import android.widget.ImageView;
 
 public class Feed {
     ImageView profile;
-    String name;
+    String nickName;
     String movieTitle;
     String genre;
     String review;
     int like ,dislike;
 
-    public Feed(ImageView profile, String name, String movieTitle, String genre, String review, int like, int dislike) {
+    public Feed(ImageView profile, String nickName, String movieTitle, String genre, String review, int like, int dislike) {
         this.profile = profile;
-        this.name = name;
+        this.nickName = nickName;
         this.movieTitle = movieTitle;
         this.genre = genre;
         this.review = review;
@@ -28,12 +28,12 @@ public class Feed {
         this.profile = profile;
     }
 
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String name) {
+        this.nickName = name;
     }
 
     public String getMovieTitle() {
