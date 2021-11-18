@@ -113,8 +113,10 @@ public class FragMain extends Fragment {
             }
 
             //어댑터 설정
-            adapter = new MyRecyclerViewAdapter(getActivity(), movieList);
-            recyclerView.setAdapter(adapter);
+            if(getActivity()!=null) {
+                adapter = new MyRecyclerViewAdapter(getActivity(), movieList);
+                recyclerView.setAdapter(adapter);
+            }
             adapter.notifyDataSetChanged();
         }
     }
