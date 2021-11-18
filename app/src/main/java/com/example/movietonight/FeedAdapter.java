@@ -34,6 +34,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         String movieTitle=item.getMovieTitle();
         String genre=item.getGenre();
         String review=item.getReview();
+        String reviewTitle=item.getReviewTitle();
         final int like=item.getLike();
         final int dislike=item.getDislike();
         //holder.ivProfilePic.setImageResource();//프로필설정
@@ -43,6 +44,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         holder.tvReview.setText(review);
         holder.tvLike.setText(Integer.toString(like));
         holder.tvDislike.setText(Integer.toString(dislike));
+        holder.tvReviewTitle.setText(reviewTitle);
 
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override

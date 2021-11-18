@@ -41,7 +41,8 @@ public class MyReviewActivity extends AppCompatActivity {
         for (int i = 0; i < 10; i++) {
             String reviewMovieTitle = i + "번영화";
             String date="2021.11."+i;
-            MyReview item=new MyReview(reviewMovieTitle,date);
+            String reviewTitle=i+"번 제목";
+            MyReview item=new MyReview(reviewMovieTitle,date,reviewTitle);
             myReviews.add(item);//리뷰리스트에 아이템 저장
         }
     }
