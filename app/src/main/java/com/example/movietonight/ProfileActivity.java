@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void onClick(View view)
     {
-        Intent intent= new Intent(this,UploadActivity.class);
+        Intent intent= new Intent(ProfileActivity.this,UploadActivity.class);
         startActivity(intent);
     }
 
