@@ -59,6 +59,7 @@
                 >
 
                 <ImageView
+                    android:id="@+id/UploadPicture"
                     android:layout_width="290dp"
                     android:layout_height="165dp"
                     android:src="@drawable/mypage"/>

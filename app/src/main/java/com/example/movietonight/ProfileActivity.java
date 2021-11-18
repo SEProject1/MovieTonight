@@ -1,10 +1,12 @@
 package com.example.movietonight;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.content.Intent;
+
+
 public class ProfileActivity extends AppCompatActivity {
 
     EditText etNickname;
@@ -17,6 +19,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         viewInitializations();
     }
+
 
     void viewInitializations() {
         etNickname = findViewById(R.id.et_nickname);
@@ -32,6 +35,11 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
+    public void onClick(View view)
+    {
+        Intent intent= new Intent(this,UploadActivity.class);
+        startActivity(intent);
+    }
 
     public void performEditProfile (View v) {
         if (validateInput()) {
