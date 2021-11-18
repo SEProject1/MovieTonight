@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.264" />
+        <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.16" />
         <entry key="..\:/Android/MovieTonight/MovieTonight/MovieTonight/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1259259259259259" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/drawable/background.xml" value="0.26979166666666665" />
         <entry key="..\:/Android/MovieTonight/MyApplication/app/src/main/res/drawable/ic_baseline_feed_24.xml" value="0.26979166666666665" />
@@ -45,8 +45,6 @@
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_notification.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/notification_item.xml" value="0.1" />
       </map>
     </option>
   </component>
