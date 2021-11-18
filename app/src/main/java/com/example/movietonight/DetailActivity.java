@@ -10,7 +10,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.DatabaseError;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -45,7 +44,7 @@ public class DetailActivity extends AppCompatActivity {
         btn_review.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailActivity.this, WriteActivity.class);
+                Intent intent = new Intent(DetailActivity.this, ReviewActivity.class);
                 intent.putExtra("title",title);
                 startActivity(intent);
                 finish();

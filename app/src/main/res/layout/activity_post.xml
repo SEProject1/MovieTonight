@@ -43,6 +43,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/genre"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="장르"
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
     <EditText
-        android:id="@+id/title_et"
+        android:id="@+id/et_title"
         android:padding="16dp"
         android:background="#eeeeee"
         android:layout_width="match_parent"
@@ -70,7 +71,7 @@
 
 
     <EditText
-        android:id="@+id/content_et"
+        android:id="@+id/et_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
