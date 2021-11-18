@@ -33,7 +33,7 @@ public class SavedActivity extends AppCompatActivity {//찜한 리스트를 아�
             @Override
             public void onClick(View view) {
                 //뒤로가기, 인텐트 종료
-                //finish();
+                finish();
             }
         });
     }
