@@ -54,7 +54,7 @@ public class ReviewActivity extends AppCompatActivity {
         TextView m_title = findViewById(R.id.m_title);
         TextView m_genre = findViewById(R.id.genre);
         m_title.setText(title);
-        EditText date = findViewById(R.id.date);
+        Button date = findViewById(R.id.date);
         ProgressDialog progressDialog = new ProgressDialog(this);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +83,7 @@ public class ReviewActivity extends AppCompatActivity {
                     firebaseAuth=FirebaseAuth.getInstance();
                     user = firebaseAuth.getCurrentUser();
                     Review review = new Review(title, rtitle, mgenre, rcontent, 0, 0, mdate, user.getEmail(), user.getDisplayName());
-                    databaseReference.child(user.getUid()).child("Review").setValue(review);
+                    databaseReference.child(user.getUid()).child("Review").child(title).setValue(review);
                     progressDialog.dismiss();
                     Toast.makeText(ReviewActivity.this, "리뷰가 작성되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ReviewActivity.this, MainActivity.class);
@@ -105,7 +105,7 @@ public class ReviewActivity extends AppCompatActivity {
     private void setDate(){
         String Date = "yyyy/MM/dd";
         SimpleDateFormat format = new SimpleDateFormat(Date, Locale.KOREA);
-        EditText date = findViewById(R.id.date);
+        Button date = findViewById(R.id.date);
         date.setText(format.format(myCalendar.getTime()));
     }
 }
