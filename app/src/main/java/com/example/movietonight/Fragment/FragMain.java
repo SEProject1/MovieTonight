@@ -21,7 +21,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.movietonight.MainActivity;
 import com.example.movietonight.Movie;
 import com.example.movietonight.MyRecyclerViewAdapter;
 import com.example.movietonight.R;
@@ -43,17 +42,21 @@ public class FragMain extends Fragment {
     private MyRecyclerViewAdapter adapter;
     ArrayList<Movie> movieList;
 
-    @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_main, container, false);
+
         Toolbar myToolbar = view.findViewById(R.id.toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        setHasOptionsMenu(true);
+
         recyclerView = view.findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
+
         //Asynctask - OKHttp
         MyAsyncTask mAsyncTask = new MyAsyncTask();
         mAsyncTask.execute("https://api.themoviedb.org/3/movie/upcoming?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1");
+
         //LayoutManager
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
         recyclerView.setLayoutManager(layoutManager);
@@ -65,6 +68,7 @@ public class FragMain extends Fragment {
     public class MyAsyncTask extends AsyncTask<String, Void, Movie[]> {
         //로딩중 표시
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -113,19 +117,19 @@ public class FragMain extends Fragment {
             }
 
             //어댑터 설정
-            if(getActivity()!=null) {
-                adapter = new MyRecyclerViewAdapter(getActivity(), movieList);
-                recyclerView.setAdapter(adapter);
-            }
+            adapter = new MyRecyclerViewAdapter(getActivity(), movieList);
+            recyclerView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
     }
 
 
     // 검색창
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        getActivity().getMenuInflater().inflate(R.menu.my_menu, menu);
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.my_menu, menu);
+//        getActivity().getMenuInflater().inflate(R.menu.my_menu, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
@@ -151,8 +155,6 @@ public class FragMain extends Fragment {
                 return false;
             }
         });
-
-        return true;
     }
 
     @Override
