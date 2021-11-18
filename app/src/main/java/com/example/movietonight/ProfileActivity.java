@@ -10,7 +10,6 @@ import android.content.Intent;
 public class ProfileActivity extends AppCompatActivity {
 
     EditText etNickname;
-    final int MIN_PASSWORD_LENGTH = 6;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +22,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     void viewInitializations() {
         etNickname = findViewById(R.id.et_nickname);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     boolean validateInput() {
@@ -46,8 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
 
             String Nickname = etNickname.getText().toString();
 
-            Toast.makeText(this,"Profile Update Successfully",Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this,"프로필 수정 완료",Toast.LENGTH_SHORT).show();
+            //DB연결하는부분
         }
     }
 
