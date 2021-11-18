@@ -52,6 +52,7 @@ public class UploadActivity extends  AppCompatActivity{
                                 .load(uri)
                                 .into(imageview);
                     }
+
                 }
             });
 
