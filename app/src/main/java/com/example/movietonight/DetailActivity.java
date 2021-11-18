@@ -2,12 +2,15 @@ package com.example.movietonight;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseError;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -38,5 +41,15 @@ public class DetailActivity extends AppCompatActivity {
         textView_overview.setText(overview);
         TextView textView_release_date = (TextView)findViewById(R.id.tv_release_date);
         textView_release_date.setText(release_date);
+        Button btn_review = findViewById(R.id.btn_review);
+        btn_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailActivity.this, WriteActivity.class);
+                intent.putExtra("title",title);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
