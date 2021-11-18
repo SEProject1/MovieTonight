@@ -16,7 +16,35 @@ public class Notification {
     public Notification() {
     }
 
+    public String getUserid() {
+        return userid;
+    }
 
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
 
+    public String getText() {
+        return text;
+    }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getPostid() {
+        return postid;
+    }
+
+    public void setPostid(String postid) {
+        this.postid = postid;
+    }
+
+    public boolean isIspost() {
+        return ispost;
+    }
+
+    public void setIspost(boolean ispost) {
+        this.ispost = ispost;
+    }
 }
