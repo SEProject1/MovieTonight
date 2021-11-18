@@ -103,11 +103,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".UploadActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            tools:ignore="Instantiatable" />
-        <activity
             android:name="com.example.movietonight.DetailActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"

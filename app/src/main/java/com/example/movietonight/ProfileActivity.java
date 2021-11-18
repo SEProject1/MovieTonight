@@ -34,8 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void onClick(View view)
     {
-        Intent intent= new Intent(ProfileActivity.this,UploadActivity.class);
-        startActivity(intent);
+        choosefile();
     }
 
     public void performEditProfile (View v) {
@@ -47,5 +46,11 @@ public class ProfileActivity extends AppCompatActivity {
             //DB연결하는부분
         }
     }
-
+    private void choosefile()
+    {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent,"사진을 고르세요"),1);
+    }
 }
