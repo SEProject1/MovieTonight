@@ -36,6 +36,7 @@ public class ProfileActivity extends AppCompatActivity {
     {
         Intent intent= new Intent(ProfileActivity.this,UploadActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void performEditProfile (View v) {
