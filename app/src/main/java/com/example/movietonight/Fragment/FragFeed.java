@@ -134,9 +134,10 @@ public class FragFeed extends Fragment {
             String movieTitle = i + "번 영화";
             String genre=i+"번 장르";
             String review=i+"번 리뷰";
+            String reviewTitle=i+"번 리뷰제목";
             int like=i;
             int dislike=10+i;
-            Feed item=new Feed(null,name,movieTitle,genre
+            Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
                     ,review,like,dislike);
             feeds.add(item);//아이템을 리스트에 넣기
         }

@@ -3,14 +3,15 @@ package com.example.movietonight;
 import android.widget.ImageView;
 
 public class Feed {
-    ImageView profile;
-    String nickName;
-    String movieTitle;
-    String genre;
-    String review;
-    int like ,dislike;
+    private ImageView profile;
+    private String nickName;
+    private String movieTitle;
+    private String reviewTitle;
+    private String genre;
+    private String review;
+    private int like ,dislike;
 
-    public Feed(ImageView profile, String nickName, String movieTitle, String genre, String review, int like, int dislike) {
+    public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, int like, int dislike) {
         this.profile = profile;
         this.nickName = nickName;
         this.movieTitle = movieTitle;
@@ -18,6 +19,7 @@ public class Feed {
         this.review = review;
         this.like = like;
         this.dislike = dislike;
+        this.reviewTitle=reviewTitle;
     }
 
     public ImageView getProfile() {
@@ -74,5 +76,13 @@ public class Feed {
 
     public void setDislike(int dislike) {
         this.dislike = dislike;
+    }
+
+    public String getReviewTitle() {
+        return reviewTitle;
+    }
+
+    public void setReviewTitle(String reviewTitle) {
+        this.reviewTitle = reviewTitle;
     }
 }

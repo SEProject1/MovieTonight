@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class FeedViewHolder extends RecyclerView.ViewHolder {
     ImageView ivProfilePic;
-    TextView tvNickname,tvMovieTitle,tvMovieGenre,tvReview,tvLike,tvDislike;
+    TextView tvNickname,tvMovieTitle,tvMovieGenre,tvReview,tvLike,tvDislike,tvReviewTitle;
     ImageButton btnLike,btnDisLike;
     public FeedViewHolder(Context context, @NonNull View itemView) {
         super(itemView);
@@ -24,6 +24,7 @@ public class FeedViewHolder extends RecyclerView.ViewHolder {
         tvDislike=itemView.findViewById(R.id.tvDislike);
         btnLike=itemView.findViewById(R.id.btnLike);
         btnDisLike=itemView.findViewById(R.id.btnDislike);
+        tvReviewTitle=itemView.findViewById(R.id.tvReviewTitle);
     }
 }
 
