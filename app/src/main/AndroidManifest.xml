@@ -104,7 +104,7 @@
             tools:ignore="Instantiatable" />
         <activity
             android:name=".UploadActivity"
-            android:exported="ture"
+            android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
         <activity
