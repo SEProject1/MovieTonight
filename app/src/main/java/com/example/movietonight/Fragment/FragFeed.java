@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movietonight.Adapter.UserAdapter;
 import com.example.movietonight.Class.UserAccount;
+import com.example.movietonight.Feed;
+import com.example.movietonight.FeedAdapter;
 import com.example.movietonight.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,10 +32,11 @@ import java.util.List;
 public class FragFeed extends Fragment {
 
     private View view;
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerView,feedRecyclerView;
     private UserAdapter userAdapter;
     private List<UserAccount> mUsers;
-
+    private FeedAdapter feedAdapter;
+    ArrayList<Feed> feeds=new ArrayList<Feed>();
     EditText search_bar;
 
     @Nullable
@@ -45,11 +48,19 @@ public class FragFeed extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        feedRecyclerView=view.findViewById(R.id.feed_recycler_view);
+        feedRecyclerView.setHasFixedSize(true);
+        feedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+
         search_bar = view.findViewById(R.id.search_bar);
 
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), mUsers);
+        feedAdapter = new FeedAdapter();
         recyclerView.setAdapter(userAdapter);
+        feedRecyclerView.setAdapter(feedAdapter);
 
         readUsers();
         search_bar.addTextChangedListener(new TextWatcher() {
@@ -68,7 +79,8 @@ public class FragFeed extends Fragment {
 
             }
         });
-
+        getFeeds();//db에서 피드 가져옴
+        setFeeds();//item추가
         return view;
     }
     private void searchUsers(String s) {
@@ -114,5 +126,24 @@ public class FragFeed extends Fragment {
 
             }
         });
+    }
+    public void getFeeds() {//db피드 가져옴
+        //db에서 찜 영화 가져옴
+        for (int i = 0; i < 10; i++) {
+            String name=i+"번 유저";
+            String movieTitle = i + "번 영화";
+            String genre=i+"번 장르";
+            String review=i+"번 리뷰";
+            int like=i;
+            int dislike=10+i;
+            Feed item=new Feed(null,name,movieTitle,genre
+                    ,review,like,dislike);
+            feeds.add(item);//아이템을 리스트에 넣기
+        }
+    }
+    public void setFeeds(){//아이템 추가 메서드
+        for (int i=0;i<feeds.size();i++){
+            feedAdapter.setFeedData(feeds.get(i));
+        }
     }
 }
