@@ -4,15 +4,24 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
 public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
     private ArrayList<MyReview> myReviewList=null;
-
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
     MyReviewAdapter(){
         myReviewList=new ArrayList<>();
     }
@@ -41,7 +50,13 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
             @Override
             public void onClick(View view) {
                 //db에서 해당 리뷰 삭제
-
+                databaseReference.child(user.getUid()).child("Review").child(mt).
+                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(view.getContext(),"리뷰가 삭제되었습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });
                 myReviewList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(),myReviewList.size());

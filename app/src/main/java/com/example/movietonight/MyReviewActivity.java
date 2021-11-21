@@ -4,30 +4,43 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyReviewActivity extends AppCompatActivity {
-    RecyclerView recyclerView;
-    MyReviewAdapter adapter;
-    ImageButton btnBack;
-    ArrayList<MyReview> myReviews=new ArrayList<MyReview>();//리뷰목록을 저장
+    private RecyclerView recyclerView;
+    private MyReviewAdapter adapter;
+    private ImageButton btnBack;
+    private ArrayList<MyReview> myReviews=new ArrayList<MyReview>();//리뷰목록을 저장
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myreview_recycler);
         recyclerView = (RecyclerView)findViewById(R.id.myReivew_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBackMyReview);//뒤로가기 버튼
-
+        String uid=user!=null? user.getUid():null;
+        adapter = new MyReviewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL, false)) ;
-        adapter = new MyReviewAdapter();
+
         getMyReviews();//db에서 리뷰정보 불러오기
-        recyclerView.setAdapter(adapter);
-        setMyReviews();//리사이클러뷰에 아이템추가
+
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,17 +51,32 @@ public class MyReviewActivity extends AppCompatActivity {
     }
 
     public void getMyReviews() {//db에서 영화정보를 가져오는 메서드
-        for (int i = 0; i < 10; i++) {
-            String reviewMovieTitle = i + "번영화";
-            String date="2021.11."+i;
-            String reviewTitle=i+"번 제목";
-            MyReview item=new MyReview(reviewMovieTitle,date,reviewTitle);
-            myReviews.add(item);//리뷰리스트에 아이템 저장
-        }
+        //db에서 나의 리뷰 가져옴
+        databaseReference.child(user.getUid()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot s: snapshot.getChildren()){
+                    HashMap<String,Object> reviewMap= (HashMap<String, Object>) s.getValue();
+
+                    String reviewMovieTitle = (String) reviewMap.get("mtitle");
+                    String date=(String) reviewMap.get("mdate");
+                    String reviewTitle= (String) reviewMap.get("rtitle");
+                    MyReview item=new MyReview(reviewMovieTitle,date,reviewTitle);
+                    myReviews.add(item);//리뷰리스트에 아이템 저장
+                }
+                setMyReviews();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
     public void setMyReviews(){//아이템 추가 메서드
         for (int i=0;i<myReviews.size();i++){
             adapter.setMyReviewList(myReviews.get(i));
         }
+        recyclerView.setAdapter(adapter);
     }
 }
