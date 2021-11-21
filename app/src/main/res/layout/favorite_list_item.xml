@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="title"
         android:id="@+id/tvFavoriteMovieTitle"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:layout_weight="1"/>
     <ImageButton
         android:layout_width="40dp"
