@@ -26,7 +26,6 @@ import org.json.JSONObject;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-
 public class ProfileActivity extends AppCompatActivity {
 
     EditText etNickname;
@@ -55,7 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public void onClick(View view)
+    /*public void onClick(View view)
     {
         choosefile();
     }
@@ -106,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
                 progressDialog.dismiss();
                 Toast.makeText(ProfileActivity.this, "Error : " + error.toString(), Toast.LENGTH_SHORT).show();
             }
-        })
+        });
     private void choosefile()
     {
         Intent intent = new Intent(Intent.ACTION_PICK);
@@ -144,5 +143,5 @@ public class ProfileActivity extends AppCompatActivity {
         byte[] imageByteArray = byteArrayOutputStream.toByteArray();
         String encodedImage = Base64.encodeToString(imageByteArray, Base64.DEFAULT);
         return encodedImage;
-    }
+    }*/
 }
