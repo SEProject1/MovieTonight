@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DetailActivity extends AppCompatActivity {
     ImageButton btn_save;
@@ -70,6 +69,7 @@ public class DetailActivity extends AppCompatActivity {
                     String m_name = dataSnapshot.getValue().toString();
                     if(m_name.equals(title)){
                         btn_save.setSelected(true);
+                        btn_save.setEnabled(false);
                     }
                     arrayList.add(m_name);
                 }
@@ -90,14 +90,11 @@ public class DetailActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {    //save버튼 눌렀을 때 버튼 변화
             @Override
             public void onClick(View v) {
-                if(arrayList.contains(title)){
-                    databaseReference.child(user.getUid()).child("save").child(title).removeValue();
-                    arrayList.remove(title);
-                }else{  //save에 추가
+                    btn_save.setEnabled(false);
+                    btn_save.setClickable(false);
                     databaseReference.child(user.getUid()).child("save").child(title).setValue(title);
-                    arrayList.add(title);
-                }
-                btn_save.setSelected(!btn_save.isSelected());
+                    arrayList.remove(title);
+                    btn_save.setSelected(!btn_save.isSelected());
             }
         });
     }
