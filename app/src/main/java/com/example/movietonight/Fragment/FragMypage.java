@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.movietonight.CalendarActivity;
+import com.example.movietonight.FollowingListActivity;
 import com.example.movietonight.MyReviewActivity;
 import com.example.movietonight.R;
 import com.example.movietonight.RankingActivity;
@@ -23,6 +25,7 @@ import com.example.movietonight.StartActivity;
 public class FragMypage extends Fragment implements View.OnClickListener{
     private Button review, saved, cal, rank, logout;
     private View view;
+    private TextView following;
 
     @Nullable
     @Override
@@ -33,11 +36,13 @@ public class FragMypage extends Fragment implements View.OnClickListener{
         cal = view.findViewById(R.id.btn_calendar);
         rank = view.findViewById(R.id.btn_ranking);
         logout = view.findViewById(R.id.btn_logout);
+        following=view.findViewById(R.id.following);
         review.setOnClickListener(this);
         saved.setOnClickListener(this);
         cal.setOnClickListener(this);
         rank.setOnClickListener(this);
         logout.setOnClickListener(this);
+        following.setOnClickListener(this);
         return view;
     }
     public void onClick(View v){
@@ -74,7 +79,10 @@ public class FragMypage extends Fragment implements View.OnClickListener{
                     }
                 }).show();
                 break;
-
+            case R.id.following:
+                intent=new Intent(getActivity(), FollowingListActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }
