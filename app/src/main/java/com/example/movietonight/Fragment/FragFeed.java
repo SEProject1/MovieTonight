@@ -84,7 +84,7 @@ public class FragFeed extends Fragment {
         return view;
     }
     private void searchUsers(String s) {
-        Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("username")
+        Query query = FirebaseDatabase.getInstance().getReference("UserAccount").orderByChild("username")
                 .startAt(s)
                 .endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
@@ -106,7 +106,7 @@ public class FragFeed extends Fragment {
         });
     }
     private void readUsers() {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserAccount");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
