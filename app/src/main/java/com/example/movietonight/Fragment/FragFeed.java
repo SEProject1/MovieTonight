@@ -52,10 +52,7 @@ public class FragFeed extends Fragment {
         feedRecyclerView.setHasFixedSize(true);
         feedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
-
         search_bar = view.findViewById(R.id.search_bar);
-
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), mUsers);
         feedAdapter = new FeedAdapter();

@@ -80,6 +80,7 @@
         android:ems="10"
         android:hint="닉네임 입력"
         android:textSize="12sp"
+        android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/btn_signup_signup"
         app:layout_constraintEnd_toEndOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
