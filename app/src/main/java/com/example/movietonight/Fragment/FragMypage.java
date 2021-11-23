@@ -1,5 +1,7 @@
 package com.example.movietonight.Fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,11 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.movietonight.CalendarActivity;
-import com.example.movietonight.LogoutActivity;
 import com.example.movietonight.MyReviewActivity;
 import com.example.movietonight.R;
 import com.example.movietonight.RankingActivity;
 import com.example.movietonight.SavedActivity;
+import com.example.movietonight.StartActivity;
 
 public class FragMypage extends Fragment implements View.OnClickListener{
     private Button review, saved, cal, rank, logout;
@@ -58,9 +60,21 @@ public class FragMypage extends Fragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.btn_logout:
-                intent = new Intent(getActivity(), LogoutActivity.class);
-                startActivity(intent);
+                new AlertDialog.Builder(getActivity()).setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?").setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getActivity(), StartActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                }).setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                }).show();
                 break;
+
         }
     }
 }
