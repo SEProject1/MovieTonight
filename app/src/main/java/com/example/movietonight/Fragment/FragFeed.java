@@ -67,6 +67,14 @@ public class FragFeed extends Fragment {
         feedAdapter = new FeedAdapter();
         recyclerView.setAdapter(userAdapter);
 
+        recyclerView.setVisibility(View.GONE);
+
+        search_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recyclerView.setVisibility(View.VISIBLE);
+            }
+        });
 
         readUsers();
         search_bar.addTextChangedListener(new TextWatcher() {
@@ -78,6 +86,9 @@ public class FragFeed extends Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchUsers(charSequence.toString().toLowerCase());
+                if(search_bar.getText().toString().equals("")){
+                    recyclerView.setVisibility(View.GONE);
+                }
             }
 
             @Override
