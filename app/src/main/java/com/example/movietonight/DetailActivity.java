@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -40,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
         String poster_path = intent.getStringExtra("poster_path");
         String overview = intent.getStringExtra("overview");
         String release_date = intent.getStringExtra("release_date");
+        String vote_average = intent.getStringExtra("vote_average");
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("UserAccount");
@@ -62,7 +64,11 @@ public class DetailActivity extends AppCompatActivity {
         TextView textView_release_date = (TextView)findViewById(R.id.tv_release_date);
         textView_release_date.setText(release_date);
         Button btn_review = findViewById(R.id.btn_review);
+        RatingBar ratingBar = findViewById(R.id.movie_rating);
         btn_save = findViewById(R.id.btn_save);
+
+        ratingBar.setRating(((float)Double.parseDouble(vote_average)/2));
+
         databaseReference.child(user.getUid()).child("save").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -58,7 +58,7 @@ public class FragMain extends Fragment {
         mAsyncTask.execute("https://api.themoviedb.org/3/movie/upcoming?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1");
 
         //LayoutManager
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2, GridLayoutManager.HORIZONTAL,false);
         recyclerView.setLayoutManager(layoutManager);
         //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         return view;

@@ -57,6 +57,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
                 intent.putExtra("poster_path", mMovieList.get(holder.getAdapterPosition()).getPoster_path());
                 intent.putExtra("overview", mMovieList.get(holder.getAdapterPosition()).getOverview());
                 intent.putExtra("release_date", mMovieList.get(holder.getAdapterPosition()).getRelease_date());
+                intent.putExtra("vote_average", mMovieList.get(holder.getAdapterPosition()).getVote_average());
                 mContext.startActivity(intent);
                 Log.d("Adapter", "Clcked: " + holder.getAdapterPosition());
             }
