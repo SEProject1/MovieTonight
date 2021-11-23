@@ -61,7 +61,6 @@ public class FragFeed extends Fragment {
         feedRecyclerView=view.findViewById(R.id.feed_recycler_view);
         feedRecyclerView.setHasFixedSize(true);
         feedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         search_bar = view.findViewById(R.id.search_bar);
         mUsers = new ArrayList<>();
         userAdapter = new UserAdapter(getContext(), mUsers);
@@ -134,8 +133,8 @@ public class FragFeed extends Fragment {
         });
     }
     public void getFollowingList(){
+        followingLists.clear();
         databaseReference.child(user.getUid()).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {//팔로잉 리스트 부름
                 for(DataSnapshot s:snapshot.getChildren()){
@@ -154,7 +153,7 @@ public class FragFeed extends Fragment {
     }
     public void getFeeds() {//db피드 가져옴
         //db에서 나의 리뷰 가져옴
-
+            feeds.clear();
             for(int i=0;i<followingLists.size();i++){
                 String name=followingLists.get(i).getNickName();
                 databaseReference.child(followingLists.get(i).getIdToken()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
