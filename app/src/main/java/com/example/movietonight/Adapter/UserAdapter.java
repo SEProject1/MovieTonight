@@ -76,7 +76,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             }
         });
 
-        /*holder.btn_follow.setOnClickListener(new View.OnClickListener() {
+        holder.btn_follow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (holder.btn_follow.getText().toString().equals("follow")){
@@ -91,7 +91,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             .child("followers").child(firebaseUser.getUid()).removeValue();
                 }
             }
-        });*/
+        });
     }
 
     @Override
