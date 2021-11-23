@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.movietonight.Class.UserAccount;
+import com.example.movietonight.FollowUser;
 import com.example.movietonight.Fragment.FragMypage;
 import com.example.movietonight.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +34,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     private Context mContext;
     private List<UserAccount> mUsers;
-
     private FirebaseUser firebaseUser;
 
     public UserAdapter(Context mContext, List<UserAccount> mUsers) {
@@ -52,19 +52,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final UserAccount user = mUsers.get(position);
-
+        UserAccount user = mUsers.get(position);
         holder.btn_follow.setVisibility(View.VISIBLE);
 
         holder.nickname.setText(user.getUserNickname());
         Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
         //isFollowing(user.getUserId(), holder.btn_follow);
 
-        /*if(user.getUserId().equals(firebaseUser.getUid())) {
+        if(user.getUserId().equals(firebaseUser.getUid())) {
             holder.btn_follow.setVisibility(View.GONE);
-        }*/
+        }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        //친구 마이페이지로 이동
+        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
@@ -74,21 +74,30 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,
                         new FragMypage()).commit();
             }
-        });
+        });*/
 
         holder.btn_follow.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (holder.btn_follow.getText().toString().equals("follow")){
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
-                            .child("following").child(user.getUserId()).setValue(true);
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getUserId())
-                            .child("followers").child(firebaseUser.getUid()).setValue(true);
-                } else {
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(firebaseUser.getUid())
-                            .child("following").child(user.getUserId()).removeValue();
-                    FirebaseDatabase.getInstance().getReference().child("Follow").child(user.getUserId())
-                            .child("followers").child(firebaseUser.getUid()).removeValue();
+            public void onClick(View view) {    //firebaseuser -> 현재 사용자 user -> 팔로우하는 사용자
+                FollowUser followUser = new FollowUser();
+                if (holder.btn_follow.getText().toString().equals("팔로우")){
+                    holder.btn_follow.setText("팔로잉");
+                    followUser.setUserEmail(user.getUserId());
+                    followUser.setUserNickname(user.getUserNickname());
+                    followUser.setIdToken(user.getIdToken());
+                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
+                            .child("following").child(user.getIdToken()).setValue(followUser);
+                    followUser.setUserEmail(firebaseUser.getEmail());
+                    followUser.setUserNickname(null);
+                    followUser.setIdToken(firebaseUser.getUid());
+                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
+                            .child("follower").child(firebaseUser.getUid()).setValue(followUser);
+                } else {    //팔로잉일 때
+                    holder.btn_follow.setText("팔로우");
+                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
+                            .child("following").child(user.getIdToken()).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
+                            .child("follower").child(firebaseUser.getUid()).removeValue();
                 }
             }
         });
@@ -107,7 +116,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             nickname = itemView.findViewById(R.id.nickname);
             image_profile = itemView.findViewById(R.id.image_profile);
             btn_follow = itemView.findViewById(R.id.btn_follow);

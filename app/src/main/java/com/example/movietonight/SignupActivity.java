@@ -4,6 +4,7 @@ import static android.widget.Toast.makeText;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +52,6 @@ public class SignupActivity extends AppCompatActivity {
         mEtPw = findViewById(R.id.et_pw);
         mBtnSignup = findViewById(R.id.btn_signup_signup);
         progressDialog = new ProgressDialog(this);
-
         mBtnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,6 +84,7 @@ public class SignupActivity extends AppCompatActivity {
                             account.setUserId(firebaseUser.getEmail());
                             account.setUserNickname(userNickname);
                             account.setPasswd(passwd);
+                            //account.setImageurl("ic_baseline_profile_24");
 
                             //setValue : database에 삽입 동작
                             mDatabaseRef.child(firebaseUser.getUid()).setValue(account);

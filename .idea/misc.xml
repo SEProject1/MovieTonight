@@ -40,6 +40,9 @@
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/calendar.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/empty_heart.xml" value="0.28541666666666665" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/full_heart.xml" value="0.28541666666666665" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1037037037037037" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.1037037037037037" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_profile_24.xml" value="0.1037037037037037" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/logout.xml" value="0.28541666666666665" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/piechart.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/savebutton.xml" value="0.1" />
@@ -55,6 +58,7 @@
         <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_mypage.xml" value="0.15512465373961218" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/myreview_item.xml" value="0.16168478260869565" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/myreview_recycler.xml" value="0.16168478260869565" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/notification_item.xml" value="0.22416413373860183" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/savedbutton.xml" value="0.161231884057971" />
         <entry key="..\:/MovieTonight/app/src/main/res/menu/bottom_menu.xml" value="0.2682291666666667" />
         <entry key="..\:/MovieTonight/app/src/main/res/menu/my_menu.xml" value="0.2611111111111111" />

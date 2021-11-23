@@ -101,7 +101,8 @@ public class FragFeed extends Fragment {
                     UserAccount user = snapshot.getValue(UserAccount.class);
                     mUsers.add(user);
                 }
-
+                List<UserAccount> result = new ArrayList<UserAccount>();
+                result = mUsers;
                 userAdapter.notifyDataSetChanged();
             }
 
@@ -122,7 +123,6 @@ public class FragFeed extends Fragment {
                         UserAccount user = snapshot.getValue(UserAccount.class);
                         mUsers.add(user);
                     }
-
                     userAdapter.notifyDataSetChanged();
                 }
             }

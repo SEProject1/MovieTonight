@@ -5,10 +5,10 @@
     android:padding="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/image_profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/image_profile"
-        android:src="@drawable/ic_baseline_profile_24"/>
+        android:src="@drawable/ic_baseline_profile_24" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -36,6 +36,7 @@
         android:background="#000000"
         android:id="@+id/btn_follow"
         android:textColor="#FFFFFF"
+        android:text="팔로우"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
         android:visibility="gone"/>
