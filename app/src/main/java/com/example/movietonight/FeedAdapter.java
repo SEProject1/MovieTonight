@@ -8,10 +8,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     private ArrayList<Feed> feedData=null;
+    private FirebaseUser firebaseUser;
+
+
     public FeedAdapter(){
         feedData=new ArrayList<>();
     }
@@ -64,6 +69,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         });
 
     }
+
 
     @Override
     public int getItemCount() {
