@@ -46,15 +46,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         String genre=item.getGenre();
         String review=item.getReview();
         String reviewTitle=item.getReviewTitle();
-        final int like=item.getLike();
-        final int dislike=item.getDislike();
+        String like=item.getLike();
+        String dislike=item.getDislike();
         //holder.ivProfilePic.setImageResource();//프로필설정
         holder.tvNickname.setText(nickName);
         holder.tvMovieTitle.setText(movieTitle);
         holder.tvMovieGenre.setText(genre);
         holder.tvReview.setText(review);
-        holder.tvLike.setText(Integer.toString(like));
-        holder.tvDislike.setText(Integer.toString(dislike));
+        holder.tvLike.setText(like);
+        holder.tvDislike.setText(dislike);
         holder.tvReviewTitle.setText(reviewTitle);
 
         holder.btnLike.setOnClickListener(new View.OnClickListener() {

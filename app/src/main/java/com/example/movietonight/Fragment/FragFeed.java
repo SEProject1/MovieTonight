@@ -18,7 +18,10 @@ import com.example.movietonight.Adapter.UserAdapter;
 import com.example.movietonight.Class.UserAccount;
 import com.example.movietonight.Feed;
 import com.example.movietonight.FeedAdapter;
+import com.example.movietonight.FollowingList;
 import com.example.movietonight.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +30,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 public class FragFeed extends Fragment {
@@ -37,7 +43,11 @@ public class FragFeed extends Fragment {
     private List<UserAccount> mUsers;
     private FeedAdapter feedAdapter;
     ArrayList<Feed> feeds=new ArrayList<Feed>();
+    ArrayList<FollowingList> followingLists=new ArrayList<>();
     EditText search_bar;
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
     @Nullable
     @Override
@@ -57,7 +67,7 @@ public class FragFeed extends Fragment {
         userAdapter = new UserAdapter(getContext(), mUsers);
         feedAdapter = new FeedAdapter();
         recyclerView.setAdapter(userAdapter);
-        feedRecyclerView.setAdapter(feedAdapter);
+
 
         readUsers();
         search_bar.addTextChangedListener(new TextWatcher() {
@@ -76,8 +86,7 @@ public class FragFeed extends Fragment {
 
             }
         });
-        getFeeds();//db에서 피드 가져옴
-        setFeeds();//item추가
+        getFollowingList();
         return view;
     }
     private void searchUsers(String s) {
@@ -124,24 +133,61 @@ public class FragFeed extends Fragment {
             }
         });
     }
+    public void getFollowingList(){
+        databaseReference.child(user.getUid()).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {//팔로잉 리스트 부름
+                for(DataSnapshot s:snapshot.getChildren()){
+                    HashMap<String,Object>followingMap=(HashMap<String, Object>) s.getValue();
+                    String nickName=(String) followingMap.get("userNickname");
+                    String idToken=(String)followingMap.get("idToken");
+                    FollowingList item=new FollowingList(nickName,idToken);
+                    followingLists.add(item);
+                }
+                getFeeds();
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     public void getFeeds() {//db피드 가져옴
-        //db에서 찜 영화 가져옴
-        for (int i = 0; i < 10; i++) {
-            String name=i+"번 유저";
-            String movieTitle = i + "번 영화";
-            String genre=i+"번 장르";
-            String review=i+"번 리뷰";
-            String reviewTitle=i+"번 리뷰제목";
-            int like=i;
-            int dislike=10+i;
-            Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
-                    ,review,like,dislike);
-            feeds.add(item);//아이템을 리스트에 넣기
-        }
+        //db에서 나의 리뷰 가져옴
+
+            for(int i=0;i<followingLists.size();i++){
+                String name=followingLists.get(i).getNickName();
+                databaseReference.child(followingLists.get(i).getIdToken()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot s:snapshot.getChildren()){
+                            HashMap<String,Object>reviewMap=(HashMap<String, Object>) s.getValue();
+                            String movieTitle = (String)reviewMap.get("mtitle");
+                            String genre=(String)reviewMap.get("mgenre");
+                            String review=(String)reviewMap.get("rcontent");
+                            String reviewTitle=(String)reviewMap.get("rtitle");
+                            String like=Long.toString((Long) reviewMap.get("like"));
+                            String dislike=Long.toString((Long) reviewMap.get("dislike"));
+                            String mdate=(String)reviewMap.get("mdate");
+                            Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
+                                    ,review,like,dislike,mdate);
+                            feeds.add(item);//아이템을 리스트에 넣기
+                        }
+                        Collections.sort(feeds);
+                        setFeeds();
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
     }
     public void setFeeds(){//아이템 추가 메서드
         for (int i=0;i<feeds.size();i++){
+            System.out.println("-----------------"+feeds.size());
+            System.out.println(feeds.get(i).getMovieTitle());
             feedAdapter.setFeedData(feeds.get(i));
         }
+        feedRecyclerView.setAdapter(feedAdapter);
     }
 }

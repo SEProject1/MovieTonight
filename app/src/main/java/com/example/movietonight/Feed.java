@@ -2,16 +2,22 @@ package com.example.movietonight;
 
 import android.widget.ImageView;
 
-public class Feed {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Feed implements Comparable<Feed>{
     private ImageView profile;
     private String nickName;
     private String movieTitle;
     private String reviewTitle;
     private String genre;
     private String review;
-    private int like ,dislike;
+    private String like ,dislike;
+    private Date mdate;
 
-    public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, int like, int dislike) {
+    public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, String like, String dislike,String mdate) {
+        SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
         this.profile = profile;
         this.nickName = nickName;
         this.movieTitle = movieTitle;
@@ -20,8 +26,20 @@ public class Feed {
         this.like = like;
         this.dislike = dislike;
         this.reviewTitle=reviewTitle;
+        try {
+            this.mdate=format.parse(mdate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
-
+    public int compareTo(Feed feed){
+        if(feed.mdate.after(mdate)){
+            return 1;
+        }else if(mdate.after(feed.mdate)){
+            return -1;
+        }
+        return 0;
+    }
     public ImageView getProfile() {
         return profile;
     }
@@ -62,19 +80,19 @@ public class Feed {
         this.review = review;
     }
 
-    public int getLike() {
+    public String getLike() {
         return like;
     }
 
-    public void setLike(int like) {
+    public void setLike(String like) {
         this.like = like;
     }
 
-    public int getDislike() {
+    public String getDislike() {
         return dislike;
     }
 
-    public void setDislike(int dislike) {
+    public void setDislike(String dislike) {
         this.dislike = dislike;
     }
 
