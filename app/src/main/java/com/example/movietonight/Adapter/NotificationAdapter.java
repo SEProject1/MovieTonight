@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.movietonight.Class.Notification;
 import com.example.movietonight.Class.UserAccount;
 import com.example.movietonight.Fragment.FragFeed;
+import com.example.movietonight.Fragment.FragMypage;
 import com.example.movietonight.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -47,6 +48,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         Notification notification = mNotifications.get(position);
 
         getUser(holder.imageProfile, holder.username, notification.getUserid());
+        holder.comment.setText(notification.getText()); //comment 알림창에 출력
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +60,12 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
                     ((FragmentActivity)mContext).getSupportFragmentManager()
                             .beginTransaction().replace(R.id.main_frame, new FragFeed()).commit();
+                } else {
+                    mContext.getSharedPreferences("PROFILE", Context.MODE_PRIVATE)
+                            .edit().putString("profileId", notification.getUserid()).apply();
+
+                    ((FragmentActivity)mContext).getSupportFragmentManager()
+                            .beginTransaction().replace(R.id.main_frame, new FragMypage()).commit();
                 }
             }
         });
@@ -72,7 +80,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageProfile;
-        //        public ImageView postImage;
         public TextView username;
         public TextView comment;
 
@@ -88,16 +95,17 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     }
 
 
-    private void getUser(ImageView imageView, TextView textView, String userId) {
-        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userId).addValueEventListener(new ValueEventListener() {
+    private void getUser(ImageView imageView, TextView textView, String userNickname) {
+        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserAccount user = dataSnapshot.getValue(UserAccount.class);
-                if (user.getImageurl().equals("default")) {
-                    imageView.setImageResource(R.mipmap.ic_launcher);
-                } else {
-                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
-                }
+//                if (user.getImageurl().equals("default")) {
+//                    imageView.setImageResource(R.mipmap.ic_launcher);
+//                } else {
+//                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
+//                }
+                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
                 textView.setText(user.getUserNickname());
             }
 

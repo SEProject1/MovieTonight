@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -71,13 +72,20 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
                 //db에 Dislike수 +1
                 int updated_dislike= Integer.parseInt((String)holder.tvDislike.getText())+1;
                 holder.tvDislike.setText(Integer.toString(updated_dislike));//Ui에 like+1
-                addNotification(item.getReviewTitle(), item.getNickName()); //싫어요 알림
             }
         });
 
     }
 
     private void addNotification(String reviewTitle, String nickName){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("userid", nickName);
+        map.put("text", "Liked your review");
+        map.put("reviewId", reviewTitle);
+        map.put("isReview", true);
+
+        FirebaseDatabase.getInstance().getReference().child("Notification").child(firebaseUser.getUid()).push().setValue(map);
 
     }
 
