@@ -51,6 +51,12 @@
                 android:stepSize="1" />
 
             <TextView
+                android:id="@+id/tv_genre_ids"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"   />
+
+            <TextView
                 android:id="@+id/tv_overview"
                 android:paddingLeft="8dp"
                 android:paddingTop="8dp"

@@ -1,5 +1,7 @@
 package com.example.movietonight;
 
+import java.util.ArrayList;
+
 public class Movie {
     //Json 데이터를 참조
     private String title;
@@ -9,8 +11,9 @@ public class Movie {
     private String backdrop_path;
     private String release_date;
     private String vote_average;
+    ArrayList<Integer> genre_ids = new ArrayList<>();
 
-    public Movie(String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average) {
+    public Movie(String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
         this.title = title;
         this.original_title = original_title;
         this.poster_path = poster_path;
@@ -18,6 +21,7 @@ public class Movie {
         this.backdrop_path = backdrop_path;
         this.release_date = release_date;
         this.vote_average = vote_average;
+        this.genre_ids = genre_ids;
     }
 
     public String getTitle() {
@@ -45,4 +49,6 @@ public class Movie {
     }
 
     public String getVote_average() { return vote_average; }
+
+    public ArrayList<Integer> getGenre_ids() { return genre_ids; }
 }
