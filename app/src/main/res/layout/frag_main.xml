@@ -6,23 +6,24 @@
     android:orientation="vertical">
 
 
-    <ImageView
-        android:id="@+id/img_toplogo"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:srcCompat="@drawable/project_toplogo" />
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="?attr/colorPrimary"
+        android:background="#FFFFFF"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+
+        <ImageView
+            android:id="@+id/img_toplogo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            app:srcCompat="@drawable/project_toplogo" />
+    </androidx.appcompat.widget.Toolbar>
 
     <!--RecyclerView-->
     <androidx.recyclerview.widget.RecyclerView
