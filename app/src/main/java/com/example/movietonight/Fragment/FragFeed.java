@@ -1,9 +1,11 @@
 package com.example.movietonight.Fragment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -47,6 +49,7 @@ public class FragFeed extends Fragment {
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setVisibility(View.GONE);
 
         feedRecyclerView=view.findViewById(R.id.feed_recycler_view);
         feedRecyclerView.setHasFixedSize(true);
@@ -58,22 +61,30 @@ public class FragFeed extends Fragment {
         feedAdapter = new FeedAdapter();
         recyclerView.setAdapter(userAdapter);
         feedRecyclerView.setAdapter(feedAdapter);
+        search_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                }
+        });
 
         readUsers();
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                recyclerView.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 searchUsers(charSequence.toString().toLowerCase());
+                if(search_bar.getText().toString().equals("")){
+                    recyclerView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         getFeeds();//db에서 피드 가져옴
@@ -81,7 +92,7 @@ public class FragFeed extends Fragment {
         return view;
     }
     private void searchUsers(String s) {
-        Query query = FirebaseDatabase.getInstance().getReference("UserAccount").orderByChild("username")
+        Query query = FirebaseDatabase.getInstance().getReference("UserAccount").orderByChild("userNickname")
                 .startAt(s)
                 .endAt(s + "\uf8ff");
         query.addValueEventListener(new ValueEventListener() {
