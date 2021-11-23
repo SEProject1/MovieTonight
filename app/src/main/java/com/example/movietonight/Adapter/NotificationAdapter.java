@@ -47,7 +47,10 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         Notification notification = mNotifications.get(position);
 
-        getUser(holder.imageProfile, holder.username, notification.getUserid());
+//       getUser(holder.imageProfile, holder.username, notification.getUserid());
+        holder.imageProfile.setImageResource(R.mipmap.ic_launcher_round); //임시로 기본 프로필사진 출력
+
+        holder.username.setText(notification.getUserid()); //임시로 닉네임 유저 설정
         holder.comment.setText(notification.getText()); //comment 알림창에 출력
 
 
@@ -94,25 +97,25 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     }
 
-
-    private void getUser(ImageView imageView, TextView textView, String userNickname) {
-        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                UserAccount user = dataSnapshot.getValue(UserAccount.class);
-//                if (user.getImageurl().equals("default")) {
-//                    imageView.setImageResource(R.mipmap.ic_launcher);
-//                } else {
-//                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
-//                }
-                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
-                textView.setText(user.getUserNickname());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
+// 아직 피드 리뷰 좋아요가 디비와 연동 X
+//    private void getUser(ImageView imageView, TextView textView, String userNickname) {
+//        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                UserAccount user = dataSnapshot.getValue(UserAccount.class);
+////                if (user.getImageurl().equals("default")) {
+////                    imageView.setImageResource(R.mipmap.ic_launcher);
+////                } else {
+////                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
+////                }
+//                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
+//                textView.setText(user.getUserNickname());
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 }

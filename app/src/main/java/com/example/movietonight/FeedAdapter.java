@@ -81,7 +81,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         HashMap<String, Object> map = new HashMap<>();
 
         map.put("userid", nickName);
-        map.put("text", "Liked your review");
+        map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
         map.put("reviewId", reviewTitle);
         map.put("isReview", true);
 
