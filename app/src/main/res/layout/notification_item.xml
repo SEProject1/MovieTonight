@@ -14,8 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:orientation="vertical"
-        android:layout_toEndOf="@+id/image_profile"
-        android:layout_toStartOf="@id/post_image">
+        android:layout_toEndOf="@+id/image_profile">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,10 +30,5 @@
             android:maxLines="5"/>
     </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:id="@+id/post_image"
-        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>
