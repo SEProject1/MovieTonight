@@ -48,12 +48,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         getUser(holder.imageProfile, holder.username, notification.getUserid());
 
-//        if (notification.isReview()) {
-//            holder.postImage.setVisibility(View.VISIBLE);
-//            getPostImage(holder.postImage, notification.getReviewtitle());
-//        } else {
-//            holder.postImage.setVisibility(View.GONE);
-//        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +80,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             super(itemView);
 
             imageProfile = itemView.findViewById(R.id.image_profile);
-//            postImage = itemView.findViewById(R.id.post_image);
             username = itemView.findViewById(R.id.username);
             comment = itemView.findViewById(R.id.comment);
         }
@@ -94,20 +87,6 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     }
 
-//    private void getPostImage(ImageView imageView, String reveiwTitle) {
-//        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(reveiwTitle).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                UserAccount user = dataSnapshot.getValue(UserAccount.class);
-//                Glide.with(mContext).load(user.getImageurl()).placeholder(R.mipmap.ic_launcher).into(imageView);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
 
     private void getUser(ImageView imageView, TextView textView, String userId) {
         FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userId).addValueEventListener(new ValueEventListener() {

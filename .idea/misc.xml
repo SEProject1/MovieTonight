@@ -68,8 +68,8 @@
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/frag_notification.xml" value="0.1935185185185185" />
-        <entry key="app/src/main/res/layout/notification_item.xml" value="0.1935185185185185" />
+        <entry key="app/src/main/res/layout/frag_notification.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/notification_item.xml" value="0.1" />
       </map>
     </option>
   </component>
