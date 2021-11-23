@@ -32,7 +32,6 @@ public class ReviewActivity extends AppCompatActivity {
     FirebaseUser user;
     Calendar myCalendar = Calendar.getInstance();
 
-
     DatePickerDialog.OnDateSetListener myDate = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
