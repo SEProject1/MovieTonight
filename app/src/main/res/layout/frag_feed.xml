@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,14 +10,18 @@
         android:id="@+id/img_toplogo"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/project_toplogo" />
+        app:srcCompat="@drawable/project_toplogo"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="350dp"
         android:layout_height="40dp"
         android:layout_marginLeft="30dp"
         android:background="#000000"
-        android:id="@+id/bar">
+        android:id="@+id/bar"
+        app:layout_constraintTop_toBottomOf="@id/img_toplogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -28,6 +32,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/img_search"
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:src="@drawable/ic_search_dark" />
@@ -39,6 +44,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginLeft="10dp"
                 android:background="@null"
+                android:inputType="textPersonName"
                 android:hint="Search User"
                 android:textSize="12sp"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -49,14 +55,20 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_below="@id/bar"
         android:id="@+id/recycler_view"
-        />
+        app:layout_constraintTop_toBottomOf="@id/img_toplogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/recycler_view"
         android:id="@+id/feed_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_view"
         />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

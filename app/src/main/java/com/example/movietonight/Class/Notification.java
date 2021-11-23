@@ -3,13 +3,13 @@ package com.example.movietonight.Class;
 public class Notification {
     private String userid;
     private String text;
-    private String reviewTitle;
+    private String reviewId;
     private boolean isReview;
 
-    public Notification(String userid, String text, String reviewTitle, boolean isReview) {
+    public Notification(String userid, String text, String reviewId, boolean isReview) {
         this.userid = userid;
         this.text = text;
-        this.reviewTitle = reviewTitle;
+        this.reviewId = reviewId;
         this.isReview = isReview;
     }
 
@@ -32,12 +32,12 @@ public class Notification {
         this.text = text;
     }
 
-    public String getReviewTitle() {
-        return reviewTitle;
+    public String getReviewId() {
+        return reviewId;
     }
 
-    public void setReviewTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
+    public void setReviewId(String reviewId) {
+        this.reviewId = reviewId;
     }
 
     public boolean getIsReview() {

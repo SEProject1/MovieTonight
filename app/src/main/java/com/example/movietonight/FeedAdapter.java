@@ -8,10 +8,18 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     private ArrayList<Feed> feedData=null;
+    private FirebaseUser firebaseUser;
+
+
     public FeedAdapter(){
         feedData=new ArrayList<>();
     }
@@ -29,6 +37,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         Feed item=feedData.get(position);//리스트 안의position위치의 feed객체 꺼내기
         String nickName=item.getNickName();
         String movieTitle=item.getMovieTitle();
@@ -52,6 +63,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
                 //db에 like수 +1
                 int updated_like= Integer.parseInt((String)holder.tvLike.getText())+1;
                 holder.tvLike.setText(Integer.toString(updated_like));//Ui에 like+1
+                addNotification(item.getReviewTitle(), item.getNickName()); //좋아요 알림
             }
         });
         holder.btnDisLike.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +76,19 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         });
 
     }
+
+    private void addNotification(String reviewTitle, String nickName){
+        HashMap<String, Object> map = new HashMap<>();
+
+        map.put("userid", nickName);
+        map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
+        map.put("reviewId", reviewTitle);
+        map.put("isReview", true);
+
+        FirebaseDatabase.getInstance().getReference().child("Notification").child(firebaseUser.getUid()).push().setValue(map);
+
+    }
+
 
     @Override
     public int getItemCount() {
