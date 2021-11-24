@@ -70,13 +70,15 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListView
             @Override
             public void onClick(View view) {
                 //db 팔로잉 리스트에서 해당 유저 제거
-//                databaseReference.child(user.getUid()).child("following").child(idToken).
-//                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void unused) {
-//                        Toast.makeText(view.getContext(),"언팔로우 되었습니다.",Toast.LENGTH_LONG).show();
-//                    }
-//                });
+                databaseReference.child(user.getUid()).child("following").child(idToken).
+                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //해당 유저의 팔로워 목록에서 사용자 제거
+                        databaseReference.child(idToken).child("follower").child(user.getUid()).removeValue();
+                        Toast.makeText(view.getContext(),"언팔로우 되었습니다.",Toast.LENGTH_LONG).show();
+                    }
+                });
                 myFollowingList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
                 notifyItemRemoved(holder.getAdapterPosition());
                 notifyItemRangeChanged(holder.getAdapterPosition(),myFollowingList.size());
