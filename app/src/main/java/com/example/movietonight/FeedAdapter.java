@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,7 +40,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
+        SimpleDateFormat transFormat=new SimpleDateFormat("yyyy/MM/dd");
         Feed item=feedData.get(position);//리스트 안의position위치의 feed객체 꺼내기
         String nickName=item.getNickName();
         String movieTitle=item.getMovieTitle();
@@ -48,6 +49,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         String reviewTitle=item.getReviewTitle();
         String like=item.getLike();
         String dislike=item.getDislike();
+        String date=transFormat.format(item.getMdate());
         //holder.ivProfilePic.setImageResource();//프로필설정
         holder.tvNickname.setText(nickName);
         holder.tvMovieTitle.setText(movieTitle);
@@ -56,6 +58,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         holder.tvLike.setText(like);
         holder.tvDislike.setText(dislike);
         holder.tvReviewTitle.setText(reviewTitle);
+        holder.tvDate.setText(date);
 
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override

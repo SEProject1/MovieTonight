@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class FragFeed extends Fragment {
@@ -73,6 +74,7 @@ public class FragFeed extends Fragment {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.VISIBLE);
+                feedRecyclerView.setBottom(R.id.recycler_view);
             }
         });
 
@@ -88,6 +90,7 @@ public class FragFeed extends Fragment {
                 searchUsers(charSequence.toString().toLowerCase());
                 if(search_bar.getText().toString().equals("")){
                     recyclerView.setVisibility(View.GONE);
+                    feedRecyclerView.setBottom(R.id.bar);
                 }
             }
 
@@ -165,37 +168,42 @@ public class FragFeed extends Fragment {
     public void getFeeds() {//db피드 가져옴
         //db에서 나의 리뷰 가져옴
             feeds.clear();
-            for(int i=0;i<followingLists.size();i++){
-                String name=followingLists.get(i).getNickName();
-                databaseReference.child(followingLists.get(i).getIdToken()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot s:snapshot.getChildren()){
-                            HashMap<String,Object>reviewMap=(HashMap<String, Object>) s.getValue();
-                            String movieTitle = (String)reviewMap.get("mtitle");
-                            String genre=(String)reviewMap.get("mgenre");
-                            String review=(String)reviewMap.get("rcontent");
-                            String reviewTitle=(String)reviewMap.get("rtitle");
-                            String like=Long.toString((Long) reviewMap.get("like"));
-                            String dislike=Long.toString((Long) reviewMap.get("dislike"));
-                            String mdate=(String)reviewMap.get("mdate");
-                            Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
-                                    ,review,like,dislike,mdate);
-                            feeds.add(item);//아이템을 리스트에 넣기
-                        }
-                        Collections.sort(feeds);
-                        setFeeds();
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(int i=0;i<followingLists.size();i++){
+                            String name=followingLists.get(i).getNickName();
+                            Iterable<DataSnapshot> reviewSnapshot= snapshot.child(followingLists.get(i).getIdToken()).
+                                        child("Review").getChildren();
+                            Iterator<DataSnapshot> iter=reviewSnapshot.iterator();
+                            while(iter.hasNext()){
+                                HashMap<String,Object> reviewMap= (HashMap<String, Object>) iter.next().getValue();
+                                String movieTitle = (String)reviewMap.get("mtitle");
+                                String genre=(String)reviewMap.get("mgenre");
+                                String review=(String)reviewMap.get("rcontent");
+                                String reviewTitle=(String)reviewMap.get("rtitle");
+                                String like=Long.toString((Long) reviewMap.get("like"));
+                                String dislike=Long.toString((Long) reviewMap.get("dislike"));
+                                String mdate=(String)reviewMap.get("mdate");
+                                Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
+                                        ,review,like,dislike,mdate);
+                                feeds.add(item);//아이템을 리스트에 넣기
+                            }
+
                     }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-            }
+                    Collections.sort(feeds);
+                    setFeeds();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
     }
     public void setFeeds(){//아이템 추가 메서드
         for (int i=0;i<feeds.size();i++){
-            System.out.println("-----------------"+feeds.size());
-            System.out.println(feeds.get(i).getMovieTitle());
             feedAdapter.setFeedData(feeds.get(i));
         }
         feedRecyclerView.setAdapter(feedAdapter);

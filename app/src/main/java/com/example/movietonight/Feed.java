@@ -103,4 +103,12 @@ public class Feed implements Comparable<Feed>{
     public void setReviewTitle(String reviewTitle) {
         this.reviewTitle = reviewTitle;
     }
+
+    public Date getMdate() {
+        return mdate;
+    }
+
+    public void setMdate(Date mdate) {
+        this.mdate = mdate;
+    }
 }
