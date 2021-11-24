@@ -57,4 +57,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:3.7.0'      // glide 4.11.0 crossFade error
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.google.code.gson:gson:2.8.5'
+//upload
+    implementation platform('com.google.firebase:firebase-bom:26.5.0')
+    implementation 'com.google.firebase:firebase-storage'
 }
