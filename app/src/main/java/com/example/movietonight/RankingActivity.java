@@ -22,7 +22,7 @@ public class RankingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_ranking);
 
         pieChart = (PieChart)findViewById(R.id.piechart);
 
@@ -52,7 +52,7 @@ public class RankingActivity extends AppCompatActivity {
 
         pieChart.animateY(1000, Easing.EaseInOutCubic); //애니메이션
 
-        PieDataSet dataSet = new PieDataSet(yValues,"Countries");
+        PieDataSet dataSet = new PieDataSet(yValues,"Genre");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);

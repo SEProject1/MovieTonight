@@ -59,7 +59,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             Toast.makeText(this,"프로필 수정 완료",Toast.LENGTH_SHORT).show();
     }
- c
+
     private void chooseFile() { //Pick Pic from gallery
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
