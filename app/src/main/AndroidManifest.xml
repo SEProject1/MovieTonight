@@ -93,11 +93,6 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".LogoutActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            tools:ignore="Instantiatable" />
-        <activity
             android:name=".ProfileActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
@@ -114,6 +109,11 @@
             tools:ignore="Instantiatable" />
         <activity
             android:name=".FollowingListActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".FollowerActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />
