@@ -1,5 +1,6 @@
 package com.example.movietonight;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.github.mikephil.charting.animation.Easing;
@@ -10,15 +11,24 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.animation.Easing;
-
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class RankingActivity extends AppCompatActivity {
     PieChart pieChart;
-
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,4 +73,22 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setData(data);
 
     }
+//    //DB에서 영화가져오기
+//    public void getMyMovie(){
+//        databaseReference.child(user.getUid()).child("mgenre").addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for(DataSnapshot s: snapshot.getChildren()){
+//                    HashMap<String,Object> reviewMap= (HashMap<String, Object>) s.getValue();
+//                    String mGenre=(String) reviewMap.get("mgenre");
+//                    String[] Genre=mGenre.split(" ",6);
+//                }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
+//    public
 }
