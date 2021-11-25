@@ -54,6 +54,7 @@ public class CalendarActivity extends AppCompatActivity{
         calendarView=findViewById(R.id.calendarView);
         recyclerView=(RecyclerView)findViewById(R.id.calReviewRecycler);
         adapter=new MyReviewAdapter();
+        adapter.setDelBtnGone();
         recyclerView.setLayoutManager(new LinearLayoutManager(this,RecyclerView.VERTICAL,false));
         getMyReviews();
         btnBackMyReview.setOnClickListener(new View.OnClickListener() {

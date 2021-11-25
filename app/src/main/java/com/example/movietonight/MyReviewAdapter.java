@@ -22,6 +22,7 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    private int delBtn=0;
     MyReviewAdapter(){
         myReviewList=new ArrayList<>();
     }
@@ -47,23 +48,27 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
         holder.tvDate.setText(date);//홀더에 날짜 설정
         holder.tvReviewTitle.setText(reviewTitle);
         holder.tvReview.setText(review);
+        if(delBtn==1){
+            holder.btnReviewDel.setVisibility(View.GONE);
+        }else{
+            holder.btnReviewDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //db에서 해당 리뷰 삭제
+                    databaseReference.child(user.getUid()).child("Review").child(mt).
+                            removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(view.getContext(),"리뷰가 삭제되었습니다.",Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    myReviewList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
+                    notifyItemRemoved(holder.getAdapterPosition());
+                    notifyItemRangeChanged(holder.getAdapterPosition(),myReviewList.size());
+                }
+            });
+        }
 
-        holder.btnReviewDel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //db에서 해당 리뷰 삭제
-                databaseReference.child(user.getUid()).child("Review").child(mt).
-                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(view.getContext(),"리뷰가 삭제되었습니다.",Toast.LENGTH_LONG).show();
-                    }
-                });
-                myReviewList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(),myReviewList.size());
-            }
-        });
     }
 
     @Override
@@ -75,5 +80,8 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
     }
     public void clearMyReviewList(){
         myReviewList.clear();
+    }
+    public void setDelBtnGone(){
+        delBtn=1;
     }
 }
