@@ -11,6 +11,14 @@ public class UserAccount {
 
     public UserAccount(){ }
 
+    public UserAccount(String idToken, String userId, String userNickname, String passwd, String imageurl) {
+        this.idToken = idToken;
+        this.userId = userId;
+        this.userNickname = userNickname;
+        this.passwd = passwd;
+        this.imageurl = imageurl;
+    }
+
     public String getIdToken() {return idToken;}
 
     public void setIdToken(String idToken) {this.idToken = idToken;}

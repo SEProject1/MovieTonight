@@ -1,6 +1,7 @@
 package com.example.movietonight.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.movietonight.Class.Notification;
 import com.example.movietonight.Class.UserAccount;
+import com.example.movietonight.Feed;
 import com.example.movietonight.Fragment.FragFeed;
 import com.example.movietonight.Fragment.FragMypage;
 import com.example.movietonight.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -45,13 +48,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Notification notification = mNotifications.get(position);
+        final Notification notification = mNotifications.get(position);
 
-//       getUser(holder.imageProfile, holder.username, notification.getUserid());
-        holder.imageProfile.setImageResource(R.mipmap.ic_launcher_round); //임시로 기본 프로필사진 출력
+        getUser(holder.imageProfile, holder.username, notification.getUserid());
+//        holder.imageProfile.setImageResource(R.mipmap.ic_launcher_round); //임시로 기본 프로필사진 출력
 
-        holder.username.setText(notification.getUserid()); //임시로 닉네임 유저 설정
-        holder.comment.setText(notification.getText()); //comment 알림창에 출력
+//        holder.username.setText(notification.getUserid()); //임시로 닉네임 유저 설정
+        holder.text.setText(notification.getText()); //comment 알림창에 출력
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -84,38 +87,35 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
         public ImageView imageProfile;
         public TextView username;
-        public TextView comment;
+        public TextView text;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             imageProfile = itemView.findViewById(R.id.image_profile);
             username = itemView.findViewById(R.id.username);
-            comment = itemView.findViewById(R.id.comment);
+            text = itemView.findViewById(R.id.comment);
         }
 
 
     }
 
 // 아직 피드 리뷰 좋아요가 디비와 연동 X, image 구현 아직 x
-//    private void getUser(ImageView imageView, TextView textView, String userNickname) {
-//        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                UserAccount user = dataSnapshot.getValue(UserAccount.class);
-////                if (user.getImageurl().equals("default")) {
-////                    imageView.setImageResource(R.mipmap.ic_launcher);
-////                } else {
-////                    Glide.with(mContext).load(user.getImageurl()).into(imageView);
-////                }
-//                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
-//                textView.setText(user.getUserNickname());
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
+    private void getUser(ImageView imageView, TextView username, String userNickname) {
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                UserAccount user = dataSnapshot.getValue(UserAccount.class);
+                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
+                username.setText(user.getUserNickname());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }
