@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
@@ -19,7 +20,9 @@ import java.util.HashMap;
 public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     private ArrayList<Feed> feedData=null;
     private FirebaseUser firebaseUser;
-
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
 
     public FeedAdapter(){
         feedData=new ArrayList<>();
@@ -50,6 +53,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         String like=item.getLike();
         String dislike=item.getDislike();
         String date=transFormat.format(item.getMdate());
+        String idToken=item.getIdToken();
         //holder.ivProfilePic.setImageResource();//프로필설정
         holder.tvNickname.setText(nickName);
         holder.tvMovieTitle.setText(movieTitle);
@@ -64,6 +68,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
             @Override
             public void onClick(View view) {
                 //db에 like수 +1
+                HashMap<String,Object> likeUpdate=new HashMap<String,Object>();
+                likeUpdate.put("like",Integer.parseInt((String) holder.tvLike.getText())+1);
+                databaseReference.child(idToken).child("Review").child(movieTitle).updateChildren(likeUpdate);
                 int updated_like= Integer.parseInt((String)holder.tvLike.getText())+1;
                 holder.tvLike.setText(Integer.toString(updated_like));//Ui에 like+1
                 addNotification(item.getReviewTitle(), item.getNickName()); //좋아요 알림
@@ -73,6 +80,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
             @Override
             public void onClick(View view) {
                 //db에 Dislike수 +1
+                HashMap<String,Object> dislikeUpdate=new HashMap<String,Object>();
+                dislikeUpdate.put("dislike",Integer.parseInt((String) holder.tvDislike.getText())+1);
+                databaseReference.child(idToken).child("Review").child(movieTitle).updateChildren(dislikeUpdate);
                 int updated_dislike= Integer.parseInt((String)holder.tvDislike.getText())+1;
                 holder.tvDislike.setText(Integer.toString(updated_dislike));//Ui에 like+1
             }

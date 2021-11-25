@@ -185,7 +185,7 @@ public class FragFeed extends Fragment {
                                 String dislike=Long.toString((Long) reviewMap.get("dislike"));
                                 String mdate=(String)reviewMap.get("mdate");
                                 Feed item=new Feed(null,name,reviewTitle,movieTitle,genre
-                                        ,review,like,dislike,mdate);
+                                        ,review,like,dislike,mdate,followingLists.get(i).getIdToken());
                                 feeds.add(item);//아이템을 리스트에 넣기
                             }
 
