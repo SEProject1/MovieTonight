@@ -22,50 +22,40 @@
         android:id="@+id/text_ranking"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="나의 장르 랭킹"
-        app:layout_constraintLeft_toRightOf="@id/img_backmove"
-        app:layout_constraintBottom_toBottomOf="@id/img_backmove"
         android:layout_marginLeft="60dp"
-        android:textSize="30sp"/>
+        android:text="나의 장르 랭킹"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/img_backmove"
+        app:layout_constraintLeft_toRightOf="@id/img_backmove" />
+
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        app:layout_constraintTop_toBottomOf="@id/text_ranking"
+        android:layout_marginTop="30dp"
         android:background="#111"
-        android:layout_marginTop="30dp"/>
+        app:layout_constraintTop_toBottomOf="@id/text_ranking" />
 
     <TextView
+        android:id="@+id/text2_ranking"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        app:layout_constraintTop_toBottomOf="@id/text_ranking"
-        app:layout_constraintLeft_toLeftOf="@id/img_backmove"
         android:layout_marginTop="60dp"
         android:text="나의 영화 장르 랭킹"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="@id/img_backmove"
+        app:layout_constraintTop_toBottomOf="@id/text_ranking" />
 
-    <LinearLayout
 
-        android:orientation="vertical"
-        android:layout_height="450dp"
-        android:layout_width="400dp">
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/piechart"
+        android:layout_width="0dp"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text2_ranking">
 
-        <org.eazegraph.lib.charts.PieChart
-            android:id="@+id/tab1_chart_1"
-            android:layout_width="300dp"
-            android:layout_height="340dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginTop="160dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="20dp"
-            android:padding="10dp"
-            app:egBarWidth="20dp"
-            app:egEnableScroll="true"
-            app:egFixedBarWidth="true"
-            app:egLegendHeight="40dp"
-            app:egShowDecimal="true" />
-
-    </LinearLayout>
-
+    </com.github.mikephil.charting.charts.PieChart>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

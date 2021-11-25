@@ -44,7 +44,16 @@
         app:layout_constraintLeft_toRightOf="@id/img_profile"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="40dp"
+        android:gravity="center"
         />
+    <TextView
+        android:id="@+id/cnt_follower"
+        android:text="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/follower"
+        app:layout_constraintStart_toStartOf="@id/follower"
+        app:layout_constraintEnd_toEndOf="@id/follower"/>
 
     <TextView
         android:id="@+id/following"
@@ -55,7 +64,17 @@
         app:layout_constraintTop_toBottomOf="@id/img_toplogo"
         app:layout_constraintLeft_toRightOf="@id/follower"
         android:layout_marginTop="30dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/cnt_following"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="@id/following"
+        app:layout_constraintStart_toStartOf="@id/following"
+        app:layout_constraintTop_toBottomOf="@id/following"/>
 
     <Button
         android:id="@+id/btn_profile"
