@@ -33,9 +33,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:background="#000000"
+        android:background="#FFFFFF"
         android:id="@+id/btn_follow"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:text="팔로우"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
