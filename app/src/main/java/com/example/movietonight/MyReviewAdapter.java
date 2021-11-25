@@ -73,4 +73,7 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
     public void setMyReviewList(MyReview data){//데이터 추가
         myReviewList.add(data);
     }
+    public void clearMyReviewList(){
+        myReviewList.clear();
+    }
 }
