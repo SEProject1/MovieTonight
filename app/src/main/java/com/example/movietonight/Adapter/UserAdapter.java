@@ -56,33 +56,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         UserAccount user = mUsers.get(position);
         holder.nickname.setText(user.getUserNickname());
-        if(user.getIdToken().equals(firebaseUser.getUid())){
-            holder.btn_follow.setVisibility(View.GONE);
-        }
+
+        holder.btn_follow.setText("팔로우");
         Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid()).child("following");
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    String id = data.getKey();
-                    System.out.println("id " + id);
-                    System.out.println("user "+ user.getIdToken());
-                    if (id.equals(user.getIdToken())) {
-                        System.out.println("일치");
-                        holder.btn_follow.setText("팔로잉");
-                    } else {
-                        holder.btn_follow.setText("팔로우");
-                    }
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
-
-        //isFollowing(databaseReference, user, holder.btn_follow);
+        isFollowing(databaseReference, user, holder.btn_follow);
         holder.btn_follow.setVisibility(View.VISIBLE);
         //친구 마이페이지로 이동
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +135,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             btn_follow = itemView.findViewById(R.id.btn_follow);
         }
     }
-    private void isFollowing(DatabaseReference databaseReference, UserAccount user, ViewHolder button) {
+    private void isFollowing(DatabaseReference databaseReference, UserAccount user, Button button) {
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String id = data.getKey();
+                    if (id.equals(user.getIdToken())) {
+                        button.setText("팔로잉");
+                    }
+                    if(user.getIdToken().equals(firebaseUser.getUid())){
+                        button.setVisibility(View.GONE);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
