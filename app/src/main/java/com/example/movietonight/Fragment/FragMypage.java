@@ -1,7 +1,6 @@
 package com.example.movietonight.Fragment;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,76 +15,34 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.movietonight.CalendarActivity;
-import com.example.movietonight.FollowersActivity;
 import com.example.movietonight.FollowingListActivity;
 import com.example.movietonight.MyReviewActivity;
 import com.example.movietonight.R;
 import com.example.movietonight.RankingActivity;
 import com.example.movietonight.SavedActivity;
 import com.example.movietonight.StartActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class FragMypage extends Fragment implements View.OnClickListener{
     private Button review, saved, cal, rank, logout;
     private View view;
-    private TextView following, follower;
-
-    private FirebaseUser fUser;
-
-    String profileId;
+    private TextView following;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.frag_mypage, container, false);
-
-        fUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        String data = getContext().getSharedPreferences("PROFILE", Context.MODE_PRIVATE).getString("profileId", "none");
-
-        if (data.equals("none")) {
-            profileId = fUser.getUid();
-        } else {
-            profileId = data;
-            getContext().getSharedPreferences("PROFILE", Context.MODE_PRIVATE).edit().clear().apply();
-        }
-
-
         review = view.findViewById(R.id.btn_review);
         saved = view.findViewById(R.id.btn_saved);
         cal = view.findViewById(R.id.btn_calendar);
         rank = view.findViewById(R.id.btn_ranking);
         logout = view.findViewById(R.id.btn_logout);
-        follower = view.findViewById(R.id.follower);
-        following = view.findViewById(R.id.following);
+        following=view.findViewById(R.id.following);
         review.setOnClickListener(this);
         saved.setOnClickListener(this);
         cal.setOnClickListener(this);
         rank.setOnClickListener(this);
         logout.setOnClickListener(this);
         following.setOnClickListener(this);
-
-        follower.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), FollowersActivity.class);
-                intent.putExtra("id", profileId);
-                intent.putExtra("title", "followers");
-                startActivity(intent);
-            }
-        });
-
-        following.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), FollowersActivity.class);
-                intent.putExtra("id", profileId);
-                intent.putExtra("title", "followings");
-                startActivity(intent);
-            }
-        });
-
         return view;
     }
     public void onClick(View v){
