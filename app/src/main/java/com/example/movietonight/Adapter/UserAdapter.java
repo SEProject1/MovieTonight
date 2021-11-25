@@ -2,6 +2,7 @@ package com.example.movietonight.Adapter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.movietonight.Class.UserAccount;
 import com.example.movietonight.FollowUser;
+import com.example.movietonight.FollowingList;
 import com.example.movietonight.Fragment.FragMypage;
 import com.example.movietonight.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,22 +55,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         UserAccount user = mUsers.get(position);
-        holder.btn_follow.setVisibility(View.VISIBLE);
         holder.nickname.setText(user.getUserNickname());
         if(user.getIdToken().equals(firebaseUser.getUid())){
             holder.btn_follow.setVisibility(View.GONE);
         }
-
         Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
-        //isFollowing(user.getUserId(), holder.btn_follow);
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child(firebaseUser.getUid()).child("following");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid()).child("following");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.child(user.getIdToken()).exists()){
-                    holder.btn_follow.setText("팔로잉");
-                }else{
-                    holder.btn_follow.setText("팔로우");
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String id = data.getKey();
+                    System.out.println("id " + id);
+                    System.out.println("user "+ user.getIdToken());
+                    if (id.equals(user.getIdToken())) {
+                        System.out.println("일치");
+                        holder.btn_follow.setText("팔로잉");
+                    } else {
+                        holder.btn_follow.setText("팔로우");
+                    }
                 }
             }
             @Override
@@ -77,6 +82,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             }
         });
 
+        //isFollowing(databaseReference, user, holder.btn_follow);
+        holder.btn_follow.setVisibility(View.VISIBLE);
         //친구 마이페이지로 이동
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,25 +101,39 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {    //firebaseuser -> 현재 사용자 user -> 팔로우하는 사용자
                 FollowUser followUser = new FollowUser();
-                if (holder.btn_follow.getText().toString().equals("팔로우")){
-                    holder.btn_follow.setText("팔로잉");
-                    followUser.setUserEmail(user.getUserId());
-                    followUser.setUserNickname(user.getUserNickname());
-                    followUser.setIdToken(user.getIdToken());
-                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
-                            .child("following").child(user.getIdToken()).setValue(followUser);
-                    followUser.setUserEmail(firebaseUser.getEmail());
-                    followUser.setUserNickname(null);
-                    followUser.setIdToken(firebaseUser.getUid());
-                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
-                            .child("follower").child(firebaseUser.getUid()).setValue(followUser);
-                } else {    //팔로잉일 때
-                    holder.btn_follow.setText("팔로우");
-                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
-                            .child("following").child(user.getIdToken()).removeValue();
-                    FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
-                            .child("follower").child(firebaseUser.getUid()).removeValue();
-                }
+                String id = firebaseUser.getUid();
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserAccount").child(id).child("userNickname");
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String nickname = snapshot.getValue(String.class);
+                        if (holder.btn_follow.getText().toString().equals("팔로우")){
+                            holder.btn_follow.setText("팔로잉");
+                            followUser.setUserEmail(user.getUserId());
+                            followUser.setUserNickname(user.getUserNickname());
+                            followUser.setIdToken(user.getIdToken());
+                            FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
+                                    .child("following").child(user.getIdToken()).setValue(followUser);
+                            followUser.setUserEmail(firebaseUser.getEmail());
+                            followUser.setUserNickname(nickname);
+                            followUser.setIdToken(firebaseUser.getUid());
+                            FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
+                                    .child("follower").child(firebaseUser.getUid()).setValue(followUser);
+                        } else {    //팔로잉일 때
+                            holder.btn_follow.setText("팔로우");
+                            FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
+                                    .child("following").child(user.getIdToken()).removeValue();
+                            FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
+                                    .child("follower").child(firebaseUser.getUid()).removeValue();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
         });
     }
@@ -135,23 +156,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             btn_follow = itemView.findViewById(R.id.btn_follow);
         }
     }
-    private void isFollowing(String userid, Button button) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("follow").child(firebaseUser.getUid()).child("following");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.child(userid).exists()){
-                    button.setText("팔로잉");
-                } else {
-                    button.setText("팔로우");
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+    private void isFollowing(DatabaseReference databaseReference, UserAccount user, ViewHolder button) {
     }
 }
