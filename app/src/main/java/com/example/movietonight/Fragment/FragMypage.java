@@ -33,10 +33,11 @@ import com.google.firebase.database.ValueEventListener;
 public class FragMypage extends Fragment implements View.OnClickListener{
     private Button review, saved, cal, rank, logout;
     private View view;
-    private TextView following,follwer,userName;
+    private TextView following,follwer,userName, cnt_follower, cnt_following;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+    long fol, foling;
 
     @Nullable
     @Override
@@ -50,6 +51,10 @@ public class FragMypage extends Fragment implements View.OnClickListener{
         following=view.findViewById(R.id.following);
         follwer=view.findViewById(R.id.follower);
         userName=view.findViewById(R.id.username);
+        cnt_follower = view.findViewById(R.id.cnt_follower);
+        cnt_following = view.findViewById(R.id.cnt_following);
+
+
         review.setOnClickListener(this);
         saved.setOnClickListener(this);
         cal.setOnClickListener(this);
@@ -57,7 +62,7 @@ public class FragMypage extends Fragment implements View.OnClickListener{
         logout.setOnClickListener(this);
         following.setOnClickListener(this);
         follwer.setOnClickListener(this);
-        getUserNickname();
+        getUserInfo();
         return view;
     }
     public void onClick(View v){
@@ -104,7 +109,7 @@ public class FragMypage extends Fragment implements View.OnClickListener{
                 break;
         }
     }
-    public void getUserNickname(){
+    public void getUserInfo(){
         databaseReference.child(user.getUid()).child("userNickname").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,5 +122,36 @@ public class FragMypage extends Fragment implements View.OnClickListener{
 
             }
         });
+        databaseReference.child(user.getUid()).child("follower").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    fol= snapshot.getChildrenCount();
+                }
+                cnt_follower.setText(Long.toString(fol));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        databaseReference.child(user.getUid()).child("following").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()!=null){
+                    foling = snapshot.getChildrenCount();
+                }
+                cnt_following.setText(Long.toString(foling));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
     }
 }
