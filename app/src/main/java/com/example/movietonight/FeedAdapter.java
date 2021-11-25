@@ -69,6 +69,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
                 addNotification(item.getReviewTitle(), item.getNickName()); //좋아요 알림
             }
         });
+
         holder.btnDisLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
