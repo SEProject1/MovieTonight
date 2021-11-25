@@ -47,12 +47,14 @@ public class ReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
         Intent mintent = getIntent();
         String title = mintent.getExtras().getString("title");
+        String genre_list = mintent.getExtras().getString("genre_list");
         EditText et_title = findViewById(R.id.et_title);
         EditText et_content = findViewById(R.id.et_content);
         Button btn_reg = findViewById(R.id.btn_reg);
         TextView m_title = findViewById(R.id.m_title);
         TextView m_genre = findViewById(R.id.genre);
         m_title.setText(title);
+        m_genre.setText(genre_list);
         Button date = findViewById(R.id.date);
         ProgressDialog progressDialog = new ProgressDialog(this);
         date.setOnClickListener(new View.OnClickListener() {

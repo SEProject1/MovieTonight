@@ -97,7 +97,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
     }
 
-// 아직 피드 리뷰 좋아요가 디비와 연동 X
+// 아직 피드 리뷰 좋아요가 디비와 연동 X, image 구현 아직 x
 //    private void getUser(ImageView imageView, TextView textView, String userNickname) {
 //        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname).addValueEventListener(new ValueEventListener() {
 //            @Override
