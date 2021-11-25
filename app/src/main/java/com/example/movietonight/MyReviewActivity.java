@@ -61,7 +61,8 @@ public class MyReviewActivity extends AppCompatActivity {
                     String reviewMovieTitle = (String) reviewMap.get("mtitle");
                     String date=(String) reviewMap.get("mdate");
                     String reviewTitle= (String) reviewMap.get("rtitle");
-                    MyReview item=new MyReview(reviewMovieTitle,date,reviewTitle);
+                    String review=(String)reviewMap.get("rcontent");
+                    MyReview item=new MyReview(reviewMovieTitle,date,reviewTitle,review);
                     myReviews.add(item);//리뷰리스트에 아이템 저장
                 }
                 setMyReviews();

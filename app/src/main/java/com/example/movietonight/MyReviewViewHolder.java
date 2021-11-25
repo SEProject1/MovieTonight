@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyReviewViewHolder extends RecyclerView.ViewHolder{
-    TextView tvReviewMovieTitle,tvDate,tvReviewTitle;
+    TextView tvReviewMovieTitle,tvDate,tvReviewTitle,tvReview;
     ImageButton btnReviewDel;
     MyReviewViewHolder(Context context, View itemView){
         super(itemView);
@@ -16,5 +16,6 @@ public class MyReviewViewHolder extends RecyclerView.ViewHolder{
         tvDate=(TextView) itemView.findViewById(R.id.tvDate);
         btnReviewDel=(ImageButton) itemView.findViewById(R.id.btnReviewDel);
         tvReviewTitle=(TextView) itemView.findViewById(R.id.tvReviewTitle);
+        tvReview=(TextView) itemView.findViewById(R.id.tvReview);
     }
 }

@@ -52,7 +52,11 @@
             android:id="@+id/tvDate"
             android:layout_weight="1"
             />
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="리뷰내용"
+            android:id="@+id/tvReview"/>
     </LinearLayout>
 
     <ImageButton
