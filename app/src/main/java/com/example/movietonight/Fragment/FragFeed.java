@@ -74,7 +74,7 @@ public class FragFeed extends Fragment {
             @Override
             public void onClick(View v) {
                 recyclerView.setVisibility(View.VISIBLE);
-                feedRecyclerView.setBottom(R.id.recycler_view);
+                //feedRecyclerView.setBottom(R.id.recycler_view);
             }
         });
 
@@ -82,7 +82,7 @@ public class FragFeed extends Fragment {
         search_bar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                recyclerView.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -90,7 +90,6 @@ public class FragFeed extends Fragment {
                 searchUsers(charSequence.toString().toLowerCase());
                 if(search_bar.getText().toString().equals("")){
                     recyclerView.setVisibility(View.GONE);
-                    feedRecyclerView.setBottom(R.id.bar);
                 }
             }
 
