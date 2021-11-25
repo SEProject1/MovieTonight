@@ -73,7 +73,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
                 databaseReference.child(idToken).child("Review").child(movieTitle).updateChildren(likeUpdate);
                 int updated_like= Integer.parseInt((String)holder.tvLike.getText())+1;
                 holder.tvLike.setText(Integer.toString(updated_like));//Ui에 like+1
-                addNotification(item.getReviewTitle(), item.getNickName()); //좋아요 알림
+                addNotification(item.getReviewTitle(), item.getNickName(), idToken); //좋아요 알림
             }
         });
 
@@ -91,15 +91,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
 
     }
 
-    private void addNotification(String reviewTitle, String nickName){
+    private void addNotification(String reviewTitle, String nickName, String idToken){
         HashMap<String, Object> map = new HashMap<>();
 
-        map.put("userid", nickName);
+        map.put("userid", firebaseUser.getEmail());
         map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
         map.put("reviewId", reviewTitle);
         map.put("isReview", true);
 
-        FirebaseDatabase.getInstance().getReference().child("Notification").child(firebaseUser.getUid()).push().setValue(map);
+        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(idToken).child("Noti").push().setValue(map);
 
     }
 
