@@ -15,8 +15,9 @@ public class Feed implements Comparable<Feed>{
     private String review;
     private String like ,dislike;
     private Date mdate;
+    private String idToken;
 
-    public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, String like, String dislike,String mdate) {
+    public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, String like, String dislike,String mdate,String idToken) {
         SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
         this.profile = profile;
         this.nickName = nickName;
@@ -26,6 +27,7 @@ public class Feed implements Comparable<Feed>{
         this.like = like;
         this.dislike = dislike;
         this.reviewTitle=reviewTitle;
+        this.idToken=idToken;
         try {
             this.mdate=format.parse(mdate);
         } catch (ParseException e) {
@@ -110,5 +112,9 @@ public class Feed implements Comparable<Feed>{
 
     public void setMdate(Date mdate) {
         this.mdate = mdate;
+    }
+
+    public String getIdToken() {
+        return idToken;
     }
 }
