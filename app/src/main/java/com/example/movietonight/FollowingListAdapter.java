@@ -1,7 +1,7 @@
 package com.example.movietonight;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,16 +10,15 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
-import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 
 public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListViewHolder> {
@@ -28,7 +27,8 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListView
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://movietonight-78dfc.appspot.com");
+    private StorageReference storageReference = storage.getReference();
     FollowingListAdapter(){
         myFollowingList=new ArrayList<>();
     }
@@ -49,23 +49,12 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListView
         String nickName=item.getNickName();
         String idToken=item.getIdToken();
         holder.tvFollowingNickName.setText(nickName);
-//        databaseReference.child(idToken).child("profilePic").addValueEventListener(new ValueEventListener() {
-//            //db에 이진수로 저장된 이미지를 받아와 drawable로 바꾼뒤 ivFollowingUserPic에 설정함
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                String image=snapshot.getValue().toString();
-//                byte[]b=binaryStringToByteArray(image);
-//                ByteArrayInputStream is=new ByteArrayInputStream(b);
-//                Drawable profilePic=Drawable.createFromStream(is,"profilePic");
-//                holder.ivFollwingUserPic.setImageDrawable(profilePic);
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-
+        storageReference.child(idToken+"/").child("profileimg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.itemView.getContext()).load(uri).into(holder.ivFollwingUserPic);
+            }
+        });
         holder.btnUnfollow.setOnClickListener(new View.OnClickListener() {//언팔로우버튼 클릭
             @Override
             public void onClick(View view) {
@@ -84,25 +73,6 @@ public class FollowingListAdapter extends RecyclerView.Adapter<FollowingListView
                 notifyItemRangeChanged(holder.getAdapterPosition(),myFollowingList.size());
             }
         });
-    }
-// 스트링을 바이너리 바이트 배열로
- public static byte[] binaryStringToByteArray(String s) {
-     int count = s.length() / 8;
-     byte[] b = new byte[count];
-     for (int i = 1; i < count; ++i) {
-         String t = s.substring((i - 1) * 8, i * 8);
-         b[i - 1] = binaryStringToByte(t);
-     }
-     return b;
-    }
-    // 스트링을 바이너리 바이트로
-    public static byte binaryStringToByte(String s) {
-        byte ret = 0, total = 0;
-        for (int i = 0; i < 8; ++i) {
-            ret = (s.charAt(7 - i) == '1') ? (byte) (1 << i) : 0;
-            total = (byte) (ret | total);
-        }
-        return total;
     }
 
     @Override

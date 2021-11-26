@@ -8,9 +8,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FollowerViewHolder extends RecyclerView.ViewHolder {
     TextView tvFollowerNickName;
-    ImageView ivFollowerUserPic;
+    CircleImageView ivFollowerUserPic;
     public FollowerViewHolder(Context context, @NonNull View itemView) {
         super(itemView);
         tvFollowerNickName=itemView.findViewById(R.id.tvFollowerNickName);

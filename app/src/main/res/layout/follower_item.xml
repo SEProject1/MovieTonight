@@ -4,11 +4,10 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="20dp">
-    <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/profile_pic"
-        android:scaleType="centerInside"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baseline_profile_24"
         android:id="@+id/ivFollowerUserPic"
         android:layout_marginRight="15dp"/>
     <TextView
