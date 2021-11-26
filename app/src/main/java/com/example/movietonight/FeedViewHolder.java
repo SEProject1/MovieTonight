@@ -9,8 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class FeedViewHolder extends RecyclerView.ViewHolder {
-    ImageView ivProfilePic;
+    CircleImageView ivProfilePic;
     TextView tvNickname,tvMovieTitle,tvMovieGenre,tvReview,tvLike,tvDislike,tvReviewTitle,tvDate;
     ImageButton btnLike,btnDisLike;
     public FeedViewHolder(Context context, @NonNull View itemView) {

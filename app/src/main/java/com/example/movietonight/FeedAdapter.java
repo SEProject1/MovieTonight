@@ -1,6 +1,7 @@
 package com.example.movietonight;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +9,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,8 +27,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     private FirebaseUser firebaseUser;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
-    private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-
+    private FirebaseStorage storage = FirebaseStorage.getInstance("gs://movietonight-78dfc.appspot.com");
+    private StorageReference storageReference = storage.getReference();
     public FeedAdapter(){
         feedData=new ArrayList<>();
     }
@@ -54,7 +59,6 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         String dislike=item.getDislike();
         String date=transFormat.format(item.getMdate());
         String idToken=item.getIdToken();
-        //holder.ivProfilePic.setImageResource();//프로필설정
         holder.tvNickname.setText(nickName);
         holder.tvMovieTitle.setText(movieTitle);
         holder.tvMovieGenre.setText(genre);
@@ -63,7 +67,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
         holder.tvDislike.setText(dislike);
         holder.tvReviewTitle.setText(reviewTitle);
         holder.tvDate.setText(date);
-
+        storageReference.child(idToken+"/").child("profileimg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(holder.itemView.getContext()).load(uri).into(holder.ivProfilePic);
+            }
+        });
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

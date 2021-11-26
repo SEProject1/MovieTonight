@@ -34,7 +34,6 @@ public class MyReviewActivity extends AppCompatActivity {
         setContentView(R.layout.myreview_recycler);
         recyclerView = (RecyclerView)findViewById(R.id.myReivew_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBackMyReview);//뒤로가기 버튼
-        String uid=user!=null? user.getUid():null;
         adapter = new MyReviewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL, false)) ;
