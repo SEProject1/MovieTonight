@@ -1,5 +1,6 @@
 package com.example.movietonight;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -28,7 +29,6 @@ public class MyReviewActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myreview_recycler);
