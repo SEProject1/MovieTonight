@@ -23,21 +23,23 @@ import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class RankingActivity extends AppCompatActivity {
+    static ArrayList<String> list = new ArrayList<String>();
     PieChart pieChart;
-    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-    private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
-    private FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+    private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference("UserAccount");
+    private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-
-        pieChart = (PieChart)findViewById(R.id.piechart);
+        pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
-        pieChart.setExtraOffsets(5,10,5,5);
+        pieChart.setExtraOffsets(5, 10, 5, 5);
 
         pieChart.setDragDecelerationFrictionCoef(0.95f);
 
@@ -47,13 +49,12 @@ public class RankingActivity extends AppCompatActivity {
 
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
 
-        yValues.add(new PieEntry(34f,"로맨스"));
-        yValues.add(new PieEntry(23f,"스릴러"));
-        yValues.add(new PieEntry(14f,"액션"));
-        yValues.add(new PieEntry(35f,"호러"));
-        yValues.add(new PieEntry(40f,"전쟁"));
-        yValues.add(new PieEntry(40f,"뮤지컬"));
-
+        yValues.add(new PieEntry(30f, "로맨스"));
+        yValues.add(new PieEntry(30f, "스릴러"));
+        yValues.add(new PieEntry(20f, "액션"));
+        yValues.add(new PieEntry(30f, "호러"));
+        yValues.add(new PieEntry(40f, "전쟁"));
+        yValues.add(new PieEntry(50f, "뮤지컬"));
         Description description = new Description();
         description.setText("내가 본 장르"); //라벨
         description.setTextSize(15);
@@ -61,7 +62,7 @@ public class RankingActivity extends AppCompatActivity {
 
         pieChart.animateY(1000, Easing.EaseInOutCubic); //애니메이션
 
-        PieDataSet dataSet = new PieDataSet(yValues,"Genre");
+        PieDataSet dataSet = new PieDataSet(yValues, "Genre");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
@@ -73,22 +74,40 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setData(data);
 
     }
-//    //DB에서 영화가져오기
-//    public void getMyMovie(){
+
+    //DB에서 영화가져오기
+//    public void getMyMovie() {
 //        databaseReference.child(user.getUid()).child("mgenre").addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for(DataSnapshot s: snapshot.getChildren()){
-//                    HashMap<String,Object> reviewMap= (HashMap<String, Object>) s.getValue();
-//                    String mGenre=(String) reviewMap.get("mgenre");
-//                    String[] Genre=mGenre.split(" ",6);
+//                for (DataSnapshot s : snapshot.getChildren()) {
+//                    HashMap<String, Object> reviewMap = (HashMap<String, Object>) s.getValue();
+//                    String mGenre = (String) reviewMap.get("mgenre");
+//                    String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
+//                    for (int i = 0; i < Genre.length; i++) {
+//                        list.add(Genre[i]); // 분리한장르를 list에 추가
+//                    }
+//
 //                }
+//                countFrequncies(list); //카운트함수 실행
 //            }
+//
 //            @Override
 //            public void onCancelled(@NonNull DatabaseError error) {
 //
 //            }
 //        });
 //    }
-//    public
+//
+//    public static void countFrequncies(ArrayList<String> list) //장르 카운트
+//    {
+//        Map<String, Integer> hm = new HashMap<String, Integer>();
+//        for (String i : list) {
+//            Integer j = hm.get(i);
+//            hm.put(i, (j == null) ? 1 : j + 1);
+//        }
+//        for (Map.Entry<String, Integer> val : hm.entrySet()) {
+//            String Ranking_Genre = val.getKey(); // 카운트방법        }
+//        }
+    }
 }
