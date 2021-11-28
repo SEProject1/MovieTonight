@@ -22,16 +22,20 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class RankingActivity extends AppCompatActivity {
     static ArrayList<String> list = new ArrayList<String>();
+    static String[] Ranking_Genre={};
+    static int[] occurrence={};
     PieChart pieChart;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,15 +50,11 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColor(Color.WHITE);
         pieChart.setTransparentCircleRadius(61f);
-
+        getMyMovie(); //db에서 장르 불러오기
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
-
-        yValues.add(new PieEntry(30f, "로맨스"));
-        yValues.add(new PieEntry(30f, "스릴러"));
-        yValues.add(new PieEntry(20f, "액션"));
-        yValues.add(new PieEntry(30f, "호러"));
-        yValues.add(new PieEntry(40f, "전쟁"));
-        yValues.add(new PieEntry(50f, "뮤지컬"));
+        for(int k=0;k<occurrence.length;k++) {
+            yValues.add(new PieEntry(occurrence[k], Ranking_Genre[k]));
+        }
         Description description = new Description();
         description.setText("내가 본 장르"); //라벨
         description.setTextSize(15);
@@ -76,37 +76,39 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     //DB에서 영화가져오기
-//    public void getMyMovie() {
-//        databaseReference.child(user.getUid()).child("mgenre").addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                for (DataSnapshot s : snapshot.getChildren()) {
-//                    HashMap<String, Object> reviewMap = (HashMap<String, Object>) s.getValue();
-//                    String mGenre = (String) reviewMap.get("mgenre");
-//                    String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
-//                    for (int i = 0; i < Genre.length; i++) {
-//                        list.add(Genre[i]); // 분리한장르를 list에 추가
-//                    }
-//
-//                }
-//                countFrequncies(list); //카운트함수 실행
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
-//    }
-//
-//    public static void countFrequncies(ArrayList<String> list) //장르 카운트
-//    {
-//        Map<String, Integer> hm = new HashMap<String, Integer>();
-//        for (String i : list) {
-//            Integer j = hm.get(i);
-//            hm.put(i, (j == null) ? 1 : j + 1);
-//        }
-//        for (Map.Entry<String, Integer> val : hm.entrySet()) {
-//            String Ranking_Genre = val.getKey(); // 카운트방법        }
-//        }
+    public void getMyMovie() {
+        databaseReference.child(user.getUid()).child("mgenre").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot s : snapshot.getChildren()) {
+                    HashMap<String, Object> reviewMap = (HashMap<String, Object>) s.getValue();
+                    String mGenre = (String) reviewMap.get("mgenre"); //파이어베이스에서 장르 받아오기
+                    String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
+                    for (int i = 0; i < Genre.length; i++) {
+                        list.add(Genre[i]); // 분리한장르를 list에 추가
+                    }
+                    countFrequncies(list); //카운트함수 실행
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
+    //참고코드 https://www.geeksforgeeks.org/count-occurrences-elements-list-java/?ref=gcse
+    public static void countFrequncies(ArrayList<String> list) //장르 카운트
+    {
+        Map<String, Integer> hm = new HashMap<String, Integer>();
+        for (String i : list) {
+            Integer j = hm.get(i);
+            hm.put(i, (j == null) ? 1 : j + 1);
+        }
+        for (Map.Entry<String, Integer> val : hm.entrySet()) {
+            int n=0;
+            Ranking_Genre[n]= val.getKey(); // key값에 장르이름 들어간것 추출
+            occurrence[n]=val.getValue(); //Value값에 카운트된 횟수 추출
+            n++;
+        }
+
+    }
+}
