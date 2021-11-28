@@ -74,6 +74,8 @@ public class ReviewActivity extends AppCompatActivity {
 
                 if(rtitle.equals("")||rcontent.equals("")){
                     Toast.makeText(ReviewActivity.this, "제목 또는 내용을 작성해주세요", Toast.LENGTH_SHORT).show();
+                }else if(mdate.equals("날짜선택")){
+                    Toast.makeText(ReviewActivity.this, "날짜를 선택해주세요", Toast.LENGTH_SHORT).show();
                 }else{
                     progressDialog.setMessage("리뷰를 작성중입니다");
                     progressDialog.setTitle("리뷰");
