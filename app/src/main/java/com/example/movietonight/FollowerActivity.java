@@ -3,6 +3,7 @@ package com.example.movietonight;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class FollowerActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FollowerAdapter adapter;
     private ImageButton btnBack;
+    private TextView tvNoFollwer;
     private ArrayList<FollowingList> myFollowerList=new ArrayList<FollowingList>();//팔로워 목록 저장
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
@@ -32,6 +34,7 @@ public class FollowerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.follower_recycler);
+        tvNoFollwer=findViewById(R.id.tvNoFollower);
         recyclerView = (RecyclerView)findViewById(R.id.follower_list_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBackMyReview);//뒤로가기 버튼
         adapter = new FollowerAdapter();
@@ -70,9 +73,15 @@ public class FollowerActivity extends AppCompatActivity {
         });
     }
     public void setMyFollowerList(){//아이템 추가 메서드
-        for (int i=0;i<myFollowerList.size();i++){
-            adapter.setMyFollowerList(myFollowerList.get(i));
+        if(myFollowerList.size()==0){
+            tvNoFollwer.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }else{
+            for (int i=0;i<myFollowerList.size();i++){
+                adapter.setMyFollowerList(myFollowerList.get(i));
+            }
+            recyclerView.setAdapter(adapter);
         }
-        recyclerView.setAdapter(adapter);
+
     }
 }

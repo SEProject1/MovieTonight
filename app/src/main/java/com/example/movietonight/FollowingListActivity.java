@@ -3,6 +3,7 @@ package com.example.movietonight;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 
 public class FollowingListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private TextView tvNoFollowing;
     private FollowingListAdapter adapter;
     private ImageButton btnBack;
     private ArrayList<FollowingList> myFollowingList=new ArrayList<FollowingList>();//팔로잉 목록 저장
@@ -32,6 +34,7 @@ public class FollowingListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.following_list_recycler);
+        tvNoFollowing=findViewById(R.id.tvNoFollowing);
         recyclerView = (RecyclerView)findViewById(R.id.following_list_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBackMyReview);//뒤로가기 버튼
         adapter = new FollowingListAdapter();
@@ -71,9 +74,14 @@ public class FollowingListActivity extends AppCompatActivity {
         });
     }
     public void setMyFollowingList(){//아이템 추가 메서드
-        for (int i=0;i<myFollowingList.size();i++){
-            adapter.setMyFollowingList(myFollowingList.get(i));
+        if(myFollowingList.size()==0){
+            recyclerView.setVisibility(View.GONE);
+            tvNoFollowing.setVisibility(View.VISIBLE);
+        }else{
+            for (int i=0;i<myFollowingList.size();i++){
+                adapter.setMyFollowingList(myFollowingList.get(i));
+            }
+            recyclerView.setAdapter(adapter);
         }
-        recyclerView.setAdapter(adapter);
     }
 }
