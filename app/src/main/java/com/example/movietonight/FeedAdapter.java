@@ -10,11 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.movietonight.Class.UserAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -48,6 +52,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUid = firebaseUser.getUid();
+        //String currentNickname;
         SimpleDateFormat transFormat=new SimpleDateFormat("yyyy/MM/dd");
         Feed item=feedData.get(position);//리스트 안의position위치의 feed객체 꺼내기
         String nickName=item.getNickName();
@@ -82,7 +88,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
                 databaseReference.child(idToken).child("Review").child(movieTitle).updateChildren(likeUpdate);
                 int updated_like= Integer.parseInt((String)holder.tvLike.getText())+1;
                 holder.tvLike.setText(Integer.toString(updated_like));//Ui에 like+1
-                addNotification(item.getReviewTitle(), item.getNickName(), idToken); //좋아요 알림
+                addNotification(item.getReviewTitle(), currentUid, idToken); //좋아요 알림
             }
         });
 
@@ -100,15 +106,28 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
 
     }
 
-    private void addNotification(String reviewTitle, String nickName, String idToken){
+    private void addNotification(String reviewTitle, String currentUid, String idToken){
         HashMap<String, Object> map = new HashMap<>();
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserAccount").child(currentUid);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserAccount userAccount = snapshot.getValue(UserAccount.class);
+                String usernickname = userAccount.getUserNickname();
+                map.put("userid", firebaseUser.getEmail());
+                map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
+                map.put("reviewId", reviewTitle);
+                map.put("nickname", usernickname);
+                FirebaseDatabase.getInstance().getReference().child("UserAccount").child(idToken).child("Noti").push().setValue(map);
+            }
 
-        map.put("userid", firebaseUser.getEmail());
-        map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
-        map.put("reviewId", reviewTitle);
-        map.put("isReview", true);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        FirebaseDatabase.getInstance().getReference().child("UserAccount").child(idToken).child("Noti").push().setValue(map);
+            }
+        });
+
+
 
     }
 

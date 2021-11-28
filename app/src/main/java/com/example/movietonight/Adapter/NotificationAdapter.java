@@ -19,6 +19,9 @@ import com.example.movietonight.Feed;
 import com.example.movietonight.Fragment.FragFeed;
 import com.example.movietonight.Fragment.FragMypage;
 import com.example.movietonight.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthActionCodeException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -102,8 +105,9 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 
 // 아직 피드 리뷰 좋아요가 디비와 연동 X, image 구현 아직 x
     private void getUser(ImageView imageView, TextView username, String userNickname) {
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(userNickname);
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        String uid = firebaseUser.getUid();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserAccout").child(uid);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
