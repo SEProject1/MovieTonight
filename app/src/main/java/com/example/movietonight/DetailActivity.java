@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,6 @@ public class DetailActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     FirebaseDatabase firebaseDatabase;
     FirebaseUser user;
-    ArrayList arrayList = new ArrayList();
     String genre_list = "";
 
     @Override
@@ -94,7 +94,6 @@ public class DetailActivity extends AppCompatActivity {
                     if(m_name.equals(title)){
                         btn_save.setSelected(true);
                     }
-                    arrayList.add(m_name);
                 }
             }
             @Override
@@ -114,14 +113,8 @@ public class DetailActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {    // 찜버튼 선택시
             @Override
             public void onClick(View v) {
-                if(arrayList.contains(title)){
-                    databaseReference.child(user.getUid()).child("save").child(title).removeValue();
-                    arrayList.remove(title);
-                }else{  //save에 추가
-                    databaseReference.child(user.getUid()).child("save").child(title).setValue(title);
-                    arrayList.add(title);
-                }
-                btn_save.setSelected(!btn_save.isSelected());
+                databaseReference.child(user.getUid()).child("save").child(title).setValue(title);
+                btn_save.setSelected(true);
             }
         });
     }

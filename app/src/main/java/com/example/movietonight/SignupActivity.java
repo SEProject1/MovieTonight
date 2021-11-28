@@ -129,19 +129,20 @@ public class SignupActivity extends AppCompatActivity {
                             //setValue : database에 삽입 동작
                             mDatabaseRef.child(firebaseUser.getUid()).setValue(account);
                             storageReference = storageReference.child(firebaseUser.getUid()).child("profileimg");
-                            UploadTask uploadTask = storageReference.putFile(Uuri);
+                                UploadTask uploadTask = storageReference.putFile(Uuri);
 
-                            uploadTask.addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(SignupActivity.this, "이미지 저장에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                uploadTask.addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(SignupActivity.this, "이미지 저장에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                    @Override
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                }
-                            });
+                                    }
+                                });
+
                             progressDialog.dismiss();
                             Toast.makeText(SignupActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
 
