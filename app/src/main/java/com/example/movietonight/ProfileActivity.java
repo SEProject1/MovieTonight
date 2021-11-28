@@ -100,7 +100,7 @@ public class ProfileActivity extends FragmentActivity {
                 }
                 else if(!(nickname.getText().toString().equals(""))&&imgChanged==false){//사용자가 닉네임만변경한경우
                     changeNickName();
-                    Toast.makeText(ProfileActivity.this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "닉네임이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -108,12 +108,12 @@ public class ProfileActivity extends FragmentActivity {
                 else if(!(nickname.getText().toString().equals(""))&&imgChanged==true){//사용자가 닉네임, 프로필 모두 바꾼 경우
                     changeNickName();
                     changeProfile();
-                    Toast.makeText(ProfileActivity.this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "프로필과 닉네임이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else{
-                    System.out.println("변경사항 없음");
+                    Toast.makeText(ProfileActivity.this, "변경사항이 없습니다.", Toast.LENGTH_SHORT).show();
                 }
 
             }
