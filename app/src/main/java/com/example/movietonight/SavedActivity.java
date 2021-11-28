@@ -3,6 +3,7 @@ package com.example.movietonight;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 public class SavedActivity extends AppCompatActivity {//찜한 리스트를 아이템으로 넣고 화면에 보여주는 클래스
     private RecyclerView recyclerView;
     private FavoriteListAdapter adapter;
+    private TextView tvNoSave;
     private ImageButton btnBack;
     private ArrayList<FavoriteMovie> favoriteMovies=new ArrayList<FavoriteMovie>();
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
@@ -34,6 +36,7 @@ public class SavedActivity extends AppCompatActivity {//찜한 리스트를 아�
         setContentView(R.layout.favorite_list_recycler);
         recyclerView = (RecyclerView)findViewById(R.id.favoriteMovie_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBack);//뒤로가기 버튼
+        tvNoSave=findViewById(R.id.tvNoSave);
         adapter = new FavoriteListAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL, false)) ;
@@ -65,9 +68,15 @@ public class SavedActivity extends AppCompatActivity {//찜한 리스트를 아�
         });
     }
     public void setFavoriteMovies(){//아이템 추가 메서드
-        for (int i=0;i<favoriteMovies.size();i++){
-            adapter.setFavoriteMovieData(favoriteMovies.get(i));
+        if (favoriteMovies.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            tvNoSave.setVisibility(View.VISIBLE);
+        }else{
+            for (int i=0;i<favoriteMovies.size();i++){
+                adapter.setFavoriteMovieData(favoriteMovies.get(i));
+            }
+            recyclerView.setAdapter(adapter);
         }
-        recyclerView.setAdapter(adapter);
+
     }
 }

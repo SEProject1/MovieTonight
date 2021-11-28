@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class MyReviewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MyReviewAdapter adapter;
     private ImageButton btnBack;
+    private TextView tvNoReview;
     private ArrayList<MyReview> myReviews=new ArrayList<MyReview>();//리뷰목록을 저장
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
@@ -34,6 +36,7 @@ public class MyReviewActivity extends AppCompatActivity {
         setContentView(R.layout.myreview_recycler);
         recyclerView = (RecyclerView)findViewById(R.id.myReivew_recycler);
         btnBack=(ImageButton)findViewById(R.id.btnBackMyReview);//뒤로가기 버튼
+        tvNoReview=findViewById(R.id.tvNoReview);
         adapter = new MyReviewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager
                 (this, RecyclerView.VERTICAL, false)) ;
@@ -74,9 +77,15 @@ public class MyReviewActivity extends AppCompatActivity {
         });
     }
     public void setMyReviews(){//아이템 추가 메서드
-        for (int i=0;i<myReviews.size();i++){
-            adapter.setMyReviewList(myReviews.get(i));
+        if (myReviews.size() == 0) {
+            recyclerView.setVisibility(View.GONE);
+            tvNoReview.setVisibility(View.VISIBLE);
+        }else{
+            for (int i=0;i<myReviews.size();i++){
+                adapter.setMyReviewList(myReviews.get(i));
+            }
+            recyclerView.setAdapter(adapter);
         }
-        recyclerView.setAdapter(adapter);
+
     }
 }
