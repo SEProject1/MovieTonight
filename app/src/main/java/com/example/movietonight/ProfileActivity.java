@@ -57,6 +57,7 @@ public class ProfileActivity extends FragmentActivity {
     private CircleImageView profile_img;
     private ImageButton back;
     private Button btn_profile, btn_register;
+    private boolean imgChanged=false;
     String uuid = firebaseUser.getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,17 +91,31 @@ public class ProfileActivity extends FragmentActivity {
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!(nickname.getText().toString().equals(""))){//변경된 닉네임이 있다면
+                if(imgChanged==true&&nickname.getText().toString().equals("")){//사용자가 이미지만 변경한 경우
+                    changeProfile();
+                    Toast.makeText(ProfileActivity.this, "프로필이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(!(nickname.getText().toString().equals(""))&&imgChanged==false){//사용자가 닉네임만변경한경우
+                    changeNickName();
+                    Toast.makeText(ProfileActivity.this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+                else if(!(nickname.getText().toString().equals(""))&&imgChanged==true){//사용자가 닉네임, 프로필 모두 바꾼 경우
                     changeNickName();
                     changeProfile();
                     Toast.makeText(ProfileActivity.this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
+                }else{
+                    System.out.println("변경사항 없음");
                 }
-                else{
-                    System.out.println("변경닉네임 없음");
-                }
+
             }
         });
     }
@@ -151,6 +166,7 @@ public class ProfileActivity extends FragmentActivity {
                         Uuri = intent.getData();
                         profile_img.setImageURI(Uuri);
                         Glide.with(getApplicationContext()).load(Uuri).into(profile_img);
+                        imgChanged=true;
                     }
                 }
             });
