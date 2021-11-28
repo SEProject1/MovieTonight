@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.movietonight.Class.Notification;
 import com.example.movietonight.Class.UserAccount;
 import com.example.movietonight.FollowUser;
 import com.example.movietonight.FollowingList;
@@ -37,7 +38,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     private Context mContext;
     private List<UserAccount> mUsers;
-    private FirebaseUser firebaseUser;
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String uid;
 
     public UserAdapter(Context mContext, List<UserAccount> mUsers) {
         this.mContext = mContext;
@@ -53,17 +55,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         UserAccount user = mUsers.get(position);
         holder.nickname.setText(user.getUserNickname());
-
-        holder.btn_follow.setText("팔로우");
         Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid()).child("following");
-
+        holder.btn_follow.setText("팔로우");
         isFollowing(databaseReference, user, holder.btn_follow);
-        holder.btn_follow.setVisibility(View.VISIBLE);
+        if(user.getIdToken().equals(firebaseUser.getUid())){
+            holder.btn_follow.setVisibility(View.GONE);
+        }else{
+            holder.btn_follow.setVisibility(View.VISIBLE);
+        }
         //친구 마이페이지로 이동
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,9 +83,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onClick(View view) {    //firebaseuser -> 현재 사용자 user -> 팔로우하는 사용자
                 FollowUser followUser = new FollowUser();
-                String id = firebaseUser.getUid();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserAccount").child(id).child("userNickname");
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                uid = firebaseUser.getUid();
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserAccount").child(uid).child("userNickname");
+                databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         String nickname = snapshot.getValue(String.class);
@@ -99,7 +101,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             followUser.setIdToken(firebaseUser.getUid());
                             FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
                                     .child("follower").child(firebaseUser.getUid()).setValue(followUser);
-                            addNotification(user.getUserId());
+                            addNotification(user.getIdToken(), nickname, firebaseUser.getEmail());
                         } else {    //팔로잉일 때
                             holder.btn_follow.setText("팔로우");
                             FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
@@ -121,16 +123,24 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
 
     }
 
-    private void addNotification(String userid) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+    private void addNotification(String following, String nickname, String follower) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserAccount").child(uid).child("Noti");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Notification notification = new Notification();
+                notification.setUserid(follower);
+                notification.setText("나를 팔로우하기 시작했습니다.");
+                notification.setNickname(nickname);
+                notification.setReviewTitle("팔로우");
+                FirebaseDatabase.getInstance().getReference().child("UserAccount").child(following).child("Noti").push().setValue(notification);
+            }
 
-        HashMap<String , Object> hashMap = new HashMap<>();
-        hashMap.put("userid" , firebaseUser.getUid());
-        hashMap.put("text" , "started following you");
-        hashMap.put("postid" , "");
-        hashMap.put("ispost" , false);
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        reference.push().setValue(hashMap);
+            }
+        });
     }
 
     @Override
@@ -156,12 +166,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    String id = data.getKey();
+                    FollowUser followUser = new FollowUser();
+                    followUser = data.getValue(FollowUser.class);
+                    String id = followUser.getIdToken();
                     if (id.equals(user.getIdToken())) {
                         button.setText("팔로잉");
-                    }
-                    if(user.getIdToken().equals(firebaseUser.getUid())){
-                        button.setVisibility(View.GONE);
+                        button.setVisibility(View.VISIBLE);
                     }
                 }
             }

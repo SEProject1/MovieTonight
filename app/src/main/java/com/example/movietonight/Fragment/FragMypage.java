@@ -29,7 +29,7 @@ import com.example.movietonight.MainActivity;
 import com.example.movietonight.MyReviewActivity;
 import com.example.movietonight.ProfileActivity;
 import com.example.movietonight.R;
-import com.example.movietonight.RankingActivity;
+import com.example.movietonight.RankingActicity;
 import com.example.movietonight.SavedActivity;
 import com.example.movietonight.StartActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -121,7 +121,7 @@ public class FragMypage extends Fragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.btn_ranking:
-                intent = new Intent(getActivity(), RankingActivity.class);
+                intent = new Intent(getActivity(), RankingActicity.class);
                 startActivity(intent);
                 break;
             case R.id.btn_logout:

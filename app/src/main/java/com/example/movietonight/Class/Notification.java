@@ -3,14 +3,14 @@ package com.example.movietonight.Class;
 public class Notification {
     private String userid;
     private String text;
-    private String reviewId;
-    private boolean isReview;
+    private String reviewTitle;
+    private String nickname;
 
-    public Notification(String userid, String text, String reviewId, boolean isReview) {
+    public Notification(String userid, String text, String reviewTitle, String nickname) {
         this.userid = userid;
         this.text = text;
-        this.reviewId = reviewId;
-        this.isReview = isReview;
+        this.reviewTitle = reviewTitle;
+        this.nickname = nickname;
     }
 
     public Notification() {
@@ -32,19 +32,15 @@ public class Notification {
         this.text = text;
     }
 
-    public String getReviewId() {
-        return reviewId;
+    public String getReviewTitle() {
+        return reviewTitle;
     }
 
-    public void setReviewId(String reviewId) {
-        this.reviewId = reviewId;
+    public void setReviewTitle(String reviewTitle) {
+        this.reviewTitle = reviewTitle;
     }
 
-    public boolean getIsReview() {
-        return isReview;
-    }
+    public String getNickname() {return nickname;}
 
-    public void setIsReview(boolean isReview) {
-        this.isReview = isReview;
-    }
+    public void setNickname(String nickname) {this.nickname = nickname; }
 }

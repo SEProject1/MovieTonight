@@ -17,6 +17,7 @@ import com.example.movietonight.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -38,25 +39,25 @@ public class FragNoti extends Fragment {
 
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         notificationList = new ArrayList<>();
-        notificationAdapter = new NotificationAdapter(getContext(), notificationList);
-        recyclerView.setAdapter(notificationAdapter);
-
         readNotifications();
-
+        notificationAdapter = new NotificationAdapter(getActivity(), notificationList);
+        recyclerView.setAdapter(notificationAdapter);
         return view;
     }
 
     private void readNotifications() {
-
-        FirebaseDatabase.getInstance().getReference().child("Notification").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
+        databaseReference.child(uid).child("Noti").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    notificationList.add(snapshot.getValue(Notification.class));
+                    Notification notification = snapshot.getValue(Notification.class);
+                    notificationList.add(notification);
                 }
-
                 Collections.reverse(notificationList);
                 notificationAdapter.notifyDataSetChanged();
             }
@@ -67,4 +68,6 @@ public class FragNoti extends Fragment {
             }
         });
     }
+
+
 }

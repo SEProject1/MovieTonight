@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.movietonight.Class.Notification;
 import com.example.movietonight.Class.UserAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -107,18 +108,18 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedViewHolder>{
     }
 
     private void addNotification(String reviewTitle, String currentUid, String idToken){
-        HashMap<String, Object> map = new HashMap<>();
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("UserAccount").child(currentUid);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserAccount userAccount = snapshot.getValue(UserAccount.class);
+                Notification notification = new Notification();
                 String usernickname = userAccount.getUserNickname();
-                map.put("userid", firebaseUser.getEmail());
-                map.put("text", "내 리뷰에 '좋아요'가 눌렸습니다.");
-                map.put("reviewId", reviewTitle);
-                map.put("nickname", usernickname);
-                FirebaseDatabase.getInstance().getReference().child("UserAccount").child(idToken).child("Noti").push().setValue(map);
+                notification.setNickname(usernickname +"님이");
+                notification.setUserid(firebaseUser.getEmail());
+                notification.setText("내 리뷰에 '좋아요'를 눌렀습니다.");
+                notification.setReviewTitle(reviewTitle);
+                FirebaseDatabase.getInstance().getReference().child("UserAccount").child(idToken).child("Noti").push().setValue(notification);
             }
 
             @Override
