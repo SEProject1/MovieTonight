@@ -1,5 +1,6 @@
 package com.example.movietonight;
 
+import android.annotation.SuppressLint;
 import android.widget.ImageView;
 
 import java.text.ParseException;
@@ -15,10 +16,10 @@ public class Feed implements Comparable<Feed>{
     private String review;
     private String like ,dislike;
     private Date mdate;
-    private String idToken;
+    private final String idToken;
 
     public Feed(ImageView profile, String nickName, String reviewTitle,String movieTitle, String genre, String review, String like, String dislike,String mdate,String idToken) {
-        SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat format=new SimpleDateFormat("yyyy/MM/dd");
         this.profile = profile;
         this.nickName = nickName;
         this.movieTitle = movieTitle;

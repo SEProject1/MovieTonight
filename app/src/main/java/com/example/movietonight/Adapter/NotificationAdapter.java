@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -67,13 +68,13 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
                     mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE)
                             .edit().putString("userid", notification.getUserid()).apply();
 
-                    ((FragmentActivity)mContext).getSupportFragmentManager()
+                    ((FragmentActivity) mContext).getSupportFragmentManager()
                             .beginTransaction().replace(R.id.main_frame, new FragFeed()).commit();
                 } else {
                     mContext.getSharedPreferences("PROFILE", Context.MODE_PRIVATE)
                             .edit().putString("profileId", notification.getUserid()).apply();
 
-                    ((FragmentActivity)mContext).getSupportFragmentManager()
+                    ((FragmentActivity) mContext).getSupportFragmentManager()
                             .beginTransaction().replace(R.id.main_frame, new FragMypage()).commit();
                 }
             }
@@ -99,21 +100,24 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
             username = itemView.findViewById(R.id.username);
             text = itemView.findViewById(R.id.comment);
         }
-
-
     }
 
-// 아직 피드 리뷰 좋아요가 디비와 연동 X, image 구현 아직 x
-    private void getUser(ImageView imageView, TextView username, String userNickname) {
-        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+    private void getUser(final ImageView imageView, final TextView username, String userid) {
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = firebaseUser.getUid();
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserAccout").child(uid);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("UserAccount")
+                .child(uid).child("Noti");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 UserAccount user = dataSnapshot.getValue(UserAccount.class);
                 imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
-                username.setText(user.getUserNickname());
+                username.setText(user.getUserId());
+
+
             }
 
             @Override
@@ -123,3 +127,34 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
         });
     }
 }
+
+
+
+
+
+
+//    private void getUser(ImageView imageView, TextView username, String userid) {
+//        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = firebaseUser.getUid();
+//        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(uid)
+//                .child("Noti");
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                for (DataSnapshot data : dataSnapshot.getChildren()) {
+//                    String id = data.getKey();
+//                    imageView.setImageResource(R.mipmap.ic_launcher_round);
+//                    username.setText();
+//                }
+//                UserAccount user = dataSnapshot.getValue(UserAccount.class);
+//                imageView.setImageResource(R.mipmap.ic_launcher_round); //임시 프로필 사진
+//                username.setText(user.getUserId());
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+

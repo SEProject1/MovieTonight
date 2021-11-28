@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -98,6 +99,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                             followUser.setIdToken(firebaseUser.getUid());
                             FirebaseDatabase.getInstance().getReference().child("UserAccount").child(user.getIdToken())
                                     .child("follower").child(firebaseUser.getUid()).setValue(followUser);
+                            addNotification(user.getUserId());
                         } else {    //팔로잉일 때
                             holder.btn_follow.setText("팔로우");
                             FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid())
@@ -117,6 +119,18 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         });
 
 
+    }
+
+    private void addNotification(String userid) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Notifications").child(userid);
+
+        HashMap<String , Object> hashMap = new HashMap<>();
+        hashMap.put("userid" , firebaseUser.getUid());
+        hashMap.put("text" , "started following you");
+        hashMap.put("postid" , "");
+        hashMap.put("ispost" , false);
+
+        reference.push().setValue(hashMap);
     }
 
     @Override
