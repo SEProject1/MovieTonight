@@ -72,7 +72,6 @@ public class SignupActivity extends AppCompatActivity {
         profile = findViewById(R.id.profile);
         progressDialog = new ProgressDialog(this);
 
-
         storageReference.child("profileimg/profile_pic.png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

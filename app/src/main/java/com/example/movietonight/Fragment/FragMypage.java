@@ -18,6 +18,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.movietonight.CalendarActivity;
@@ -82,7 +84,10 @@ public class FragMypage extends Fragment implements View.OnClickListener{
         logout.setOnClickListener(this);
         following.setOnClickListener(this);
         follwer.setOnClickListener(this);
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.detach(this).attach(this).commit();
         getUserInfo();
+
         storageReference.child(user.getUid()+"/").child("profileimg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
