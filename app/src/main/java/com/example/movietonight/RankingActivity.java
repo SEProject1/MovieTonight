@@ -110,4 +110,3 @@ public class RankingActivity extends AppCompatActivity {
 //            String Ranking_Genre = val.getKey(); // 카운트방법        }
 //        }
     }
-}
