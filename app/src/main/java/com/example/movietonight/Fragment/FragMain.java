@@ -1,6 +1,7 @@
 package com.example.movietonight.Fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +20,16 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movietonight.Movie;
 import com.example.movietonight.MyRecyclerViewAdapter;
 import com.example.movietonight.R;
+import com.example.movietonight.SearchActivity;
+import com.example.movietonight.SectionDataAdapter;
+import com.example.movietonight.SectionItem;
+import com.example.movietonight.SingleItem;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -38,9 +44,11 @@ import okhttp3.Response;
 public class FragMain extends Fragment {
 
     private View view;
-    private RecyclerView recyclerView;
-    private MyRecyclerViewAdapter adapter;
     ArrayList<Movie> movieList;
+    ArrayList<SingleItem> PmovieList;
+    ArrayList<SingleItem> NmovieList;
+    ArrayList<SingleItem> TmovieList;
+    ArrayList<SectionItem> sectionDataList;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,22 +58,36 @@ public class FragMain extends Fragment {
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
         setHasOptionsMenu(true);
 
-        recyclerView = view.findViewById(R.id.recycler_view);
-        movieList = new ArrayList<Movie>();
+        // 메인
+        sectionDataList = new ArrayList<SectionItem>();
+        PmovieList = new ArrayList<SingleItem>();
+        NmovieList = new ArrayList<SingleItem>();
+        TmovieList = new ArrayList<SingleItem>();
+            // 메인 실행
+        MyAsyncTask_P mAsyncTask_P = new MyAsyncTask_P();
 
-        //Asynctask - OKHttp
-        MyAsyncTask mAsyncTask = new MyAsyncTask();
-        mAsyncTask.execute("https://api.themoviedb.org/3/movie/upcoming?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1");
+        mAsyncTask_P.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-        //LayoutManager
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity(),2, GridLayoutManager.HORIZONTAL,false);
-        recyclerView.setLayoutManager(layoutManager);
-        //recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        MyAsyncTask_N mAsyncTask_N = new MyAsyncTask_N();
+
+        mAsyncTask_N.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        MyAsyncTask_T mAsyncTask_T = new MyAsyncTask_T();
+
+        mAsyncTask_T.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+        CreateMovieList();
+
+        RecyclerView my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        my_recycler_view.setHasFixedSize(true);
+        SectionDataAdapter adapter_m = new SectionDataAdapter(getActivity(), sectionDataList);
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        my_recycler_view.setAdapter(adapter_m);
+
         return view;
     }
 
-
-    public class MyAsyncTask extends AsyncTask<String, Void, Movie[]> {
+    public class MyAsyncTask_P extends AsyncTask<String, Void, SingleItem[]> {
         //로딩중 표시
         ProgressDialog progressDialog = new ProgressDialog(getActivity());
 
@@ -73,21 +95,18 @@ public class FragMain extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            progressDialog.setMessage("로딩중...");
+            progressDialog.setMessage("\t로딩중...");
             //show dialog
             progressDialog.show();
 
-            //목록 배열의 내용을 클리어 해 놓는다.
-            movieList.clear();
-
+            PmovieList.clear();
         }
 
         @Override
-        protected Movie[] doInBackground(String... strings) {
-            Log.d("AsyncTask", "url : " + strings[0]);
+        protected SingleItem[] doInBackground(String... strings) {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(strings[0])
+                    .url("https://api.themoviedb.org/3/movie/popular?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1")
                     .build();
             try {
                 Response response = client.newCall(request).execute();
@@ -95,7 +114,7 @@ public class FragMain extends Fragment {
                 JsonParser parser = new JsonParser();
                 JsonElement rootObject = parser.parse(response.body().charStream())
                         .getAsJsonObject().get("results");
-                Movie[] posts = gson.fromJson(rootObject, Movie[].class);
+                SingleItem[] posts = gson.fromJson(rootObject, SingleItem[].class);
                 return posts;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -103,28 +122,120 @@ public class FragMain extends Fragment {
             return null;
         }
 
-
         @Override
-        protected void onPostExecute(Movie[] result) {
+        protected void onPostExecute(SingleItem[] result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-
             //ArrayList에 차례대로 집어 넣는다.
             if (result.length > 0) {
-                for (Movie p : result) {
-                    movieList.add(p);
+                for (SingleItem p : result) {
+                    PmovieList.add(p);
+                    Log.d("opd", "P" + String.valueOf(result));
+
                 }
             }
-
-            //어댑터 설정
-                if(getActivity()!=null) {
-                    adapter = new MyRecyclerViewAdapter(getActivity(), movieList);
-                    recyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                }
         }
     }
 
+    public class MyAsyncTask_N extends AsyncTask<String, Void, SingleItem[]> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            NmovieList.clear();
+
+        }
+        @Override
+        protected SingleItem[] doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/movie/now_playing?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1&region=KR")
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                Gson gson = new GsonBuilder().create();
+                JsonParser parser = new JsonParser();
+                JsonElement rootObject = parser.parse(response.body().charStream())
+                        .getAsJsonObject().get("results");
+                SingleItem[] posts = gson.fromJson(rootObject, SingleItem[].class);
+                return posts;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(SingleItem[] result2) {
+            super.onPostExecute(result2);
+            //ArrayList에 차례대로 집어 넣는다.
+            if (result2.length > 0) {
+                for (SingleItem p : result2) {
+                    NmovieList.add(p);
+                    Log.d("opd", "N" + String.valueOf(result2));
+                }
+            }
+        }
+    }
+
+    public class MyAsyncTask_T extends AsyncTask<String, Void, SingleItem[]> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            TmovieList.clear();
+        }
+
+        @Override
+        protected SingleItem[] doInBackground(String... strings) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url("https://api.themoviedb.org/3/movie/top_rated?api_key=a652ee13e08fed970ce6ddfc717f595b&language=ko-KR&page=1")
+                    .build();
+            try {
+                Response response = client.newCall(request).execute();
+                Gson gson = new GsonBuilder().create();
+                JsonParser parser = new JsonParser();
+                JsonElement rootObject = parser.parse(response.body().charStream())
+                        .getAsJsonObject().get("results");
+                SingleItem[] posts = gson.fromJson(rootObject, SingleItem[].class);
+                return posts;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(SingleItem[] result3) {
+            super.onPostExecute(result3);
+            //ArrayList에 차례대로 집어 넣는다.
+            if (result3.length > 0) {
+                for (SingleItem p : result3) {
+                    TmovieList.add(p);
+                    Log.d("opd", "T" + String.valueOf(result3));
+                }
+            }
+        }
+    }
+
+    void CreateMovieList() {
+        SectionItem sectionDataModel_P = new SectionItem();
+        sectionDataModel_P.setHeaderTitle("Popular Movie");
+        sectionDataModel_P.setSingItemList(PmovieList);
+        sectionDataList.add(sectionDataModel_P);
+
+
+        SectionItem sectionDataModel_N = new SectionItem();
+        sectionDataModel_N.setHeaderTitle("Now Playing");
+        sectionDataModel_N.setSingItemList(NmovieList);
+        sectionDataList.add(sectionDataModel_N);
+
+        SectionItem sectionDataModel_T = new SectionItem();
+        sectionDataModel_T.setHeaderTitle("Top Rate Movie");
+        sectionDataModel_T.setSingItemList(TmovieList);
+        sectionDataList.add(sectionDataModel_T);
+    }
 
     // 검색창
     @Override
@@ -143,10 +254,10 @@ public class FragMain extends Fragment {
             public boolean onQueryTextSubmit(String s) {
                 Toast.makeText(getActivity(), s + "에 대한 영화를 검색합니다.", Toast.LENGTH_LONG).show();
 
-                String search_url = "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query=" + s + "&language=ko-KR&page=1";
-                String[] strings = {search_url};
-                MyAsyncTask myAsyncTask = new MyAsyncTask();
-                myAsyncTask.execute(strings[0]);
+                Intent intent = new Intent(getActivity(), SearchActivity.class);
+                intent.putExtra("SearchTitle", "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query="+s+"&language=ko-KR&page=1");
+                startActivity(intent);
+
                 return false;
             }
 
