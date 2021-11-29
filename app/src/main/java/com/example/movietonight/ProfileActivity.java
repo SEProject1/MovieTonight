@@ -95,6 +95,7 @@ public class ProfileActivity extends FragmentActivity {
                     changeProfile();
                     Toast.makeText(ProfileActivity.this, "프로필이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    intent.putExtra("mypage",true);
                     startActivity(intent);
                     finish();
                 }
@@ -102,6 +103,7 @@ public class ProfileActivity extends FragmentActivity {
                     changeNickName();
                     Toast.makeText(ProfileActivity.this, "닉네임이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    intent.putExtra("mypage",true);
                     startActivity(intent);
                     finish();
                 }
@@ -110,6 +112,7 @@ public class ProfileActivity extends FragmentActivity {
                     changeProfile();
                     Toast.makeText(ProfileActivity.this, "프로필과 닉네임이 저장되었습니다.", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    intent.putExtra("mypage",true);
                     startActivity(intent);
                     finish();
                 }else{

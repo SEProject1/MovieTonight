@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent=getIntent();
         bottomNavigationView = findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -74,8 +76,13 @@ public class MainActivity extends AppCompatActivity {
         fragFeed = new FragFeed();
         fragNotification = new FragNoti();
         fragMypage = new FragMypage();
-        setFrag(0); //첫 프래그먼트 화면을 무엇으로 지정해줄 것인지 선택
-
+        if(intent.getBooleanExtra("mypage",false)==true){
+            setFrag(3);//닉네임변경, 언팔로우시 프래그먼트 mypage로
+            bottomNavigationView.setSelectedItemId(R.id.action_mypage);//하단 아이콘 설정
+        }
+        else{
+            setFrag(0); //첫 프래그먼트 화면을 무엇으로 지정해줄 것인지 선택
+        }
     }
 
 

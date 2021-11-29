@@ -29,7 +29,7 @@ import com.example.movietonight.MainActivity;
 import com.example.movietonight.MyReviewActivity;
 import com.example.movietonight.ProfileActivity;
 import com.example.movietonight.R;
-import com.example.movietonight.RankingActicity;
+//import com.example.movietonight.RankingActicity;
 import com.example.movietonight.SavedActivity;
 import com.example.movietonight.StartActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -91,7 +91,9 @@ public class FragMypage extends Fragment implements View.OnClickListener{
         storageReference.child(user.getUid()+"/").child("profileimg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
-                Glide.with(getActivity()).load(uri).into(img_view);
+                if(getActivity()!=null){//프래그먼트 빈번한 전환시 Activity destroy되어 null참조됨
+                    Glide.with(getActivity()).load(uri).into(img_view);
+                }
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -121,8 +123,8 @@ public class FragMypage extends Fragment implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.btn_ranking:
-                intent = new Intent(getActivity(), RankingActicity.class);
-                startActivity(intent);
+                //intent = new Intent(getActivity(), RankingActicity.class);
+                //startActivity(intent);
                 break;
             case R.id.btn_logout:
                 new AlertDialog.Builder(getActivity()).setTitle("로그아웃").setMessage("로그아웃 하시겠습니까?").setPositiveButton("로그아웃", new DialogInterface.OnClickListener() {
