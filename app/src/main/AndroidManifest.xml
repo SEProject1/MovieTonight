@@ -24,10 +24,6 @@
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".SearchActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity
             android:name=".LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
@@ -121,6 +117,11 @@
             tools:ignore="Instantiatable" />
         <activity
             android:name=".FollowerActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="Instantiatable" />
+        <activity
+            android:name=".RankingActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             tools:ignore="Instantiatable" />

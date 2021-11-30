@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,10 +54,17 @@ public class ReviewActivity extends AppCompatActivity {
         Button btn_reg = findViewById(R.id.btn_reg);
         TextView m_title = findViewById(R.id.m_title);
         TextView m_genre = findViewById(R.id.genre);
+        ImageButton back = findViewById(R.id.btnBack);
         m_title.setText(title);
         m_genre.setText(genre_list);
         Button date = findViewById(R.id.date);
         ProgressDialog progressDialog = new ProgressDialog(this);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

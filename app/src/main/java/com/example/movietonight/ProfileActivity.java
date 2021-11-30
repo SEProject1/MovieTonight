@@ -1,5 +1,4 @@
 package com.example.movietonight;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -8,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
-
 import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Bundle;
@@ -24,9 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
-
 import android.util.Base64;
-
 import com.bumptech.glide.Glide;
 import com.example.movietonight.Fragment.FragMypage;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -41,10 +37,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import de.hdodenhof.circleimageview.CircleImageView;
-
-
 public class ProfileActivity extends FragmentActivity {
     private Uri Uuri;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -68,16 +61,13 @@ public class ProfileActivity extends FragmentActivity {
         back = findViewById(R.id.btnBack);
         btn_profile = findViewById(R.id.btn_profile);
         btn_register=findViewById(R.id.btn_register);
-
         getprofile();
-
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +77,6 @@ public class ProfileActivity extends FragmentActivity {
                 launcher.launch(intent);
             }
         });
-
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,7 +115,6 @@ public class ProfileActivity extends FragmentActivity {
         HashMap<String,Object> nickNameUpdate=new HashMap<String,Object>();
         nickNameUpdate.put("userNickname",nickname.getText().toString());
         databaseReference.child(user.getUid()).updateChildren(nickNameUpdate);//현재 유저db에서 닉네임 수정
-
         //이유저를 팔로잉 중인 유저의 팔로잉 목록에서 수정
         databaseReference.child(user.getUid()).child("follower").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -173,7 +161,6 @@ public class ProfileActivity extends FragmentActivity {
                     }
                 }
             });
-
     void getprofile(){
         storageReference.child(uuid).child("profileimg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -183,7 +170,6 @@ public class ProfileActivity extends FragmentActivity {
             }
         });
     }
-
     void changeProfile(){
         storageReference = storage.getReference().child(user.getUid()).child("profileimg");
         UploadTask uploadTask = storageReference.putFile(Uuri);

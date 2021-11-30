@@ -228,7 +228,6 @@ public class FragMain extends Fragment {
         sectionDataModel_P.setSingItemList(PmovieList);
         sectionDataList.add(sectionDataModel_P);
 
-
         SectionItem sectionDataModel_N = new SectionItem();
         sectionDataModel_N.setHeaderTitle("Now Playing");
         sectionDataModel_N.setSingItemList(NmovieList);

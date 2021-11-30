@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,13 +45,12 @@ public class FragFeed extends Fragment {
     private UserAdapter userAdapter;
     private List<UserAccount> mUsers;
     private FeedAdapter feedAdapter;
-    ArrayList<Feed> feeds=new ArrayList<Feed>();
-    ArrayList<FollowingList> followingLists=new ArrayList<>();
-    EditText search_bar;
+    private ArrayList<Feed> feeds=new ArrayList<Feed>();
+    private ArrayList<FollowingList> followingLists=new ArrayList<>();
+    private EditText search_bar;
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference=firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -202,6 +203,9 @@ public class FragFeed extends Fragment {
 
     }
     public void setFeeds(){//아이템 추가 메서드
+        if(feeds.size()==0){
+            Toast.makeText(getActivity(),"표시할 피드가 없습니다.",Toast.LENGTH_SHORT).show();
+        }
         for (int i=0;i<feeds.size();i++){
             feedAdapter.setFeedData(feeds.get(i));
         }
