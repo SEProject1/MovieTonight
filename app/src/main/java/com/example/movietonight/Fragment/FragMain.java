@@ -44,6 +44,7 @@ import okhttp3.Response;
 public class FragMain extends Fragment {
 
     private View view;
+    SectionDataAdapter adapter_m;
     ArrayList<SingleItem> PmovieList;
     ArrayList<SingleItem> NmovieList;
     ArrayList<SingleItem> TmovieList;
@@ -79,7 +80,7 @@ public class FragMain extends Fragment {
 
         RecyclerView my_recycler_view = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         my_recycler_view.setHasFixedSize(true);
-        SectionDataAdapter adapter_m = new SectionDataAdapter(getActivity(), sectionDataList);
+        adapter_m = new SectionDataAdapter(getActivity(), sectionDataList);
         my_recycler_view.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         my_recycler_view.setAdapter(adapter_m);
 
@@ -133,6 +134,7 @@ public class FragMain extends Fragment {
 
                 }
             }
+            adapter_m.notifyDataSetChanged();
         }
     }
 
@@ -174,6 +176,7 @@ public class FragMain extends Fragment {
                     Log.d("opd", "N" + String.valueOf(result2));
                 }
             }
+            adapter_m.notifyDataSetChanged();
         }
     }
 
@@ -215,6 +218,7 @@ public class FragMain extends Fragment {
                     Log.d("opd", "T" + String.valueOf(result3));
                 }
             }
+            adapter_m.notifyDataSetChanged();
         }
     }
 
