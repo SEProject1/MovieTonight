@@ -35,7 +35,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class RankingActivity extends AppCompatActivity {
-   // static ArrayList<String> list = new ArrayList<String>();
     static String[] Ranking_Genre=new String[16];
     static int[] occurrence=new int[16];
     PieChart pieChart;
@@ -57,6 +56,7 @@ public class RankingActivity extends AppCompatActivity {
 
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColor(Color.BLACK);
+        pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setTransparentCircleRadius(61f);
         getMyMovie(); //db에서 장르 불러오기
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
