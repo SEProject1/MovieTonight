@@ -1,6 +1,7 @@
 package com.example.movietonight;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -44,7 +45,9 @@ public class FollowersActivity extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //뒤로가기, 인텐트 종료
+                Intent intent = new Intent(FollowersActivity.this, MainActivity.class);
+                intent.putExtra("mypage",true);
+                startActivity(intent);
                 finish();
             }
         });

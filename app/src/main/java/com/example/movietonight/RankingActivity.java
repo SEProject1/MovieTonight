@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,11 +77,14 @@ public class RankingActivity extends AppCompatActivity {
 
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.YELLOW);
+        data.setValueTextColor(Color.BLACK);
         pieChart.setData(data);
         btn_backRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(RankingActivity.this, MainActivity.class);
+                intent.putExtra("mypage",true);
+                startActivity(intent);
                 finish();
             }
         });
