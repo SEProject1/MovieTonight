@@ -12,7 +12,6 @@
         android:id="@+id/imageView_m"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/blackheart_image"/>
+        android:adjustViewBounds="true" />
 
 </androidx.cardview.widget.CardView>
