@@ -5,6 +5,7 @@ import java.util.ArrayList;
 //상위 리사이클러뷰아이템의 하위 리사이클러뷰에 들어갈 하위아이템클래스를 정의한다.
 public class SingleItem {
 
+    private String id;
     private String title;
     private String original_title;
     private String poster_path;
@@ -14,7 +15,8 @@ public class SingleItem {
     private String vote_average;
     ArrayList<Integer> genre_ids = new ArrayList<>();
 
-    public SingleItem(String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
+    public SingleItem(String id, String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
+        this.id = id;
         this.title = title;
         this.original_title = original_title;
         this.poster_path = poster_path;
@@ -24,6 +26,7 @@ public class SingleItem {
         this.vote_average = vote_average;
         this.genre_ids = genre_ids;
     }
+    public String getId() { return id; }
 
     public String getTitle() {
         return title;

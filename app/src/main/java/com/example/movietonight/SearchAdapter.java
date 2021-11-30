@@ -51,6 +51,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecyclerVi
             public void onClick(View view) {
                 Log.d("click", String.valueOf(mMovieList));
                 Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("id", mMovieList.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("title", mMovieList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("original_title", mMovieList.get(holder.getAdapterPosition()).getOriginal_title());
                 intent.putExtra("poster_path", mMovieList.get(holder.getAdapterPosition()).getPoster_path());

@@ -49,6 +49,7 @@ public class SingleDataAdapter extends RecyclerView.Adapter<SingleDataAdapter.Si
             public void onClick(View view) {
                 Log.d("click", String.valueOf(itemsList));
                 Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra("id", itemsList.get(holder.getAdapterPosition()).getId());
                 intent.putExtra("title", itemsList.get(holder.getAdapterPosition()).getTitle());
                 intent.putExtra("original_title", itemsList.get(holder.getAdapterPosition()).getOriginal_title());
                 intent.putExtra("poster_path", itemsList.get(holder.getAdapterPosition()).getPoster_path());

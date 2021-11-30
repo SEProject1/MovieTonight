@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Movie {
     //Json 데이터를 참조
+    private String id;
     private String title;
     private String original_title;
     private String poster_path;
@@ -13,7 +14,8 @@ public class Movie {
     private String vote_average;
     ArrayList<Integer> genre_ids = new ArrayList<>();
 
-    public Movie(String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
+    public Movie(String id, String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
+        this.id = id;
         this.title = title;
         this.original_title = original_title;
         this.poster_path = poster_path;
@@ -23,6 +25,8 @@ public class Movie {
         this.vote_average = vote_average;
         this.genre_ids = genre_ids;
     }
+
+    public String getId() { return id; }
 
     public String getTitle() {
         return title;
