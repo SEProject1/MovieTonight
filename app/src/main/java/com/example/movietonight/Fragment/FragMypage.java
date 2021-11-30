@@ -109,6 +109,7 @@ public class FragMypage extends Fragment implements View.OnClickListener{
             case R.id.btn_profile:
                 intent = new Intent(getActivity(), ProfileActivity.class);
                 startActivity(intent);
+                getActivity().finish();
                 break;
             case R.id.btn_review:
                 intent = new Intent(getActivity(), MyReviewActivity.class);
@@ -144,6 +145,7 @@ public class FragMypage extends Fragment implements View.OnClickListener{
             case R.id.following:
                 intent=new Intent(getActivity(), FollowingListActivity.class);
                 startActivity(intent);
+                getActivity().finish();
                 break;
             case R.id.follower:
                 intent=new Intent(getActivity(), FollowerActivity.class);

@@ -65,6 +65,9 @@ public class ProfileActivity extends FragmentActivity {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                intent.putExtra("mypage",true);
+                startActivity(intent);
                 finish();
             }
         });
@@ -189,4 +192,13 @@ public class ProfileActivity extends FragmentActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+        intent.putExtra("mypage",true);
+        startActivity(intent);
+        super.onBackPressed();
+    }
+
 }
