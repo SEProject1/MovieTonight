@@ -106,6 +106,10 @@ public class ProfileActivity extends FragmentActivity {
                     finish();
                 }else{
                     Toast.makeText(ProfileActivity.this, "변경사항이 없습니다.", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                    intent.putExtra("mypage",true);
+                    startActivity(intent);
+                    finish();
                 }
 
             }

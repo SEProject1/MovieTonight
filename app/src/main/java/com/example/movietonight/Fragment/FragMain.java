@@ -254,7 +254,7 @@ public class FragMain extends Fragment {
             //검색어를 다 입력하고 서치 버튼을 눌렀을때
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(getActivity(), s + "에 대한 영화를 검색합니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), s + "에 대한 영화를 검색합니다.", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 intent.putExtra("SearchTitle", "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query="+s+"&language=ko-KR&page=1");

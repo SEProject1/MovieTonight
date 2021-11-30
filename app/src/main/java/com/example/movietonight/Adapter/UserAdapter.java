@@ -171,7 +171,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                     String id = followUser.getIdToken();
                     if (id.equals(user.getIdToken())) {
                         button.setText("팔로잉");
-                        button.setVisibility(View.VISIBLE);
                     }
                 }
             }
