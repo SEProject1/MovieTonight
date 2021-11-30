@@ -1,6 +1,8 @@
 package com.example.movietonight;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,17 +47,31 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListViewHo
         holder.btnFavoriteMovieDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //db에서 찜한 영화 삭제
-                databaseReference.child(user.getUid()).child("save").child(mt).
-                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                AlertDialog.Builder msgBilder=new AlertDialog.Builder(view.getContext());
+                msgBilder.setTitle("찜한 영화를 삭제 하시겠습니까?");
+                msgBilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                //db에서 찜한 영화 삭제
+                                databaseReference.child(user.getUid()).child("save").child(mt).
+                                        removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Toast.makeText(view.getContext(), "찜한 영화가 삭제되었습니다.", Toast.LENGTH_LONG).show();
+                                    }
+                                });
+                                favoriteMovieData.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
+                                notifyItemRemoved(holder.getAdapterPosition());
+                                notifyItemRangeChanged(holder.getAdapterPosition(),favoriteMovieData.size());
+                            }
+                        });
+                msgBilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(view.getContext(),"찜한 영화가 삭제되었습니다.",Toast.LENGTH_LONG).show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(view.getContext(), "취소 되었습니다.", Toast.LENGTH_LONG).show();
                     }
                 });
-                favoriteMovieData.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(),favoriteMovieData.size());
+                msgBilder.show();
             }
         });
     }
