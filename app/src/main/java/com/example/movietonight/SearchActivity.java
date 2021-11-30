@@ -50,10 +50,10 @@ public class SearchActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        SearchTitle = intent.getStringExtra("SearchTitle");
-        Log.d("intent_get", SearchTitle);
+        String[] strings = {intent.getStringExtra("SearchTitle")};
+        Log.d("intent_get", strings[0]);
         MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute(SearchTitle);
+        myAsyncTask.execute(strings[0]);
 
     }
 
@@ -70,10 +70,10 @@ public class SearchActivity extends AppCompatActivity {
 
         @Override
         protected Movie[] doInBackground(String... strings) {
-            Log.d("AsyncTask", "url : " + SearchTitle);
+            Log.d("AsyncTask", "url : " + strings[0]);
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
-                    .url(SearchTitle)
+                    .url(strings[0])
                     .build();
             try {
                 Response response = client.newCall(request).execute();
