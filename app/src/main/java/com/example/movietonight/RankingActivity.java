@@ -103,8 +103,6 @@ public class RankingActivity extends AppCompatActivity {
                     String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
                    for (int i = 0; i < Genre.length; i++) {
                         list.add(Genre[i]); // 분리한장르를 list에 추가
-                        //system out, logd 찍어보기
-
                     }
                      countFrequncies(list); //카운트함수 실행
                 }
@@ -114,7 +112,6 @@ public class RankingActivity extends AppCompatActivity {
             }
         });
     }
-    //참고코드 https://www.geeksforgeeks.org/count-occurrences-elements-list-java/?ref=gcse
     public static void countFrequncies(ArrayList<String> list) //장르 카운트
     {
         Map<String, Integer> hm = new HashMap<String, Integer>();
