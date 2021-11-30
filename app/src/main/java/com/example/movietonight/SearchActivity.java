@@ -122,7 +122,7 @@ public class SearchActivity extends AppCompatActivity {
             //검색어를 다 입력하고 서치 버튼을 눌렀을때
             @Override
             public boolean onQueryTextSubmit(String s) {
-                Toast.makeText(SearchActivity.this, s + "에 대한 영화를 검색합니다.", Toast.LENGTH_LONG).show();
+                Toast.makeText(SearchActivity.this, s + "에 대한 영화를 검색합니다.", Toast.LENGTH_SHORT).show();
 
                 String search_url = "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query=" + s + "&language=ko-KR&page=1";
                 String[] strings = {search_url};

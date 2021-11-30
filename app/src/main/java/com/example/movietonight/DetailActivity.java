@@ -113,8 +113,12 @@ public class DetailActivity extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {    // 찜버튼 선택시
             @Override
             public void onClick(View v) {
-                databaseReference.child(user.getUid()).child("save").child(title).setValue(title);
-                btn_save.setSelected(true);
+                if(!btn_save.isSelected()){
+                    databaseReference.child(user.getUid()).child("save").child(title).setValue(title);
+                    Toast.makeText(DetailActivity.this, "해당 영화가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+                    btn_save.setSelected(true);
+                }
+
             }
         });
     }
