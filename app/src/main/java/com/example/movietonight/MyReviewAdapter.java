@@ -1,6 +1,8 @@
 package com.example.movietonight;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,17 +56,31 @@ public class MyReviewAdapter extends RecyclerView.Adapter<MyReviewViewHolder>{
             holder.btnReviewDel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //db에서 해당 리뷰 삭제
-                    databaseReference.child(user.getUid()).child("Review").child(mt).
-                            removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    AlertDialog.Builder msgBilder=new AlertDialog.Builder(view.getContext());
+                    msgBilder.setTitle("리뷰를 삭제 하시겠습니까?");
+                    msgBilder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    //db에서 해당 리뷰 삭제
+                                    databaseReference.child(user.getUid()).child("Review").child(mt).
+                                            removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                            Toast.makeText(view.getContext(), "리뷰가 삭제되었습니다.", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                    myReviewList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
+                                    notifyItemRemoved(holder.getAdapterPosition());
+                                    notifyItemRangeChanged(holder.getAdapterPosition(),myReviewList.size());
+                                }
+                            });
+                    msgBilder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(view.getContext(),"리뷰가 삭제되었습니다.",Toast.LENGTH_LONG).show();
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(view.getContext(), "취소되었습니다.", Toast.LENGTH_LONG).show();
                         }
                     });
-                    myReviewList.remove(holder.getAdapterPosition());//UI에서 해당 item삭제
-                    notifyItemRemoved(holder.getAdapterPosition());
-                    notifyItemRangeChanged(holder.getAdapterPosition(),myReviewList.size());
+                    msgBilder.show();
                 }
             });
         }
