@@ -61,10 +61,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid()).child("following");
         holder.btn_follow.setText("팔로우");
         isFollowing(databaseReference, user, holder.btn_follow);
-        if(user.getIdToken().equals(firebaseUser.getUid())){
-            holder.btn_follow.setVisibility(View.GONE);
-        }else{
-            holder.btn_follow.setVisibility(View.VISIBLE);
+        if(user.getIdToken()!=null) {
+            if (user.getIdToken().equals(firebaseUser.getUid())) {
+                holder.btn_follow.setVisibility(View.GONE);
+            } else {
+                holder.btn_follow.setVisibility(View.VISIBLE);
+            }
         }
         //친구 마이페이지로 이동
         /*holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +75,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                 SharedPreferences.Editor editor = mContext.getSharedPreferences("PREFS", Context.MODE_PRIVATE).edit();
                 editor.putString("profileid", user.getUserId());
                 editor.apply();
-
                 ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,
                         new FragMypage()).commit();
             }
@@ -171,6 +172,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                     String id = followUser.getIdToken();
                     if (id.equals(user.getIdToken())) {
                         button.setText("팔로잉");
+                        button.setVisibility(View.VISIBLE);
                     }
                 }
             }

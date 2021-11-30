@@ -33,21 +33,8 @@
         <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_calendar.xml" value="0.32708333333333334" />
         <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_profile.xml" value="0.3197463768115942" />
         <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_ranking.xml" value="0.33177083333333335" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_calendar.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_detail.xml" value="0.2105978260869565" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_fragment.xml" value="0.2105978260869565" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_intro.xml" value="0.2105978260869565" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_login.xml" value="0.25729166666666664" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_main.xml" value="0.15172101449275363" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_movie_detail.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_profile.xml" value="0.1" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_ranking.xml" value="0.2" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_search.xml" value="0.13072916666666667" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/activity_signup.xml" value="0.16621376811594202" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/frag_mypage.xml" value="0.25364583333333335" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/myreview_item.xml" value="0.2105978260869565" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/layout/myreview_recycler.xml" value="0.16" />
-        <entry key="..\:/Android/SE_JAVA/app/src/main/res/menu/my_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Android/SEProject/app/src/main/res/layout/activity_upload.xml" value="0.370018115942029" />
+        <entry key="..\:/Android/SEProject/app/src/main/res/layout/favorite_list_item.xml" value="0.370018115942029" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable-xxxhdpi/savebutton.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/back_move.xml" value="0.28541666666666665" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/background.xml" value="0.28541666666666665" />
@@ -55,22 +42,47 @@
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/calendar.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/empty_heart.xml" value="0.28541666666666665" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/full_heart.xml" value="0.28541666666666665" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_feed_24.xml" value="0.22592592592592592" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.22592592592592592" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.22592592592592592" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_logout_24.xml" value="0.22592592592592592" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_notifications_24.xml" value="0.1" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1037037037037037" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_person_outline_24.xml" value="0.1037037037037037" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_baseline_profile_24.xml" value="0.1037037037037037" />
+        <entry key="..\:/MovieTonight/app/src/main/res/drawable/ic_launcher_background.xml" value="0.10277777777777777" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/logout.xml" value="0.28541666666666665" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/piechart.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/drawable/savebutton.xml" value="0.1" />
-        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_calendar.xml" value="0.4578125" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_calendar.xml" value="0.37752161383285304" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_fragment.xml" value="0.1671195652173913" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_login.xml" value="0.2206180344478217" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_main.xml" value="0.2682291666666667" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_movie_detail.xml" value="0.1621376811594203" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_post.xml" value="0.1621376811594203" />
-        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.16168478260869565" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_ranking.xml" value="0.1661600810536981" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_signup.xml" value="0.21904761904761905" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/activity_upload.xml" value="0.22416413373860183" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/favorite_list_item.xml" value="0.2694746376811594" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/favorite_list_recycler.xml" value="0.2694746376811594" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.13196555217831812" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/follower_recycler.xml" value="0.2206180344478217" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/following_list_recycler.xml" value="0.2667572463768116" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_feed.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_main.xml" value="0.1671195652173913" />
-        <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_mypage.xml" value="0.15512465373961218" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_mypage.xml" value="0.22972972972972974" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/frag_notification.xml" value="0.18931159420289856" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/list_item.xml" value="0.1" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/list_item_main.xml" value="0.14628623188405798" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/list_single.xml" value="0.14628623188405798" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/myreview_item.xml" value="0.16168478260869565" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/myreview_recycler.xml" value="0.16168478260869565" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/notification_item.xml" value="0.22416413373860183" />
         <entry key="..\:/MovieTonight/app/src/main/res/layout/savedbutton.xml" value="0.161231884057971" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/upload.xml" value="0.2703125" />
+        <entry key="..\:/MovieTonight/app/src/main/res/layout/user_item.xml" value="0.1" />
         <entry key="..\:/MovieTonight/app/src/main/res/menu/bottom_menu.xml" value="0.2682291666666667" />
         <entry key="..\:/MovieTonight/app/src/main/res/menu/my_menu.xml" value="0.2611111111111111" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/drawable-v24/search.xml" value="0.1" />
@@ -83,10 +95,12 @@
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/frag_notification.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/notification_item.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
