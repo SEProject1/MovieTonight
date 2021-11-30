@@ -12,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -38,10 +39,10 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Toolbar myToolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(myToolbar);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         movieList = new ArrayList<Movie>();
 
         //LayoutManager
@@ -94,8 +95,8 @@ public class SearchActivity extends AppCompatActivity {
             super.onPostExecute(result);
 
             //ArrayList에 차례대로 집어 넣는다.
-            if(result.length > 0){
-                for(Movie p : result){
+            if (result.length > 0) {
+                for (Movie p : result) {
                     movieList.add(p);
                     Log.d("movieList.add: ", String.valueOf(p));
                 }
@@ -108,5 +109,51 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
+    // 검색창
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.my_menu, menu);
 
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setQueryHint("영화제목을 입력하세요.");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            //검색어를 다 입력하고 서치 버튼을 눌렀을때
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                Toast.makeText(SearchActivity.this, s + "에 대한 영화를 검색합니다.", Toast.LENGTH_LONG).show();
+
+                String search_url = "https://api.themoviedb.org/3/search/movie?api_key=a652ee13e08fed970ce6ddfc717f595b&query=" + s + "&language=ko-KR&page=1";
+                String[] strings = {search_url};
+                MyAsyncTask myAsyncTask = new MyAsyncTask();
+                myAsyncTask.execute(strings[0]);
+                return false;
+            }
+
+            //검색 입력창에 새로운 텍스트가 들어갈때 마다 호출 - 여기선 필요 없음
+            @Override
+            public boolean onQueryTextChange(String s) {
+                //Log.d("Search", "keyword: " + s);
+                return false;
+            }
+        });
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id){
+            case R.id.action_search:
+                //Toast.makeText(this, "action_search", Toast.LENGTH_LONG).show();
+                return true;
+
+            default:
+                Toast.makeText(this, "default", Toast.LENGTH_LONG).show();
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

@@ -44,7 +44,6 @@ import okhttp3.Response;
 public class FragMain extends Fragment {
 
     private View view;
-    ArrayList<Movie> movieList;
     ArrayList<SingleItem> PmovieList;
     ArrayList<SingleItem> NmovieList;
     ArrayList<SingleItem> TmovieList;
