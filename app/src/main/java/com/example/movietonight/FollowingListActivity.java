@@ -87,4 +87,10 @@ public class FollowingListActivity extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
     }
+    public void onBackPressed(){
+        Intent intent = new Intent(FollowingListActivity.this, MainActivity.class);
+        intent.putExtra("mypage",true);
+        startActivity(intent);
+        super.onBackPressed();
+    }
 }
