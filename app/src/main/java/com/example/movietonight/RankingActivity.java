@@ -72,7 +72,6 @@ public class RankingActivity extends AppCompatActivity {
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
-
         pieChart.setData(data);
         Log.d("메인","로그");
     }
