@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseUser;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,6 +36,7 @@ public class RankingActivity extends AppCompatActivity {
     static String[] Ranking_Genre=new String[16];
     static int[] occurrence=new int[16];
     PieChart pieChart;
+    private ImageButton btn_backRanking;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -41,7 +44,7 @@ public class RankingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ranking);
-
+        btn_backRanking=findViewById(R.id.btn_backRanking);
         pieChart = (PieChart) findViewById(R.id.piechart);
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
@@ -50,7 +53,7 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setDragDecelerationFrictionCoef(0.95f);
 
         pieChart.setDrawHoleEnabled(false);
-        pieChart.setHoleColor(Color.WHITE);
+        pieChart.setHoleColor(Color.BLACK);
         pieChart.setTransparentCircleRadius(61f);
         getMyMovie(); //db에서 장르 불러오기
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
@@ -73,7 +76,12 @@ public class RankingActivity extends AppCompatActivity {
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.YELLOW);
         pieChart.setData(data);
-        Log.d("메인","로그");
+        btn_backRanking.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     //DB에서 영화가져오기
@@ -83,9 +91,7 @@ public class RankingActivity extends AppCompatActivity {
         databaseReference.child(user.getUid()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Log.d("데이터베이스","테스트");
                 for (DataSnapshot s : snapshot.getChildren()) { //DataSnapshot s : snapshot.getChildren()
-                    Log.d("포문","테스트");
                     HashMap<String, Object> reviewMap = (HashMap<String, Object>) s.getValue();
                     String mGenre = (String) reviewMap.get("mgenre"); //파이어베이스에서 장르 받아오기
                     String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
@@ -105,7 +111,6 @@ public class RankingActivity extends AppCompatActivity {
     //참고코드 https://www.geeksforgeeks.org/count-occurrences-elements-list-java/?ref=gcse
     public static void countFrequncies(ArrayList<String> list) //장르 카운트
     {
-        Log.d("카운트","테스트");
         Map<String, Integer> hm = new HashMap<String, Integer>();
         for (String i : list) {
             Integer j = hm.get(i);
