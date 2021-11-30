@@ -79,6 +79,7 @@ public class RankingActivity extends AppCompatActivity {
     //DB에서 영화가져오기
     public void getMyMovie() {
         ArrayList<String> list = new ArrayList<String>();
+        String[] Genre=new String[16];
         databaseReference.child(user.getUid()).child("Review").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -110,8 +111,8 @@ public class RankingActivity extends AppCompatActivity {
             Integer j = hm.get(i);
             hm.put(i, (j == null) ? 1 : j + 1);
         }
+        int n=0;
         for (Map.Entry<String, Integer> val : hm.entrySet()) {
-            int n=0;
             Ranking_Genre[n]= val.getKey(); // key값에 장르이름 들어간것 추출
             occurrence[n]=val.getValue(); //Value값에 카운트된 횟수 추출
             n++;
