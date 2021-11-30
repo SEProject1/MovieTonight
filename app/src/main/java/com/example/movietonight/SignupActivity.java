@@ -100,62 +100,21 @@ public class SignupActivity extends AppCompatActivity {
                 String userNickname = mEtNickname.getText().toString().trim();
                 String passwd = mEtPw.getText().toString().trim();
 
-                if (!userId.matches(emailPattern)){
+                if (userNickname.equals("")||userId.equals("")||passwd.equals("")){
+                    Toast.makeText(SignupActivity.this, "입력하지 않은 항목이 있습니다.", Toast.LENGTH_SHORT).show();
+                } else if (!userId.matches(emailPattern)){
                     mEtId.setError("이메일 형식에 맞지 않습니다.");
-                } else if (userNickname.isEmpty()){
-                    mEtNickname.setError("닉네임을 입력해주세요.");
-                } else if (passwd.isEmpty() || passwd.length() < 6){
-                    mEtPw.setError("적절한 비밀번호를 입력해주세요.");
-                } else {
+                } else if (passwd.length() < 6){
+                    mEtPw.setError("비밀번호는 6자리 이상이어야 합니다.");
+                } else if(!check){
+                    Toast.makeText(SignupActivity.this, "이메일 중복확인이 필요합니다.", Toast.LENGTH_SHORT).show();
+                } else{
                     progressDialog.setMessage("회원가입중입니다!");
                     progressDialog.setTitle("회원가입");
                     progressDialog.setCanceledOnTouchOutside(false);
                     progressDialog.show();
+                    signup(userId, passwd, userNickname);
                 }
-
-                //Firebase Auth 진행
-                mFirebaseAuth.createUserWithEmailAndPassword(userId, passwd).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()&& check) {
-                            FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                            UserAccount account = new UserAccount();
-                            account.setIdToken(firebaseUser.getUid());
-                            account.setUserId(firebaseUser.getEmail());
-                            account.setUserNickname(userNickname);
-                            account.setPasswd(passwd);
-                            //account.setImageurl("ic_baseline_profile_24");
-
-                            //setValue : database에 삽입 동작
-                            mDatabaseRef.child(firebaseUser.getUid()).setValue(account);
-                            storageReference = storageReference.child(firebaseUser.getUid()).child("profileimg");
-                                UploadTask uploadTask = storageReference.putFile(Uuri);
-
-                                uploadTask.addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                        Toast.makeText(SignupActivity.this, "이미지 저장에 실패했습니다.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                    @Override
-                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    }
-                                });
-
-                            progressDialog.dismiss();
-                            Toast.makeText(SignupActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
-
-                            //메인으로 이동
-                            Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-                            startActivity(intent);
-
-                        } else {
-                            progressDialog.dismiss();
-                            Toast.makeText(SignupActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
             }
         });
 
@@ -208,4 +167,49 @@ public class SignupActivity extends AppCompatActivity {
                     }
                 }
             });
+    void signup(String userId, String passwd, String userNickname){
+        //Firebase Auth 진행
+        mFirebaseAuth.createUserWithEmailAndPassword(userId, passwd).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()&& check) {
+                    FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
+                    UserAccount account = new UserAccount();
+                    account.setIdToken(firebaseUser.getUid());
+                    account.setUserId(firebaseUser.getEmail());
+                    account.setUserNickname(userNickname);
+                    account.setPasswd(passwd);
+                    //account.setImageurl("ic_baseline_profile_24");
+
+                    //setValue : database에 삽입 동작
+                    mDatabaseRef.child(firebaseUser.getUid()).setValue(account);
+                    storageReference = storageReference.child(firebaseUser.getUid()).child("profileimg");
+                    UploadTask uploadTask = storageReference.putFile(Uuri);
+
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(SignupActivity.this, "이미지 저장에 실패했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+
+                        }
+                    });
+
+                    progressDialog.dismiss();
+                    Toast.makeText(SignupActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+
+                    //메인으로 이동
+                    Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
+                } else {
+                    progressDialog.dismiss();
+                    Toast.makeText(SignupActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 }

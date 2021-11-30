@@ -6,19 +6,27 @@
     android:padding="16dp"
     android:orientation="vertical"
     >
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_move"
+        android:background="#ffffff"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"/>
 
     <ImageView
         android:id="@+id/img_toplogo"
         android:layout_width="300dp"
         android:layout_height="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076"
+        android:contentDescription="@string/app_name"
         app:srcCompat="@drawable/project_toplogo"
-        android:contentDescription="@string/app_name"/>
+        />
+</LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
