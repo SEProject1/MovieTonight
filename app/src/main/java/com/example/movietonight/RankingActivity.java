@@ -42,6 +42,7 @@ public class RankingActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = firebaseDatabase.getReference("UserAccount");
     private FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    private ArrayList<PieEntry> yValues;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,23 +59,13 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setTransparentCircleRadius(61f);
         getMyMovie(); //db에서 장르 불러오기
-        ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
+        yValues = new ArrayList<PieEntry>();
         pieChart.animateY(1000, Easing.EaseInOutCubic); //애니메이션
-        for(int k=0;k<occurrence.length;k++) {
-            yValues.add(new PieEntry(occurrence[k], Ranking_Genre[k]));
-        }
+
         Description description = new Description();
         description.setText("내가 본 장르"); //라벨
         description.setTextSize(15);
         pieChart.setDescription(description);
-        PieDataSet dataSet = new PieDataSet(yValues, "Genre");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-        PieData data = new PieData((dataSet));
-        data.setValueTextSize(10f);
-        data.setValueTextColor(Color.BLACK);
-        pieChart.setData(data);
         btn_backRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,18 +85,18 @@ public class RankingActivity extends AppCompatActivity {
                     HashMap<String, Object> reviewMap = (HashMap<String, Object>) s.getValue();
                     String mGenre = (String) reviewMap.get("mgenre"); //파이어베이스에서 장르 받아오기
                     String[] Genre = mGenre.split(" "); //장르가 스페이스바로 여러개 분리되어있으니 개별 카운트를 위해 분리
-                   for (int i = 0; i < Genre.length; i++) {
+                    for (int i = 0; i < Genre.length; i++) {
                         list.add(Genre[i]); // 분리한장르를 list에 추가
                     }
-                     countFrequncies(list); //카운트함수 실행
                 }
+                countFrequncies(list); //사용자의 모든 영화를 본 다음 카운트함수 실행
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }
-    public static void countFrequncies(ArrayList<String> list) //장르 카운트
+    public void countFrequncies(ArrayList<String> list) //장르 카운트
     {
         Map<String, Integer> hm = new HashMap<String, Integer>();
         for (String i : list) {
@@ -118,6 +109,19 @@ public class RankingActivity extends AppCompatActivity {
             occurrence[n]=val.getValue(); //Value값에 카운트된 횟수 추출
             n++;
         }
-
+        setRanking();
+    }
+    public void setRanking(){
+        for(int k=0;k<occurrence.length;k++) {
+            yValues.add(new PieEntry(occurrence[k], Ranking_Genre[k]));
+        }
+        PieDataSet dataSet = new PieDataSet(yValues, "Genre");
+        dataSet.setSliceSpace(3f);
+        dataSet.setSelectionShift(5f);
+        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+        PieData data = new PieData((dataSet));
+        data.setValueTextSize(10f);
+        data.setValueTextColor(Color.BLACK);
+        pieChart.setData(data);
     }
 }
