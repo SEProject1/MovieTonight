@@ -35,8 +35,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class RankingActivity extends AppCompatActivity {
-    static String[] Ranking_Genre=new String[16];
-    static int[] occurrence=new int[16];
+    static String[] Ranking_Genre;
+    static int[] occurrence;
     PieChart pieChart;
     private ImageButton btn_backRanking;
     private FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -46,6 +46,8 @@ public class RankingActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Ranking_Genre=new String[16];
+        occurrence=new int[16];
         setContentView(R.layout.activity_ranking);
         btn_backRanking=findViewById(R.id.btn_backRanking);
         pieChart = (PieChart) findViewById(R.id.piechart);
