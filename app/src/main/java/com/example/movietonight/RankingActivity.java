@@ -51,15 +51,15 @@ public class RankingActivity extends AppCompatActivity {
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setExtraOffsets(5, 10, 5, 5);
-
+        pieChart.setRotationEnabled(false);
         pieChart.setDragDecelerationFrictionCoef(0.95f);
-
         pieChart.setDrawHoleEnabled(false);
         pieChart.setHoleColor(Color.BLACK);
         pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.setTransparentCircleRadius(61f);
         getMyMovie(); //db에서 장르 불러오기
         ArrayList<PieEntry> yValues = new ArrayList<PieEntry>();
+        pieChart.animateY(1000, Easing.EaseInOutCubic); //애니메이션
         for(int k=0;k<occurrence.length;k++) {
             yValues.add(new PieEntry(occurrence[k], Ranking_Genre[k]));
         }
@@ -67,14 +67,10 @@ public class RankingActivity extends AppCompatActivity {
         description.setText("내가 본 장르"); //라벨
         description.setTextSize(15);
         pieChart.setDescription(description);
-
-        pieChart.animateY(1000, Easing.EaseInOutCubic); //애니메이션
-
         PieDataSet dataSet = new PieDataSet(yValues, "Genre");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
         dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
         PieData data = new PieData((dataSet));
         data.setValueTextSize(10f);
         data.setValueTextColor(Color.BLACK);
@@ -82,9 +78,6 @@ public class RankingActivity extends AppCompatActivity {
         btn_backRanking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RankingActivity.this, MainActivity.class);
-                intent.putExtra("mypage",true);
-                startActivity(intent);
                 finish();
             }
         });
