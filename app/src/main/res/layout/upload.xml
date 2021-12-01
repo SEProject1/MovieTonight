@@ -7,18 +7,11 @@
     android:orientation="vertical"
     tools:context=".UploadActivity">
 
-
-
-
     <ImageView
 
         android:id="@+id/profileImg"
         android:layout_width="290dp"
         android:layout_height="180dp"
         android:src="@drawable/ic_baseline_person_24"/>
-
-
-
-
 
 </LinearLayout>

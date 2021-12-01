@@ -95,8 +95,40 @@
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/activity_start.xml" value="0.14444444444444443" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_item.xml" value="0.1" />
         <entry key="..\:/Users/Seon/Desktop/MovieTonight/MovieTonight/app/src/main/res/layout/feed_recycler.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_calendar.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_fragment.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_intro.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_movie_detail.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_post.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_ranking.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_search.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_signup.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/activity_start.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/favorite_list_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/favorite_list_recycler.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/feed_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/follower_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/follower_recycler.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/following_list_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/following_list_recycler.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/layout/frag_feed.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/frag_main.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/frag_mypage.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/layout/frag_notification.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/list_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/list_item_main.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/list_single.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/myreview_item.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/myreview_recycler.xml" value="0.25364583333333335" />
         <entry key="app/src/main/res/layout/notification_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/upload.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/layout/user_item.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.25364583333333335" />
+        <entry key="app/src/main/res/menu/my_menu.xml" value="0.25364583333333335" />
       </map>
     </option>
   </component>

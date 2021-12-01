@@ -25,7 +25,8 @@
         android:layout_height="50dp"
         android:layout_marginLeft="60dp"
         android:text="나의 장르 랭킹"
-        android:textSize="30sp"
+        android:textSize="20sp"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@id/btn_backRanking"
         app:layout_constraintLeft_toRightOf="@id/btn_backRanking" />
 
@@ -43,7 +44,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="60dp"
         android:text="나의 영화 장르 랭킹"
-        android:textSize="25sp"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="@id/btn_backRanking"
         app:layout_constraintTop_toBottomOf="@id/text_ranking" />
 
