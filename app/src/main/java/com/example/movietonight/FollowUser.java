@@ -14,11 +14,11 @@ public class FollowUser {
 
     public void setIdToken(String idToken) {this.idToken = idToken;}
 
-    public String getUserEmail() {return userEmail;}
+//    public String getUserEmail() {return userEmail;}
 
     public void setUserEmail(String userEmail) {this.userEmail = userEmail;}
 
-    public String getUserNickname() {return userNickname;}
+//    public String getUserNickname() {return userNickname;}
 
     public void setUserNickname(String userNickname) {this.userNickname = userNickname;}
     }
