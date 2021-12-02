@@ -17,23 +17,12 @@ public class MyReview {//사용자 영화 리뷰
         return movieTitle;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
-
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
     public String getReviewTitle() {
         return reviewTitle;
-    }
-
-    public void setReviewTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
     }
 
     public String getReview() {
