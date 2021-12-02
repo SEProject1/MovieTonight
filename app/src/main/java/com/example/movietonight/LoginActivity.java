@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     private ImageView img_backmove;
     private EditText id;
     private EditText passwd;
-    private Button signup;
+    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +32,10 @@ public class LoginActivity extends AppCompatActivity {
         img_backmove = findViewById(R.id.img_backmove);
         id = findViewById(R.id.et_id);
         passwd = findViewById(R.id.et_passwd);
-        signup = findViewById(R.id.btn_signup_signup);
+        login = findViewById(R.id.btn_login);
         img_backmove.setOnClickListener(view ->
                 startActivity(new Intent(LoginActivity.this, StartActivity.class)));
-        signup.setOnClickListener(new View.OnClickListener() {
+        login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();

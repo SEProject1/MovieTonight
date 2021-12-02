@@ -54,13 +54,13 @@
         android:hint="비밀번호 입력"
         android:inputType="textPassword"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_signup_signup"
+        app:layout_constraintBottom_toTopOf="@+id/btn_login"
         app:layout_constraintEnd_toEndOf="@+id/et_id"
         app:layout_constraintStart_toStartOf="@+id/et_id"
         app:layout_constraintTop_toBottomOf="@+id/tv_nickname" />
 
     <Button
-        android:id="@+id/btn_signup_signup"
+        android:id="@+id/btn_login"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginTop="120dp"
