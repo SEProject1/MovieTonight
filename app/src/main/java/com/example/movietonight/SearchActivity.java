@@ -32,7 +32,6 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private SearchAdapter adapter;
     ArrayList<Movie> movieList;
-    String SearchTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
