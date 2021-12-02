@@ -63,16 +63,8 @@ public class Feed implements Comparable<Feed>{
         return movieTitle;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
-
     public String getGenre() {
         return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getReview() {
@@ -87,32 +79,16 @@ public class Feed implements Comparable<Feed>{
         return like;
     }
 
-    public void setLike(String like) {
-        this.like = like;
-    }
-
     public String getDislike() {
         return dislike;
-    }
-
-    public void setDislike(String dislike) {
-        this.dislike = dislike;
     }
 
     public String getReviewTitle() {
         return reviewTitle;
     }
 
-    public void setReviewTitle(String reviewTitle) {
-        this.reviewTitle = reviewTitle;
-    }
-
     public Date getMdate() {
         return mdate;
-    }
-
-    public void setMdate(Date mdate) {
-        this.mdate = mdate;
     }
 
     public String getIdToken() {
