@@ -222,7 +222,7 @@ public class FragMain extends Fragment {
         }
     }
 
-    void CreateMovieList() {
+    public void CreateMovieList() {
         SectionItem sectionDataModel_P = new SectionItem();
         sectionDataModel_P.setHeaderTitle("Popular Movie");
         sectionDataModel_P.setSingItemList(PmovieList);

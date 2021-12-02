@@ -26,12 +26,7 @@ public class SectionItem {
         this.headerTitle = headerTitle;
     }
 
-    public ArrayList<SingleItem> getSingItemList() {
-        return singItemList;
-    }
+    public ArrayList<SingleItem> getSingItemList() { return singItemList; }
 
-    public void setSingItemList(ArrayList<SingleItem> singItemList) {
-        this.singItemList = singItemList;
-    }
-
+    public void setSingItemList(ArrayList<SingleItem> singItemList) { this.singItemList = singItemList; }
 }

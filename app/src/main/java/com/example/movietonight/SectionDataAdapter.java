@@ -48,7 +48,6 @@ public class SectionDataAdapter extends RecyclerView.Adapter<SectionDataAdapter.
     public class ItemRowHolder extends RecyclerView.ViewHolder {
         protected TextView itemTitle;
         protected RecyclerView recycler_view_list;
-        protected Button btnMore;
 
         public ItemRowHolder(View view) {
             super(view);
