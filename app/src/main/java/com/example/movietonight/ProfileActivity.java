@@ -40,7 +40,6 @@ import com.google.firebase.storage.UploadTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 public class ProfileActivity extends FragmentActivity {
     private Uri Uuri;
-    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private FirebaseStorage storage = FirebaseStorage.getInstance("gs://movietonight-78dfc.appspot.com");
     private StorageReference storageReference = storage.getReference();
     private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
@@ -51,7 +50,7 @@ public class ProfileActivity extends FragmentActivity {
     private ImageButton back;
     private Button btn_profile, btn_register;
     private boolean imgChanged=false;
-    String uuid = firebaseUser.getUid();
+    String uuid = user.getUid();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
