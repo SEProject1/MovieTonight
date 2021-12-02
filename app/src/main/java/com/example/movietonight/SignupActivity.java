@@ -123,6 +123,7 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String email = mEtId.getText().toString().trim();
+                String userId = mEtId.getText().toString().trim();
                 arrayList.clear();
                 mDatabaseRef = FirebaseDatabase.getInstance().getReference("UserAccount");
                 mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -145,6 +146,10 @@ public class SignupActivity extends AppCompatActivity {
 
                     }
                 });
+
+                if (userId.equals("")){
+                    Toast.makeText(SignupActivity.this, "입력하지 않은 항목이 있습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
