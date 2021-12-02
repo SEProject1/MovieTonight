@@ -13,7 +13,7 @@ public class SingleItem {
     private String backdrop_path;
     private String release_date;
     private String vote_average;
-    ArrayList<Integer> genre_ids = new ArrayList<>();
+    private ArrayList<Integer> genre_ids = new ArrayList<>();
 
     public SingleItem(String id, String title, String original_title, String poster_path, String overview, String backdrop_path, String release_date, String vote_average, ArrayList<Integer> genre_ids) {
         this.id = id;

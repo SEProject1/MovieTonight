@@ -10,8 +10,4 @@ public class FavoriteMovie {//찜한 영화 정보를 저장하는 클래스
     public String getMovieTitle() {
         return movieTitle;
     }
-
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
 }
