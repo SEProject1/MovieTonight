@@ -28,73 +28,73 @@ public class Review {
 
     }
 
-//    public String getMtitle(){
-//        return mtitle;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public String getRtitle() {
-//        return rtitle;
-//    }
-//
-//    public String getMgenre() {
-//        return mgenre;
-//    }
-//
-//    public String getRcontent() {
-//        return rcontent;
-//    }
-//
-//    public String getMdate() {
-//        return mdate;
-//    }
+    public String getMtitle(){
+        return mtitle;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getRtitle() {
+        return rtitle;
+    }
+
+    public String getMgenre() {
+        return mgenre;
+    }
+
+    public String getRcontent() {
+        return rcontent;
+    }
+
+    public String getMdate() {
+        return mdate;
+    }
 
     public String getNickname() {
         return nickname;
     }
 
-//    public int getLike() {
-//        return like;
-//    }
-//
-//    public int getDislike() {
-//        return dislike;
-//    }
-//
-//    public void setLike(int like){
-//        this.like = like;
-//    }
-//
-//    public void setDislike(int dislike){
-//        this.dislike = dislike;
-//    }
-//
-//    public void setMtitle(String mtitle){
-//        this.mtitle = mtitle;
-//    }
-//
-//    public void setRtitle(String rtitle){
-//        this.rtitle=rtitle;
-//    }
-//
-//    public void setMgenre(String mgenre){
-//        this.mgenre=mgenre;
-//    }
-//
-//    public void setRcontent(String rcontent){
-//        this.rcontent=rcontent;
-//    }
-//
-//    public void setMdate(String mdate){
-//        this.mdate = mdate;
-//    }
-//
-//    public void setEmail(String email){
-//        this.email = email;
-//    }
+    public int getLike() {
+        return like;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setLike(int like){
+        this.like = like;
+    }
+
+    public void setDislike(int dislike){
+        this.dislike = dislike;
+    }
+
+    public void setMtitle(String mtitle){
+        this.mtitle = mtitle;
+    }
+
+    public void setRtitle(String rtitle){
+        this.rtitle=rtitle;
+    }
+
+    public void setMgenre(String mgenre){
+        this.mgenre=mgenre;
+    }
+
+    public void setRcontent(String rcontent){
+        this.rcontent=rcontent;
+    }
+
+    public void setMdate(String mdate){
+        this.mdate = mdate;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
 
     public void setNickname(String nickname){
         this.nickname=nickname;

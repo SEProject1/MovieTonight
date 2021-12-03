@@ -44,9 +44,9 @@ public class Movie {
         return overview;
     }
 
-//    public String getBackdrop_path() {
-//        return backdrop_path;
-//    }
+    public String getBackdrop_path() {
+        return backdrop_path;
+    }
 
     public String getRelease_date() {
         return release_date;
