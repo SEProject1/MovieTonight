@@ -165,11 +165,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                button.setText("팔로우");
                 for (DataSnapshot data : snapshot.getChildren()) {
                     FollowUser followUser = new FollowUser();
                     followUser = data.getValue(FollowUser.class);
                     String id = followUser.getIdToken();
-                    button.setText("팔로우");
                     if (id.equals(user.getIdToken())) {
                         button.setText("팔로잉");
                         button.setVisibility(View.VISIBLE);
