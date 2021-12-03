@@ -59,7 +59,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
         holder.nickname.setText(user.getUserNickname());
         Glide.with(mContext).load(user.getImageurl()).into(holder.image_profile);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("UserAccount").child(firebaseUser.getUid()).child("following");
-        holder.btn_follow.setText("팔로우");
         isFollowing(databaseReference, user, holder.btn_follow);
         if(user.getIdToken()!=null) {
             if (user.getIdToken().equals(firebaseUser.getUid())) {
@@ -170,6 +169,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder>{
                     FollowUser followUser = new FollowUser();
                     followUser = data.getValue(FollowUser.class);
                     String id = followUser.getIdToken();
+                    button.setText("팔로우");
                     if (id.equals(user.getIdToken())) {
                         button.setText("팔로잉");
                         button.setVisibility(View.VISIBLE);
